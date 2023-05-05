@@ -26,7 +26,7 @@ function Signup() {
     {error && <div>{error}</div>}
       <div className="form">
         <form action="" onSubmit={handleSubmit}>
-          <h1>Sign Up</h1>
+          <h3>Sign Up</h3>
           <input
             type="email"
             placeholder="Email"

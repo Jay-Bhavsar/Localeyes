@@ -34,7 +34,7 @@ function Login() {
       <div className="form">
         {error&& <div>{error}</div>}
         <form action="" onSubmit={handleSubmit}>
-          <h1>Login</h1>
+          <h3>Login</h3>
           <input
             type="email"
             placeholder="Email"
