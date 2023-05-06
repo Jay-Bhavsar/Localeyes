@@ -13,7 +13,7 @@ function Login() {
     setError("");
     try {
       await login(email, password);
-      navigate("/home");
+      navigate("/user");
     } catch (err) {
       setError(err.message);
     }
@@ -23,7 +23,7 @@ function Login() {
     e.preventDefault();
     try{
       await googleSignIn();
-      navigate("/home")
+      navigate("/user")
     }
     catch(err){
       setError(err.message);

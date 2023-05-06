@@ -1,22 +1,11 @@
-import React from 'react'
-import { useUserAuth } from '../context/UserAuthContext'
+import React from 'react';
+import {Link} from "react-router-dom"
 
 function Home() {
-  const {user,logOut}=useUserAuth();
-  console.log(user);
-  const handleLogout = async ()=>{
-    try{
-      await logOut();
-    }
-    catch(err){
-      console.log(err.message);
-    }
-  }
   return (
     <>
-    hello {user&&user.email}
-    <div>Home</div>
-    <button onClick={handleLogout} >Log Out</button>
+    <div>hello this is Home</div>
+    <Link to="/login">Login</Link>
     </>
   )
 }

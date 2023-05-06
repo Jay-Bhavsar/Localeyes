@@ -16,7 +16,7 @@ function Signup() {
     setError("");
     try {
       await signUp(email, password);
-      navigate('/')
+      navigate('/login')
     } catch (err) {
       setError(err.message);
     }
@@ -45,7 +45,7 @@ function Signup() {
           />
           <button type="submit">Sign Up</button>
           <p>
-            Already Registered? <Link to="/">Login</Link>
+            Already Registered? <Link to="/login">Login</Link>
           </p>
         </form>
       </div>
