@@ -48,6 +48,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">Log In</button>
+          or
           <button onClick={handleGoogleSignIn}>Login with Google</button>
           <p>
             Don't have a account? <Link to="/signup"> Sign Up</Link>
