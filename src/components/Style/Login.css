@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+*{
+    font-family: 'Macondo', cursive;
+}
 .form{
     display: flex;
     justify-content: center;
     align-items: center;
     width:100%;
-    margin-top: 10%;
+    margin-top:5%;
 }
 form{
     display: flex;
@@ -11,7 +15,7 @@ form{
     flex-direction: column;
     width: 30%;
     box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 10px -10px 0px -3px, rgb(31, 193, 27) 10px -10px, rgb(255, 255, 255) 20px -20px 0px -3px, rgb(255, 217, 19) 20px -20px, rgb(255, 255, 255) 30px -30px 0px -3px, rgb(255, 156, 85) 30px -30px, rgb(255, 255, 255) 40px -40px 0px -3px, rgb(255, 85, 85) 40px -40px;
-  
+    padding: 30px;
 }
 form h3{
     font-size: 1.5rem;
@@ -37,5 +41,14 @@ form button{
     background-color: rgb(43, 104, 228);
     color: white;
     border: 2px solid white;
-
+}
+.button{
+    background-color: rgb(43, 104, 228);
+}
+.oneliner{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(136 19 55);
+    color: white;
+    font-size: 1.3rem;
 }

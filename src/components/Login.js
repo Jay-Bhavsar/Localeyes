@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../components/Style/Login.css";
+import Navbar from "../components/Home/Navbar"
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 function Login() {
@@ -31,6 +32,7 @@ function Login() {
   }
   return (
     <>
+    <Navbar/>
       <div className="form">
         {error&& <div>{error}</div>}
         <form action="" onSubmit={handleSubmit}>
@@ -47,7 +49,7 @@ function Login() {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Log In</button>
+          <button type="submit" className="button">Log In</button>
           or
           <button onClick={handleGoogleSignIn}>Login with Google</button>
           <p>

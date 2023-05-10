@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Navbar from '../components/Home/Navbar'
 import { useUserAuth } from '../context/UserAuthContext'
 
 function User() {
@@ -14,6 +15,7 @@ function User() {
   }
   return (
     <>
+    <Navbar/>
     hello {user&&user.email}
     <div>Home</div>
     <button onClick={handleLogout} >Log Out</button>

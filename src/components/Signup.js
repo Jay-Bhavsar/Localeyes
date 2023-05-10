@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "../components/Style/Login.css";
 import { Link,useNavigate } from "react-router-dom";
+import Navbar from "../components/Home/Navbar"
+
 
 
 import  {useUserAuth}  from "../context/UserAuthContext";
-import { Alert } from "react-bootstrap";
+
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +25,7 @@ function Signup() {
   };
   return (
     <>
+    <Navbar/>
     {error && <div>{error}</div>}
       <div className="form">
         <form action="" onSubmit={handleSubmit}>
@@ -43,7 +46,7 @@ function Signup() {
               setPassword(e.target.value);
             }}
           />
-          <button type="submit">Sign Up</button>
+          <button type="submit" className="button">Sign Up</button>
           <p>
             Already Registered? <Link to="/login">Login</Link>
           </p>
