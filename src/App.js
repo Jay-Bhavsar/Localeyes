@@ -1,11 +1,11 @@
 import './App.css';
-import Login from './components/Login';
+import Login from './components/Auth/Login';
 import {Routes,Route} from "react-router-dom"
-import Signup from './components/Signup';
+import Signup from './components/Auth/Signup';
 import { UserAuthContextProvider } from './context/UserAuthContext';
-import Home from './components/Home/Home';
-import ProtectedRoute from "./components/ProtectedRoute"
-import User from './components/User';
+import Home from './components/Home/Home'
+import ProtectedRoute from "./components/Auth/ProtectedRoute"
+import User from './components/Auth/User';
 
 function App() {
   return (

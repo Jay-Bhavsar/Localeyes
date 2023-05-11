@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../components/Home/Navbar'
-import { useUserAuth } from '../context/UserAuthContext'
+import Navbar from '../Home/Navbar'
+import { useUserAuth } from '../../context/UserAuthContext'
 
 function User() {
   const {user,logOut}=useUserAuth();

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "../components/Style/Login.css";
-import Navbar from "../components/Home/Navbar"
+import "../Style/Login.css";
+import Navbar from "../Home/Navbar"
 import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from "../context/UserAuthContext";
+import { useUserAuth } from "../../context/UserAuthContext";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

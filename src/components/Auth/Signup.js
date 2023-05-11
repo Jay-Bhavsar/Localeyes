@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "../components/Style/Login.css";
+import "../Style/Login.css";
 import { Link,useNavigate } from "react-router-dom";
-import Navbar from "../components/Home/Navbar"
+import Navbar from "../Home/Navbar"
 
 
 
-import  {useUserAuth}  from "../context/UserAuthContext";
+import  {useUserAuth}  from "../../context/UserAuthContext";
 
 function Signup() {
   const [email, setEmail] = useState("");
