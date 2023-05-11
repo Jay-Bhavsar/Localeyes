@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import "../Style/Home.css"
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 const logo = require("../img/logo.png");
 
@@ -50,6 +51,7 @@ export default function Example() {
                 </div>
                 <div className="hidden sm:ml-6 sm:block mt-5">
                   <div className="flex justify-center items-center space-x-4">
+                    <div className="amr"><h1>AMRRI</h1></div>
                     {navigation.map((item) => (
                       <a
                         key={item.name}
