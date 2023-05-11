@@ -13,7 +13,7 @@ function App() {
    <div>
    <UserAuthContextProvider>
       <Routes>
-        <Route path='/login' element={<Login/>}/>
+        <Route exact path='/login' element={<Login/>}/>
         <Route path='/' element={<Home/>}/>
         <Route path='/user' element={<ProtectedRoute><User/></ProtectedRoute>}/>
         <Route path='/signup' element={<Signup/>}/>
