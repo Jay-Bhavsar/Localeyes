@@ -3,6 +3,7 @@ import "../Style/Login.css";
 import Navbar from "../Home/Navbar"
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";
+import Footer from "../Home/Footer";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,9 +34,10 @@ function Login() {
   return (
     <>
     <Navbar/>
+    <br /><br /><br /><br /><br /><br /><br />
       <div className="form">
         {error&& <div>{error}</div>}
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleSubmit} className="w-[90%] md:w-[30%]">
           <h3>Login</h3>
           <input
             type="email"
@@ -57,6 +59,8 @@ function Login() {
           </p>
         </form>
       </div>
+
+      <Footer/>
     </>
   );
 }

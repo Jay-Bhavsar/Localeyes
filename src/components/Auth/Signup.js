@@ -6,6 +6,7 @@ import Navbar from "../Home/Navbar"
 
 
 import  {useUserAuth}  from "../../context/UserAuthContext";
+import Footer from "../Home/Footer";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -26,9 +27,10 @@ function Signup() {
   return (
     <>
     <Navbar/>
+    <br /><br /><br /><br /><br /><br /><br />
     {error && <div>{error}</div>}
       <div className="form">
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleSubmit} className="w-[90%] md:w-[30%]">
           <h3>Sign Up</h3>
           <input
             type="email"
@@ -52,6 +54,8 @@ function Signup() {
           </p>
         </form>
       </div>
+
+      <Footer/>
     </>
   );
 }

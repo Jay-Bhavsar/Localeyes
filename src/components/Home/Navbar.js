@@ -19,7 +19,7 @@ function classNames(...classes) {
 export default function Example() {
   return (
     <>
-    <Disclosure as="nav" className="bg-gray-100 shadow-lg">
+    <Disclosure as="nav" className="fixed bg-gray-100 shadow-lg w-[100%]">
       {({ open }) => (
         <>
           <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
