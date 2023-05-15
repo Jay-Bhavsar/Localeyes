@@ -48,7 +48,7 @@ function Signup() {
               setPassword(e.target.value);
             }}
           />
-          <button type="submit" className="button">Sign Up</button>
+          <button className="button">Sign Up</button>
           <p>
             Already Registered? <Link to="/login">Login</Link>
           </p>

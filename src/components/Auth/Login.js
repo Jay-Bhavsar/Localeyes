@@ -34,7 +34,12 @@ function Login() {
   return (
     <>
     <Navbar/>
-    <br /><br /><br /><br /><br /><br /><br />
+    <br /><br /><br />
+      <br />
+      <div className="text-center oneliner">
+        <h1>'Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
+      </div>
+    <br /><br /><br /><br /><br />
       <div className="form">
         {error&& <div>{error}</div>}
         <form action="" onSubmit={handleSubmit} className="w-[90%] md:w-[30%]">
@@ -51,7 +56,7 @@ function Login() {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit" className="button">Log In</button>
+          <button className="button">Log In</button>
           or
           <button onClick={handleGoogleSignIn}>Login with Google</button>
           <p>

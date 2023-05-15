@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import "../Style/Home.css"
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 const logo = require("../img/logo.png");
 
 const navigation = [
@@ -52,9 +53,9 @@ export default function Example() {
                   <div className="flex items-center justify-center space-x-4">
                     <div className="amr"><h1>AMRRI</h1></div>
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
@@ -64,7 +65,7 @@ export default function Example() {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
