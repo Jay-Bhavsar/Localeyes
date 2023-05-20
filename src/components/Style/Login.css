@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 *{
     font-family: 'Macondo', cursive;
+    font-family: 'Playfair Display', serif;
 }
 .form{
     display: flex;
