@@ -48,6 +48,7 @@ function Login() {
             type="email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
+            className="w-[80%]"
           />
           <input
             type="password"
@@ -55,6 +56,7 @@ function Login() {
             id=""
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
+            className="w-[80%]"
           />
           <button className="button">Log In</button>
           or

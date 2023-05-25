@@ -28,7 +28,7 @@ form h3{
 }
 form input{
     margin:10px 0px 10px 0px;
-    width: 80%;
+    /* width: 80%; */
     height: 30px;
     border: 2px solid white;
     border-bottom-color: rgb(43, 104, 228);

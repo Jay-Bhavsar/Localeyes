@@ -38,6 +38,7 @@ function Signup() {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
+            className="w-[80%]"
           />
           <input
             type="password"
@@ -47,6 +48,7 @@ function Signup() {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
+            className="w-[80%]"
           />
           <button className="button">Sign Up</button>
           <p>
