@@ -5,16 +5,41 @@ import Navbar from "../Home/Navbar";
 
 import { useUserAuth } from "../../context/UserAuthContext";
 import Footer from "../Home/Footer";
+import userServices from "../services/user.services";
 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [username, setUsername] = useState("");
+  const [message, setMessage] = useState({ error: false, msg: "" });
+
   const [error, setError] = useState();
   const { signUp } = useUserAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setMessage("");
+    if (address === "" || username === "") {
+      setMessage({ error: true, msg: "All fields are mandatory!" });
+      return;
+    }
+
+    const newUser = {
+      username,
+      address,
+    };
+    console.log(newUser);
+
+    try {
+      await userServices.addUsers(newUser);
+      setMessage({ error: false, msg: "New book added successfully!" });
+    } catch (err) {
+      setMessage({ error: true, msg: err.message });
+    }
+    setAddress("");
+    setUsername("");
     try {
       await signUp(email, password);
       navigate("/login");
@@ -32,16 +57,18 @@ function Signup() {
       <br />
       <br />
       <br />
+      {message?.msg && <div>{message?.msg}</div>}
       {error && <div>{error}</div>}
       <div className="flex flex-row form">
-        <form action="" onSubmit={handleSubmit} className="flex justify-start w-[90%] md:w-[30%] bg-blue-200">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="flex justify-start w-[90%] md:w-[30%]"
+        >
           <h2 className="text-2xl text-blue-700">Applicant Registration</h2>
           <br />
-          <label
-            for="countries"
-            class="mr-42 mb-2 text-sm "
-          >
-            Select your country
+          <label for="countries" class="mr-42 mb-2 text-sm ">
+            Email
           </label>
           <input
             type="email"
@@ -51,11 +78,8 @@ function Signup() {
             }}
             className="w-[90%]"
           />
-           <label
-            for="countries"
-            class="mr-42 mb-2 text-sm "
-          >
-            Select your country
+          <label for="countries" class="mr-42 mb-2 text-sm ">
+            Password
           </label>
           <input
             type="password"
@@ -67,57 +91,34 @@ function Signup() {
             }}
             className="w-[90%]"
           />
-           <label
-            for="countries"
-            class="mr-42 mb-2 text-sm "
-          >
-            Select your country
+          <label for="countries" class="mr-42 mb-2 text-sm ">
+            Address
           </label>
           <input
             type="text"
             name=""
             id=""
-            placeholder="First Name"
+            placeholder="Address"
             onChange={(e) => {
-              setPassword(e.target.value);
+              setAddress(e.target.value);
             }}
             className="w-[90%]"
           />
-          <label
-            for="countries"
-            class="mr-42 mb-2 text-sm "
-          >
-            Select your country
-          </label>
-          <select
-            id="countries"
-            className="w-[90%] m-2"
-          >
-            <option>United States</option>
-            <option>Canada</option>
-            <option>France</option>
-            <option>Germany</option>
-          </select>
-          <label
-            for="countries"
-            class="mr-42 mb-2 text-sm "
-          >
-            Select your country
+
+          <label for="countries" class="mr-42 mb-2 text-sm ">
+            Username
           </label>
           <input
             type="text"
             name=""
             id=""
-            placeholder="Last Name"
+            placeholder="Username"
             onChange={(e) => {
-              setPassword(e.target.value);
+              setUsername(e.target.value);
             }}
             className="w-[90%]"
           />
-           <label
-            for="countries"
-            class="mr-42 mb-2 text-sm "
-          >
+          {/* <label for="countries" class="mr-42 mb-2 text-sm ">
             Select your country
           </label>
           <input
@@ -129,11 +130,8 @@ function Signup() {
               setPassword(e.target.value);
             }}
             className="w-[90%]"
-          />
-           <label
-            for="countries"
-            class="mr-42 mb-2 text-sm "
-          >
+          /> */}
+          {/* <label for="countries" class="mr-42 mb-2 text-sm ">
             Select your country
           </label>
           <input
@@ -145,7 +143,7 @@ function Signup() {
               setPassword(e.target.value);
             }}
             className="w-[90%]"
-          />
+          /> */}
 
           <button className="button">Sign Up</button>
           <p>

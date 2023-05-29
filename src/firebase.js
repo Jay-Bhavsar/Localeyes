@@ -1,22 +1,21 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getAuth} from "firebase/auth"
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {getAuth} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAQRECYIlTiOto3znTUeIKG0who25m0A6Q",
-  authDomain: "localeyes-auth.firebaseapp.com",
-  projectId: "localeyes-auth",
-  storageBucket: "localeyes-auth.appspot.com",
-  messagingSenderId: "62358305489",
-  appId: "1:62358305489:web:3d80412b1d97bbf86be3f0",
-  measurementId: "G-8XSKZT9RC4"
+  apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
+  authDomain: "amrri-cdeb4.firebaseapp.com",
+  projectId: "amrri-cdeb4",
+  storageBucket: "amrri-cdeb4.appspot.com",
+  messagingSenderId: "739660662641",
+  appId: "1:739660662641:web:5dc201b3c017dd80ccd8d0",
+  measurementId: "G-0BT7XZRL7E"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app);
 export const auth = getAuth(app);
 export default app;
