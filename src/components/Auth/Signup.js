@@ -12,6 +12,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [message, setMessage] = useState({ error: false, msg: "" });
 
   const [error, setError] = useState();
@@ -21,7 +23,12 @@ function Signup() {
     e.preventDefault();
     setError("");
     setMessage("");
-    if (address === "" || username === "") {
+    if (
+      address === "" ||
+      username === "" ||
+      firstname === "" ||
+      lastname === ""
+    ) {
       setMessage({ error: true, msg: "All fields are mandatory!" });
       return;
     }
@@ -29,23 +36,24 @@ function Signup() {
     const newUser = {
       username,
       address,
+      lastname,
+      firstname,
     };
     console.log(newUser);
 
+
     try {
       await userServices.addUsers(newUser);
-      setMessage({ error: false, msg: "New book added successfully!" });
-    } catch (err) {
-      setMessage({ error: true, msg: err.message });
-    }
-    setAddress("");
-    setUsername("");
-    try {
+      setMessage({ error: false, msg: "New user added successfully!" });
       await signUp(email, password);
       navigate("/login");
     } catch (err) {
       setError(err.message);
+      setMessage({ error: true, msg: err.message });
     }
+      
+    setAddress("");
+    setUsername("");
   };
   return (
     <>
@@ -115,6 +123,32 @@ function Signup() {
             placeholder="Username"
             onChange={(e) => {
               setUsername(e.target.value);
+            }}
+            className="w-[90%]"
+          />
+          <label for="countries" class="mr-42 mb-2 text-sm ">
+            First Name
+          </label>
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="First Name"
+            onChange={(e) => {
+              setFirstname(e.target.value);
+            }}
+            className="w-[90%]"
+          />
+          <label for="countries" class="mr-42 mb-2 text-sm ">
+            Last Name
+          </label>
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="Last Name"
+            onChange={(e) => {
+              setLastname(e.target.value);
             }}
             className="w-[90%]"
           />
