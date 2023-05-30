@@ -23,16 +23,7 @@ function Signup() {
     e.preventDefault();
     setError("");
     setMessage("");
-    if (
-      address === "" ||
-      username === "" ||
-      firstname === "" ||
-      lastname === ""
-    ) {
-      setMessage({ error: true, msg: "All fields are mandatory!" });
-      return;
-    }
-
+   
     const newUser = {
       username,
       address,
@@ -40,20 +31,23 @@ function Signup() {
       firstname,
     };
     console.log(newUser);
-
+    
 
     try {
-      await userServices.addUsers(newUser);
-      setMessage({ error: false, msg: "New user added successfully!" });
       await signUp(email, password);
       navigate("/login");
     } catch (err) {
       setError(err.message);
+    }
+    try {
+      if (signUp) {
+        await userServices.addUsers(newUser);
+        setMessage({ error: false, msg: "" });
+      }
+    } catch (err) {
       setMessage({ error: true, msg: err.message });
     }
-      
-    setAddress("");
-    setUsername("");
+    
   };
   return (
     <>
@@ -62,7 +56,10 @@ function Signup() {
       <br />
       <br />
       <br />
-      <br />
+
+      <div className="text-center oneliner">
+        <h1>'Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
+      </div>
       <br />
       <br />
       {message?.msg && <div>{message?.msg}</div>}
@@ -75,9 +72,7 @@ function Signup() {
         >
           <h2 className="text-2xl text-blue-700">Applicant Registration</h2>
           <br />
-          <label for="countries" class="mr-42 mb-2 text-sm ">
-            Email
-          </label>
+
           <input
             type="email"
             placeholder="Email"
@@ -86,9 +81,7 @@ function Signup() {
             }}
             className="w-[90%]"
           />
-          <label for="countries" class="mr-42 mb-2 text-sm ">
-            Password
-          </label>
+          <br />
           <input
             type="password"
             name=""
@@ -99,9 +92,7 @@ function Signup() {
             }}
             className="w-[90%]"
           />
-          <label for="countries" class="mr-42 mb-2 text-sm ">
-            Address
-          </label>
+          <br />
           <input
             type="text"
             name=""
@@ -113,9 +104,7 @@ function Signup() {
             className="w-[90%]"
           />
 
-          <label for="countries" class="mr-42 mb-2 text-sm ">
-            Username
-          </label>
+          <br />
           <input
             type="text"
             name=""
@@ -126,9 +115,7 @@ function Signup() {
             }}
             className="w-[90%]"
           />
-          <label for="countries" class="mr-42 mb-2 text-sm ">
-            First Name
-          </label>
+          <br />
           <input
             type="text"
             name=""
@@ -139,9 +126,7 @@ function Signup() {
             }}
             className="w-[90%]"
           />
-          <label for="countries" class="mr-42 mb-2 text-sm ">
-            Last Name
-          </label>
+          <br />
           <input
             type="text"
             name=""
@@ -178,8 +163,8 @@ function Signup() {
             }}
             className="w-[90%]"
           /> */}
-
-          <button className="button">Sign Up</button>
+          <br />
+          <button className="button w-[90%]">Sign Up</button>
           <p>
             Already Registered? <Link to="/login">Login</Link>
           </p>

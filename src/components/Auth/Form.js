@@ -325,6 +325,15 @@ const Form = () => {
   const renderPage = () => {
     switch (currentPage) {
       case 1:
+        return(
+          <ul>
+            <li>First</li>
+            <li>Second</li>
+            <li>Third</li>
+            <li>Fourth</li>
+          </ul>
+        )
+      case 2:
         return (
           <FirstPage
             formData={formData}
@@ -332,7 +341,7 @@ const Form = () => {
             nextPage={nextPage}
           />
         );
-      case 2:
+      case 3:
         return (
           <SecondPage
             formData={formData}
@@ -340,7 +349,7 @@ const Form = () => {
             nextPage={nextPage}
           />
         );
-      case 3:
+      case 4:
         return <FinalPage formData={formData} submitForm={submitForm} />;
       default:
         return null;

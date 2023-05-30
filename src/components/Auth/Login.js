@@ -59,8 +59,8 @@ function Login() {
             className="w-[80%]"
           />
           <button className="button">Log In</button>
-          or
-          <button onClick={handleGoogleSignIn}>Login with Google</button>
+          
+          {/* <button onClick={handleGoogleSignIn}>Login with Google</button> */}
           <p>
             Don't have a account? <Link to="/signup"> Sign Up</Link>
           </p>
