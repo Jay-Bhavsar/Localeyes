@@ -23,7 +23,7 @@ function Signup() {
     e.preventDefault();
     setError("");
     setMessage("");
-   
+
     const newUser = {
       username,
       address,
@@ -31,7 +31,6 @@ function Signup() {
       firstname,
     };
     console.log(newUser);
-    
 
     try {
       await signUp(email, password);
@@ -47,7 +46,6 @@ function Signup() {
     } catch (err) {
       setMessage({ error: true, msg: err.message });
     }
-    
   };
   return (
     <>

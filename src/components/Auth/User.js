@@ -134,8 +134,6 @@ function User() {
     );
   };
 
-
-
   const renderResult = () => {
     const question = questions[currentQuestion];
 
@@ -143,7 +141,12 @@ function User() {
       <div className="flex flex-col items-center">
         <h2 className="mb-4 text-2xl">Form submitted!</h2>
         <p className="flex flex-col items-center justify-center text-lg">
-          {answers.map(s=><React.Fragment>{s}<br/></React.Fragment>)}
+          {answers.map((s) => (
+            <React.Fragment>
+              {s}
+              <br />
+            </React.Fragment>
+          ))}
         </p>
       </div>
     );
@@ -165,8 +168,6 @@ function User() {
       <br />
       <br />
       <br />
-      {/* hello {user && user.email}
-      <div>Home</div> */}
       <div className="container p-4 mx-auto">
         <div className="w-full max-w-md mx-auto">
           {currentQuestion < questions.length ? (
@@ -174,12 +175,6 @@ function User() {
           ) : (
             <div>
               {renderResult()}
-              {/* <button
-                className="px-4 py-2 mt-2 text-white bg-blue-500 rounded"
-                onClick={resetForm}
-              >
-                Final Submission
-              </button> */}
             </div>
           )}
         </div>

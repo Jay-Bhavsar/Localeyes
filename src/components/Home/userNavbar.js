@@ -6,13 +6,11 @@ import { Link } from "react-router-dom";
 const logo = require("../img/logo.png");
 
 const navigation = [
-  { name: "Home", href: "/", current: false },
-  { name: "Trial Search", href: "#", current: false },
-  { name: "About Us", href: "#", current: false },
-  { name: "Feedback", href: "#", current: false },
-  { name: "Login", href: "/login", current: false },
-  { name: "Signup", href: "/signup", current: false },
-
+  { name: "Update Account", href: "/", current: false },
+  { name: "Trial Status", href: "#", current: false },
+  { name: "Account Details", href: "#", current: false },
+  { name: "Your Trials", href: "#", current: false },
+  { name: "Logout", href: "/login", current: false },
 ];
 
 function classNames(...classes) {
