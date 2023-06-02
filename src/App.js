@@ -9,6 +9,10 @@ import User from "./components/Auth/User";
 import Form from "./components/Auth/Form/Form";
 import Firstpage from "./components/Auth/Form/firstpage";
 import Secondpage from "./components/Auth/Form/secondpage";
+import Thirdpage from "./components/Auth/Form/thirdpage";
+import Fourthpage from "./components/Auth/Form/fourthpage";
+import Fifthpage from "./components/Auth/Form/fifthpage";
+import Vision from "./components/Home/vision";
 
 function App() {
   return (
@@ -28,6 +32,12 @@ function App() {
             />
             <Route path="/part1" element={<Firstpage/>} />
             <Route path="/part2" element={<Secondpage/>} />
+            <Route path="/part3" element={<Thirdpage/>} />
+            <Route path="/part4" element={<Fourthpage/>} />
+            <Route path="/part5" element={<Fifthpage/>} />
+            <Route path="/vision" element={<Vision/>} />
+
+
             <Route path="/signup" element={<Signup />} />
           </Routes>
         </UserAuthContextProvider>

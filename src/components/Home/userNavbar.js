@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 const logo = require("../img/logo.png");
 
 const navigation = [
-  { name: "Update Account", href: "/", current: false },
-  { name: "Trial Status", href: "#", current: false },
+  { name: "Home", href: "/", current: false },
+  { name: "Update Account", href: "#", current: false },
+  { name: "Research Status", href: "#", current: false },
   { name: "Account Details", href: "#", current: false },
-  { name: "Your Trials", href: "#", current: false },
+  { name: "Your Research", href: "#", current: false },
   { name: "Logout", href: "/login", current: false },
 ];
 

@@ -16,7 +16,7 @@ function Form() {
       <center>
         <br />
         <h1 className="text-xl font-semibold">8 Parts of AMRRI FORM</h1>
-        <div className="flex flex-col mt-2 total w-[60%] formlist">
+        <div className="flex flex-col mt-2 total w-[100%] md:w-[60%] formlist">
           <div className="flex flex-col items-center justify-center parts">
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 1</p>
@@ -58,7 +58,7 @@ function Form() {
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 3</p>
               <p>
-                <a href="">Click</a>
+                <a href="/part3">Click</a>
               </p>
             </div>
             <div className="flex flex-col w-[100%] bg-white p-0.5 ">
@@ -75,7 +75,7 @@ function Form() {
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 4</p>
               <p>
-                <a href="">Click</a>
+                <a href="/part4">Click</a>
               </p>
             </div>
             <div className="flex flex-col w-[100%] bg-white p-0.5 ">
@@ -92,7 +92,7 @@ function Form() {
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 5</p>
               <p>
-                <a href="">Click</a>
+                <a href="/part5">Click</a>
               </p>
             </div>
             <div className="flex flex-col w-[100%] bg-white p-0.5 ">
@@ -104,6 +104,8 @@ function Form() {
             </div>
           </div>
         </div>
+        <br />
+        <button className="p-4 mb-6 text-white bg-blue-500 rounded-md">Final Submission</button>
       </center>
     </>
   );

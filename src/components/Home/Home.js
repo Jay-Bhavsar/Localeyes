@@ -15,6 +15,7 @@ function Home() {
         <h1>'Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
       </div>
       <Hero/>
+      
       <AboutUs/>
       <Footer/>
     </>

@@ -1,43 +1,25 @@
-import React from "react";
-import Navbar from "../../Home/userNavbar";
+import React from 'react'
+import Navbar from '../../Home/userNavbar'
 
-export default function Firstpage() {
+function Fifthpage() {
   return (
     <>
-      <Navbar />
-      <br /><br /><br /><br />
-      <div className="text-center oneliner">
+    <Navbar />
+    <br />
+    <br /><br /><br />
+    <div className="text-center oneliner">
         <h1>Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
       </div>
+    <div className="">
       <center>
-        <h2 className="mt-10 text-lg font-bold">Specific Data</h2>
+        <h2 className="mt-10 text-lg font-bold">Declaration</h2>
       </center>
       
       <form action="" className="">
-        <label className="flex flex-col bg-blue-100 w-[50%] p-2">
-          <h2 className="font-bold">Public Title of Study:</h2>
-          <input
-            type="text"
-            className="border-blue-700"
-            // value={formData.name}
-            // onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-        </label>
-
-        <label className="flex flex-col bg-blue-100 w-[50%] p-2">
-          <h2 className="font-bold">Scientific Title of Study:</h2>
-          <input
-            type="text"
-            className="border-blue-700"
-            // value={formData.name}
-            // onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-        </label>
-        <center>
-          <h2 className="mt-16 text-lg font-bold">Type of Research</h2>
-        </center>
-        <div className="flex flex-col w-[50%] bg-blue-100">
-          <label className="font-bold">Type of Research:</label>
+       
+      
+        <div className="flex flex-col w-[50%] bg-blue-100 p-4">
+          <label className="font-bold text-justify">I hereby declare that the details furnished above are true and correct to the best of my knowledge and belief and I undertake to inform you of any changes therein, immediately. In case any of the above information is found to be false or untrue or misleading or misrepresenting, I am aware that I may be held liable for it.</label>
 
           <div className="flex flex-col">
             <label className="flex items-center p-2">
@@ -48,7 +30,7 @@ export default function Firstpage() {
                 // onChange={handleCheckboxChange}
                 // checked={selectedOption === "Option 1"}
               />
-              <span className="ml-2">Collection</span>
+              <span className="ml-2">I Agree</span>
             </label>
             <label className="flex items-center p-2">
               <input
@@ -58,48 +40,11 @@ export default function Firstpage() {
                 // onChange={handleCheckboxChange}
                 // checked={selectedOption === "Option 2"}
               />
-              <span className="ml-2">Catalouging</span>
+              <span className="ml-2">I Disagree</span>
             </label>
-            <label className="flex items-center p-2">
-              <input
-                type="radio"
-                name="option"
-                value="Option 3"
-                // onChange={handleCheckboxChange}
-                // checked={selectedOption === "Option 3"}
-              />
-              <span className="ml-2">Translation</span>
-            </label>
-            <label className="flex items-center p-2">
-              <input
-                type="radio"
-                name="option"
-                value="Option 1"
-                // onChange={handleCheckboxChange}
-                // checked={selectedOption === "Option 1"}
-              />
-              <span className="ml-2">Transliteration</span>
-            </label>
-            <label className="flex items-center p-2">
-              <input
-                type="radio"
-                name="option"
-                value="Option 1"
-                // onChange={handleCheckboxChange}
-                // checked={selectedOption === "Option 1"}
-              />
-              <span className="ml-2">Transcription</span>
-            </label>
-            <label className="flex items-center p-2">
-              <input
-                type="radio"
-                name="option"
-                value="Option 1"
-                // onChange={handleCheckboxChange}
-                // checked={selectedOption === "Option 1"}
-              />
-              <span className="ml-2">Dicephering</span>
-            </label>
+        
+           
+           
             {/* <label className="flex items-center">
               <input
                 type="radio"
@@ -164,6 +109,9 @@ export default function Firstpage() {
         </div>
         <button type="submit bg-red-900">Submit</button>
       </form>
+    </div>
     </>
-  );
+  )
 }
+
+export default Fifthpage
