@@ -5,7 +5,6 @@ import Navbar from "../Home/Navbar";
 
 import { useUserAuth } from "../../context/UserAuthContext";
 import Footer from "../Home/Footer";
-import userServices from "../services/user.services";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -29,22 +28,15 @@ function Signup() {
       address,
       lastname,
       firstname,
+      email,
     };
     console.log(newUser);
 
     try {
-      await signUp(email, password);
+      await signUp(email, password, newUser);
       navigate("/login");
     } catch (err) {
       setError(err.message);
-    }
-    try {
-      if (signUp) {
-        await userServices.addUsers(newUser);
-        setMessage({ error: false, msg: "" });
-      }
-    } catch (err) {
-      setMessage({ error: true, msg: err.message });
     }
   };
   return (

@@ -1,39 +1,43 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { db } from "../../firebase";
 
 import {
   collection,
-//   getDocs,
-//   getDoc,
-  addDoc,
-  updateDoc,
-//   deleteDoc,
+  getDocs,
+  // getDoc,
+  // addDoc,
+  setDoc,
+  // updateDoc,
+  // deleteDoc,
   doc,
 } from "firebase/firestore";
 
-const userCollectionRef = collection(db, "users");
 class userDataService {
-  addUsers = (newUser) => {
-    return addDoc(userCollectionRef, newUser);
+  addUsers = (uid, userData) => {
+    return setDoc(doc(db, "users", uid), {
+      ...userData,
+      uid: uid
+    });
   };
 
-  updateBook = (id, updatedUser) => {
-    const userDoc = doc(db, "users", id);
-    return updateDoc(userDoc, updatedUser);
-  };
+  // updateUser = (id, updatedUser) => {
+  //   const userDoc = doc(db, "users", id);
+  //   return updateDoc(userDoc, updatedUser);
+  // };
 
-//   deleteBook = (id) => {
-//     const bookDoc = doc(db, "books", id);
-//     return deleteDoc(bookDoc);
-//   };
+  // deleteUser = (id) => {
+  //   const bookDoc = doc(db, "books", id);
+  //   return deleteDoc(bookDoc);
+  // };
 
-//   getAllBooks = () => {
-//     return getDocs(bookCollectionRef);
-//   };
+  // getAllUsers = () => {
+  //   return getDocs(userCollectionRef);
+  // };
 
-//   getBook = (id) => {
-//     const bookDoc = doc(db, "books", id);
-//     return getDoc(bookDoc);
-//   };
+  // getUser = (id) => {
+  //   const bookDoc = doc(db, "books", id);
+  //   return getDoc(bookDoc);
+  // };
 }
 
 export default new userDataService();

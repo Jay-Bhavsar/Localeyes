@@ -5,10 +5,12 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 const logo = require("../img/logo.png");
 
+const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn")
+
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "About Us", href: "/vision", current: false },
-  { name: "Login", href: "/login", current: false },
+  { name: isUserLoggedIn ? "Logout" : "Login", href: isUserLoggedIn ? "/logout": "/login", current: false },
   { name: "Signup", href: "/signup", current: false },
 
 ];

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../Style/Login.css";
-import Navbar from "../Home/Navbar"
+import Navbar from "../Home/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";
 import Footer from "../Home/Footer";
@@ -8,7 +8,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const { login,googleSignIn } = useUserAuth();
+  const { login, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,27 +22,32 @@ function Login() {
     }
   };
 
-  const handleGoogleSignIn = async(e)=>{
+  const handleGoogleSignIn = async (e) => {
     e.preventDefault();
-    try{
+    try {
       await googleSignIn();
-      navigate("/user")
-    }
-    catch(err){
+      navigate("/user");
+    } catch (err) {
       setError(err.message);
     }
-  }
+  };
   return (
     <>
-    <Navbar/>
-    <br /><br /><br />
+      <Navbar />
+      <br />
+      <br />
+      <br />
       <br />
       <div className="text-center oneliner">
         <h1>'Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
       </div>
-    <br /><br /><br /><br /><br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="form">
-        {error&& <div>{error}</div>}
+        {error && <div>{error}</div>}
         <form action="" onSubmit={handleSubmit} className="w-[90%] md:w-[30%]">
           <h3>Login</h3>
           <input
@@ -60,7 +65,7 @@ function Login() {
             className="w-[80%]"
           />
           <button className="button">Log In</button>
-          
+
           {/* <button onClick={handleGoogleSignIn}>Login with Google</button> */}
           <p>
             Don't have a account? <Link to="/signup"> Sign Up</Link>
@@ -68,7 +73,7 @@ function Login() {
         </form>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }

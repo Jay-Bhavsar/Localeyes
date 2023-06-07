@@ -5,6 +5,8 @@ import { useUserAuth } from "../../context/UserAuthContext";
 function ProtectedRoute({ children }) {
   let { user } = useUserAuth();
   if (user) {
+    console.log(user.uid);
+    console.log("user log in stored in sessionStorage");
     sessionStorage.setItem("isUserLoggedIn", true);
   }
   const userLoggedIn = sessionStorage.getItem("isUserLoggedIn");

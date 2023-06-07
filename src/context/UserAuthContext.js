@@ -1,5 +1,7 @@
 import { createContext, useEffect } from "react";
 import { useContext, useState } from "react";
+import userServices from "../components/services/user.services"
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -16,12 +18,17 @@ const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState("");
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  function signUp(email, password, userData) {
+    return createUserWithEmailAndPassword(auth, email, password).then((userCreds) => {
+      userServices.addUsers(userCreds.user.uid, userData);
+    })
   }
   function login(email, password) {
     console.log("Email", email);
-    return signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password)
+    .then((userCreds) => {
+      alert("Welcome to AMRRI")
+    });
   }
   function logOut() {
     return signOut(auth);

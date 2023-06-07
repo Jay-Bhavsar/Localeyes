@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./App.css";
 import Login from "./components/Auth/Login";
 import { Routes, Route } from "react-router-dom";
@@ -13,6 +14,8 @@ import Thirdpage from "./components/Auth/Form/thirdpage";
 import Fourthpage from "./components/Auth/Form/fourthpage";
 import Fifthpage from "./components/Auth/Form/fifthpage";
 import Vision from "./components/Home/vision";
+import Profile from "./components/Auth/Profile";
+import  Logout  from "./components/Auth/Logout";
 
 function App() {
   return (
@@ -30,13 +33,62 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/part1" element={<Firstpage/>} />
-            <Route path="/part2" element={<Secondpage/>} />
-            <Route path="/part3" element={<Thirdpage/>} />
-            <Route path="/part4" element={<Fourthpage/>} />
-            <Route path="/part5" element={<Fifthpage/>} />
-            <Route path="/vision" element={<Vision/>} />
+            <Route
+              path="/part1"
+              element={
+                <ProtectedRoute>
+                  <Firstpage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/part2"
+              element={
+                <ProtectedRoute>
+                  <Secondpage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/part3"
+              element={
+                <ProtectedRoute>
+                  <Thirdpage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/part4"
+              element={
+                <ProtectedRoute>
+                  <Fourthpage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/part5"
+              element={
+                <ProtectedRoute>
+                  <Fifthpage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/vision" element={<Vision />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            ></Route>
 
+            <Route
+              path="/logout"
+              element={
+                  <Logout />
+              }
+            ></Route>
 
             <Route path="/signup" element={<Signup />} />
           </Routes>
