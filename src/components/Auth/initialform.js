@@ -6,7 +6,7 @@ import Navbar from "../Home/Navbar";
 const FirstPage = ({ formData, setFormData, nextPage }) => {
   const handleNext = (e) => {
     e.preventDefault();
-    nextPaage();
+    nextPage();
   };
 
   const [selectedOption, setSelectedOption] = useState("");

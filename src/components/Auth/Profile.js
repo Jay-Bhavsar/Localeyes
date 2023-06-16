@@ -1,40 +1,47 @@
-import React, { useEffect, useState } from "react";
-import UserDataService from "../services/user.services";
-import Navbar from '../Home/userNavbar'
-const Profile = () => {
-  const [users, setUsers] = useState([]);
+import React,{useState,useEffect} from 'react'
+import userDataService from '../services/user.services'
+
+function Profile() {
+  const [books, setBooks] = useState([]);
   useEffect(() => {
-    getUsers();
+    getBooks();
   }, []);
 
-  const getUsers = async () => {
-    const data = await UserDataService.getAllUsers();
-    console.log(data.docs);
-    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  const getBooks = async () => {
+    const data = await userDataService.getAllUsers();
+    console.log(data);
+    setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   return (
     <>
-      <Navbar/>
-      <br /><br /><br /><br />
-      {users.map((doc, index) => {
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Address</th>
+        <th>Email</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {books.map((doc, index) => {
         return (
-          <center>
-            <div>
-              <div key={doc.id} className="flex flex-col items-center justify-center ">
-                <p>{index+1}</p>
-                <p>Email:{doc.email}</p>
-                <p>Username:{doc.username}</p>
-                <p>Firstname:{doc.firstname}</p>
-                <p>Lastname:{doc.lastname}</p>
-                <p>Address:{doc.address}</p>
-              </div>
-            </div>
-          </center>
+          <tr key={doc.id}>
+            <td>{index + 1}</td>
+            <td>{doc.username}</td>
+            <td>{doc.firstname}</td>
+            <td>{doc.lastname}</td>
+            <td>{doc.address}</td>
+            <td>{doc.email}</td>
+          </tr>
         );
       })}
-    </>
-  );
-};
+    </tbody>
+</>
+  )
+}
 
-export default Profile;
+export default Profile

@@ -8,14 +8,14 @@ import Home from "./components/Home/Home";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import User from "./components/Auth/User";
 import Form from "./components/Auth/Form/Form";
-import Firstpage from "./components/Auth/Form/firstpage";
-import Secondpage from "./components/Auth/Form/secondpage";
-import Thirdpage from "./components/Auth/Form/thirdpage";
-import Fourthpage from "./components/Auth/Form/fourthpage";
-import Fifthpage from "./components/Auth/Form/fifthpage";
 import Vision from "./components/Home/vision";
 import Profile from "./components/Auth/Profile";
 import  Logout  from "./components/Auth/Logout";
+import One from "./components/Auth/Form/One";
+import Second from "./components/Auth/Form/Second";
+import Third from "./components/Auth/Form/Third";
+import Fourth from "./components/Auth/Form/Fourth";
+// import Form3 from "./components/Auth/Form/Form1";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
               path="/user"
               element={
                 <ProtectedRoute>
-                  <Form />
+                 <Form/>
                 </ProtectedRoute>
               }
             />
@@ -37,7 +37,7 @@ function App() {
               path="/part1"
               element={
                 <ProtectedRoute>
-                  <Firstpage />
+                  <One/>
                 </ProtectedRoute>
               }
             />
@@ -45,7 +45,7 @@ function App() {
               path="/part2"
               element={
                 <ProtectedRoute>
-                  <Secondpage />
+                  <Second/>
                 </ProtectedRoute>
               }
             />
@@ -53,7 +53,7 @@ function App() {
               path="/part3"
               element={
                 <ProtectedRoute>
-                  <Thirdpage />
+                  <Third/>
                 </ProtectedRoute>
               }
             />
@@ -61,18 +61,11 @@ function App() {
               path="/part4"
               element={
                 <ProtectedRoute>
-                  <Fourthpage />
+                 <Fourth/>
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/part5"
-              element={
-                <ProtectedRoute>
-                  <Fifthpage />
-                </ProtectedRoute>
-              }
-            />
+            
             <Route path="/vision" element={<Vision />} />
             <Route
               path="/profile"

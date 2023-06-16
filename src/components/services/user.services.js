@@ -12,6 +12,7 @@ import {
   doc,
 } from "firebase/firestore";
 
+const userCollectionRef = collection(db,"users");
 class userDataService {
   addUsers = (uid, userData) => {
     return setDoc(doc(db, "users", uid), {
@@ -30,14 +31,14 @@ class userDataService {
   //   return deleteDoc(bookDoc);
   // };
 
-  // getAllUsers = () => {
-  //   return getDocs(userCollectionRef);
-  // };
+  getUser = (id) => {
+    const bookDoc = doc(db,"books",id);
+    return getDocs(bookDoc);
+  };
+  getAllUsers = () => {
+    return getDocs(userCollectionRef);
+  };
 
-  // getUser = (id) => {
-  //   const bookDoc = doc(db, "books", id);
-  //   return getDoc(bookDoc);
-  // };
 }
 
 export default new userDataService();

@@ -1,5 +1,4 @@
 import React from "react";
-import Firstpage from "../Form/firstpage";
 import Navbar from "../../Home/userNavbar";
 
 
@@ -16,7 +15,7 @@ function Form() {
       <center>
         <br />
         <h1 className="text-xl font-semibold">8 Parts of AMRRI FORM</h1>
-        <div className="flex flex-col mt-2 total w-[100%] md:w-[60%] formlist">
+        <div className="flex flex-col mt-2 total w-[100%] md:w-[60%] formlist border-black">
           <div className="flex flex-col items-center justify-center parts">
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 1</p>
