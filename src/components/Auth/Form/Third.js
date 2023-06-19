@@ -21,6 +21,8 @@ const formsCollectionRef = db.collection("forms");
 
 function Third() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  const Userid = sessionStorage.getItem("uid");
+
   const [form3Data, setForm3Data] = useState({});
   const [form3Submitted, setForm3Submitted] = useState(
     localStorage.getItem("form3Submitted") === "true"
@@ -38,8 +40,9 @@ function Third() {
     setForm3Submitted(true);
 
     try {
-      await formsCollectionRef.doc("combinedForm").update({
+      await formsCollectionRef.doc(Userid).update({
         form3: form3Data,
+        docid:"ammri01"
       });
       alert("Form 3 submitted successfully!");
       console.log("Form 3 submitted successfully!");

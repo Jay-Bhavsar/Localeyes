@@ -5,6 +5,7 @@ import Navbar from "../Home/Navbar";
 
 import { useUserAuth } from "../../context/UserAuthContext";
 import Footer from "../Home/Footer";
+import SecurityCode from "./SecurityCode";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -34,6 +35,7 @@ function Signup() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    alert("You have Signed In")
     setError("");
     setMessage("");
 
@@ -84,7 +86,7 @@ function Signup() {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="flex justify-start w-[90%] md:w-[32%] shadow-xl"
+          className="flex justify-start w-[90%] md:w-[32%] shadow-2xl"
         >
           <h2 className="text-2xl text-blue-700">Applicant Registration</h2>
           <br />
@@ -392,6 +394,9 @@ function Signup() {
               required
             />
           </label>
+          <br />
+          {/* <SecurityCode correctCode="1234" onSuccess={handleSubmit} /> */}
+          
 
           <button className="button w-[90%]">Sign Up</button>
           <p>

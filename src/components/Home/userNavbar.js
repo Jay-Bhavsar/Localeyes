@@ -11,10 +11,10 @@ const logo = require("../img/logo.png");
 
 const navigation = [
   { name: "Home", href: "/", current: false },
-  { name: "Fill out the AMRRI form", href: "/form", current: false },
-  // { name: "Research Status", href: "#", current: false },
-  // { name: "Account Details", href: "#", current: false },
-  // { name: "Your Research", href: "#", current: false },
+  // { name: "Fill out the AMRRI form", href: "/form", current: false },
+  { name: "Published Research", href: "#", current: false },
+  { name: "Reasearch in Review", href: "#", current: false },
+  { name: "Update Profile", href: "/profile", current: false },
 ];
 
 function classNames(...classes) {
@@ -75,7 +75,7 @@ export default function Example() {
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center flex-shrink-0" ml-9 mt-4>
+                  {/* <div className="flex items-center flex-shrink-0" ml-9 mt-4>
                     <Dropdown label="Your Profile">
                       <Link to="/profile">
                         <Dropdown.Item>Update Profile</Dropdown.Item>
@@ -87,7 +87,7 @@ export default function Example() {
                         <Dropdown.Item>Research Status</Dropdown.Item>
                       </Link>
                     </Dropdown>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

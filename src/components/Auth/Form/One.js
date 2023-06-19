@@ -19,6 +19,8 @@ const db = firebase.firestore();
 const formsCollectionRef = db.collection("forms");
 
 function One() {
+  const Userid = sessionStorage.getItem("uid");
+
   const [form1Data, setForm1Data] = useState({});
   const [form1Submitted, setForm1Submitted] = useState(
     localStorage.getItem("form1Submitted") === "true"
@@ -37,8 +39,9 @@ function One() {
     // setform1Submitted(true);
     setForm1Submitted(true);
     try {
-      await formsCollectionRef.doc("combinedForm").update({
+      await formsCollectionRef.doc(Userid).set({
         form1: form1Data,
+        docid:"ammri01"
       });
       alert("Form 1 submitted successfully!");
       console.log("Form 1 submitted successfully!");

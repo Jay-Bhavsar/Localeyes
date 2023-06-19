@@ -21,6 +21,8 @@ const formsCollectionRef = db.collection("forms");
 
 function Fifth() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  const Userid = sessionStorage.getItem("uid");
+
   const [form5Data, setForm5Data] = useState({});
   const [form5Submitted, setForm5Submitted] = useState(
     localStorage.getItem('form5Submitted') === 'true'
@@ -39,8 +41,9 @@ function Fifth() {
     setForm5Submitted(true);
 
     try {
-      await formsCollectionRef.doc("combinedForm").update({
+      await formsCollectionRef.doc(Userid).update({
         form5: form5Data,
+        docid:"ammri01"
       });
       alert("Form 5 submitted successfully!");
       console.log("Form 5 submitted successfully!");

@@ -21,6 +21,8 @@ const formsCollectionRef = db.collection("forms");
 
 function Second() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  const Userid = sessionStorage.getItem("uid");
+
   const [form2Data, setForm2Data] = useState({});
   const [form2Submitted, setForm2Submitted] = useState(
     localStorage.getItem("form2Submitted") === "true"
@@ -39,13 +41,15 @@ function Second() {
     setForm2Submitted(true);
 
     try {
-      await formsCollectionRef.doc("combinedForm").update({
+      await formsCollectionRef.doc(Userid).update({
         form2: form2Data,
+        docid:"ammri01"
       });
       alert("Form 2 submitted successfully!");
       console.log("Form 2 submitted successfully!");
       setForm2Data({}); // Reset form data
     } catch (error) {
+      alert("please fill out the Form 1 first");
       console.error("Error submitting Form 2:", error);
     }
   };

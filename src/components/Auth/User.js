@@ -1,8 +1,41 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Navbar from "../../components/Home/userNavbar";
 import { Link } from "react-router-dom";
+import Footer from "../Home/Footer";
+import { db } from "../../firebase";
 
 function User() {
+  const Userid = sessionStorage.getItem("uid");
+  const getDocumentCount = async (docId) => {
+    try {
+      const docRef = db.collection('forms').doc(docId);
+      const docSnapshot = await docRef.get();
+      
+      if (docSnapshot.exists) {
+        const collectionRef = db.collection('forms');
+        const querySnapshot = await collectionRef.where('docid', '==', docId).get();
+        const count = querySnapshot.size;
+        return count;
+      }
+      
+      return 0;
+    } catch (error) {
+      console.error('Error retrieving document count:', error);
+      return 0;
+    }
+  };
+  
+  const [documentCount, setDocumentCount] = useState(0);
+  useEffect(() => {
+    const fetchDocumentCount = async () => {
+      const count = await getDocumentCount('hello');
+      setDocumentCount(count);
+      console.log(count);
+    };
+
+    fetchDocumentCount();
+  }, []);
+  
   return (
     <>
       <Navbar />
@@ -15,14 +48,76 @@ function User() {
       <center>
         <br />
 
-        {/* <Link to="/form">
+        <Link to="/form">
           <button className="p-2 text-white bg-blue-500 rounded-md">
-            Fill Out the AMMRI FORM
+            Click here to fill out the AMMRI Form
           </button>
-        </Link> */}
+        </Link>
         <br />
-        {/* <button className="p-4 mb-6 text-white bg-blue-500 rounded-md">Final Submission</button> */}
       </center>
+      <br />
+      <center>
+        <div class="relative overflow-x-auto">
+          <table class="w-[50%] text-sm text-left text-black dark:text-black">
+            <thead class="text-xs text-blue-100 uppercase bg-blue-50 dark:bg-blue-100 dark:text-black">
+              <tr>
+                <th scope="col" class="px-6 py-3">
+                  Total Researches
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
+                  {documentCount}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white border-b dark:bg-blue-100 dark:border-blue-100">
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-xl text-blue-900 whitespace-nowrap dark:text-black"
+                >
+                  Under Entry Stage
+                </th>
+                <td class="px-6 py-4 ">1</td>
+              
+              </tr>
+              <tr class="bg-white border-b dark:bg-blue-100 dark:border-blue-100">
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-xl text-blue-900 whitespace-nowrap dark:text-black"
+                >
+                  Under Review Stage
+                </th>
+                <td class="px-6 py-4 font-xl">0</td>
+             
+              </tr>
+              <tr class="bg-white dark:bg-blue-100">
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-xl text-blue-900 whitespace-nowrap dark:text-black"
+                >
+                  Registered Researches
+                </th>
+                <td class="px-6 py-4">0</td>
+              
+              </tr>
+              <tr class="bg-white dark:bg-blue-100">
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-xl text-blue-900 whitespace-nowrap dark:text-black"
+                >
+                  Terminated/Suspended Researches
+                </th>
+                <td class="px-6 py-4">0</td>
+              
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </center>
+      <div className="mt-44">
+        <Footer />
+      </div>
     </>
   );
 }
