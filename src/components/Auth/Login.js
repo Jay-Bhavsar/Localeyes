@@ -20,6 +20,13 @@ function Login() {
     } catch (err) {
       setError(err.message);
     }
+    // try{
+    //   await login('admin@gmail.com', 'admin@1234');
+    //   navigate("/admin")
+ 
+    // }catch(err){
+    //   setError(err.message)
+    // }
   };
 
   const handleGoogleSignIn = async (e) => {
@@ -48,7 +55,7 @@ function Login() {
       <br />
       <div className="form">
         {error && <div>{error}</div>}
-        <form action="" onSubmit={handleSubmit} className="w-[90%] md:w-[30%]">
+        <form action="" onSubmit={handleSubmit} className="w-[90%] md:w-[30%] shadow-xl">
           <h3>Login</h3>
           <input
             type="email"

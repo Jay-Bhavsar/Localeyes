@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../../Home/userNavbar";
 
-// Initialize Firebase
+
 const firebaseConfig = {
-  // Add your Firebase configuration here
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
   authDomain: "amrri-cdeb4.firebaseapp.com",
   projectId: "amrri-cdeb4",
@@ -21,23 +19,23 @@ const db = firebase.firestore();
 const formsCollectionRef = db.collection("forms");
 
 function One() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [form1Data, setForm1Data] = useState({});
+  const [form1Submitted, setForm1Submitted] = useState(
+    localStorage.getItem("form1Submitted") === "true"
+  );
 
   useEffect(() => {
     const checkAndCreateDocument = async () => {
-      const docRef = db.collection("forms").doc("newform");
-
-      await docRef.set({
-        form1: {},
-      });
+      if (form1Submitted) {
+        localStorage.setItem("form1Submitted", "true");
+      }
     };
-
     checkAndCreateDocument();
-  }, []);
-  const handleForm1Submit = async (e) => {
+  }, [form1Submitted]);
+  async function handleForm1Submit(e) {
     e.preventDefault();
-    setFormClicked(true);
+    // setform1Submitted(true);
+    setForm1Submitted(true);
     try {
       await formsCollectionRef.doc("combinedForm").update({
         form1: form1Data,
@@ -48,7 +46,7 @@ function One() {
     } catch (error) {
       console.error("Error submitting Form 1:", error);
     }
-  };
+  }
 
   const handleForm1InputChange = (e) => {
     setForm1Data({
@@ -56,7 +54,7 @@ function One() {
       [e.target.name]: e.target.value,
     });
   };
-  const [formClicked, setFormClicked] = useState(false);
+  // const [form1Submitted, setform1Submitted] = useState(false);
 
   return (
     <>
@@ -77,7 +75,7 @@ function One() {
               name="public_title"
               value={form1Data.public_title || ""}
               onChange={handleForm1InputChange}
-              disabled={formClicked}
+              disabled={form1Submitted}
               // className="m-4 bg-blue-200"
             />
           </label>
@@ -89,7 +87,7 @@ function One() {
               name="sci_title"
               value={form1Data.sci_title || ""}
               onChange={handleForm1InputChange}
-              disabled={formClicked}
+              disabled={form1Submitted}
               // className="m-4 bg-blue-200"
             />
           </label>
@@ -107,7 +105,7 @@ function One() {
                   value="collection"
                   checked={form1Data.type_of_research === "collection"}
                   onChange={handleForm1InputChange}
-                  disabled={formClicked}
+                  disabled={form1Submitted}
                 />
                 <span className="ml-2">Collection</span>
               </label>
@@ -118,7 +116,7 @@ function One() {
                   value="Catalog"
                   checked={form1Data.type_of_research === "Catalog"}
                   onChange={handleForm1InputChange}
-                  disabled={formClicked}
+                  disabled={form1Submitted}
                 />
                 <span className="ml-2">Catalouging</span>
               </label>
@@ -129,7 +127,7 @@ function One() {
                   value="translation"
                   checked={form1Data.type_of_research === "translation"}
                   onChange={handleForm1InputChange}
-                  disabled={formClicked}
+                  disabled={form1Submitted}
                 />
                 <span className="ml-2">Translation</span>
               </label>
@@ -140,7 +138,7 @@ function One() {
                   value="Transliteration"
                   checked={form1Data.type_of_research === "Transliteration"}
                   onChange={handleForm1InputChange}
-                  disabled={formClicked}
+                  disabled={form1Submitted}
                 />
                 <span className="ml-2">Transliteration</span>
               </label>
@@ -151,7 +149,7 @@ function One() {
                   value="Transcription"
                   checked={form1Data.type_of_research === "Transcription"}
                   onChange={handleForm1InputChange}
-                  disabled={formClicked}
+                  disabled={form1Submitted}
                 />
                 <span className="ml-2">Transcription</span>
               </label>
@@ -162,13 +160,16 @@ function One() {
                   value="Dicephering"
                   checked={form1Data.type_of_research === "Dicephering"}
                   onChange={handleForm1InputChange}
-                  disabled={formClicked}
+                  disabled={form1Submitted}
                 />
                 <span className="ml-2">Dicephering</span>
               </label>
             </div>
           </div>
-          <button type="submit bg-red-900">Submit</button>
+
+          <button type="submit bg-red-900" disabled={form1Submitted}>
+            Submit
+          </button>
         </form>
       </center>
     </>

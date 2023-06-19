@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
-import Navbar from '../../Home/userNavbar'
+import Navbar from "../../Home/userNavbar";
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -13,7 +12,7 @@ const firebaseConfig = {
   storageBucket: "amrri-cdeb4.appspot.com",
   messagingSenderId: "739660662641",
   appId: "1:739660662641:web:5dc201b3c017dd80ccd8d0",
-  measurementId: "G-0BT7XZRL7E"
+  measurementId: "G-0BT7XZRL7E",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -23,19 +22,20 @@ const formsCollectionRef = db.collection("forms");
 function Third() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [form3Data, setForm3Data] = useState({});
+  const [form3Submitted, setForm3Submitted] = useState(
+    localStorage.getItem("form3Submitted") === "true"
+  );
   useEffect(() => {
     const checkAndCreateDocument = async () => {
-      const docRef = db.collection("forms").doc("newform");
-
-      await docRef.set({
-        form1: {},
-      });
+      if (form3Submitted) {
+        localStorage.setItem("form3Submitted", "true");
+      }
     };
-
     checkAndCreateDocument();
-  }, []);
+  }, [form3Submitted]);
   const handleForm3Submit = async (e) => {
     e.preventDefault();
+    setForm3Submitted(true);
 
     try {
       await formsCollectionRef.doc("combinedForm").update({
@@ -58,7 +58,7 @@ function Third() {
 
   return (
     <center>
-      <Navbar/>
+      <Navbar />
       <br />
       <br />
       <br />
@@ -69,7 +69,7 @@ function Third() {
       <center>
         <h2 className="font-bold">Primary Sponsorship</h2>
         <br />
-       
+
         <form onSubmit={handleForm3Submit}>
           <label className="flex flex-col  p-2 bg-blue-200 w-[50%] font-bold">
             Name:
@@ -79,6 +79,7 @@ function Third() {
               value={form3Data.Prim_Sponsorship_name || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -89,6 +90,7 @@ function Third() {
               value={form3Data.Prim_Sponsorship_address || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <br />
@@ -105,6 +107,7 @@ function Third() {
               value={form3Data.catalog_title || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -115,6 +118,7 @@ function Third() {
               value={form3Data.MSS_title || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -125,6 +129,7 @@ function Third() {
               value={form3Data.given_title || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -135,6 +140,7 @@ function Third() {
               value={form3Data.subject || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -145,6 +151,7 @@ function Third() {
               value={form3Data.author || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -155,6 +162,7 @@ function Third() {
               value={form3Data.MSS_owner || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -165,6 +173,7 @@ function Third() {
               value={form3Data.scribe || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
 
@@ -181,6 +190,7 @@ function Third() {
               value={form3Data.Manu_Topic || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -191,6 +201,7 @@ function Third() {
               value={form3Data.Manu_Subject || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -201,6 +212,7 @@ function Third() {
               value={form3Data.Manu_size || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
 
@@ -212,6 +224,7 @@ function Third() {
               value={form3Data.Manu_binding || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
 
@@ -223,6 +236,7 @@ function Third() {
               value={form3Data.date_of_collection || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
           <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -233,14 +247,15 @@ function Third() {
               value={form3Data.duration || ""}
               onChange={handleForm3InputChange}
               // className="m-4 bg-blue-400"
+              disabled={form3Submitted}
             />
           </label>
-         
+
           <div className="flex flex-col w-[50%] bg-blue-200">
             <center>
-            <center>
-            <h2 className="text-lg font-bold ">Status</h2>
-          </center>
+              <center>
+                <h2 className="text-lg font-bold ">Status</h2>
+              </center>
               <label className="flex items-center p-2">
                 <input
                   type="radio"
@@ -248,6 +263,7 @@ function Third() {
                   value="Complete"
                   checked={form3Data.status === "Complete"}
                   onChange={handleForm3InputChange}
+                  disabled={form3Submitted}
                 />
                 <span className="ml-2">Complete</span>
               </label>
@@ -258,6 +274,7 @@ function Third() {
                   value="incomplete"
                   checked={form3Data.status === "incomplete"}
                   onChange={handleForm3InputChange}
+                  disabled={form3Submitted}
                 />
                 <span className="ml-2">Incomplete</span>
               </label>
@@ -265,7 +282,10 @@ function Third() {
           </div>
 
           {/* Add more inputs as needed */}
-          <button type="submit bg-red-900">Submit</button>
+
+          <button type="submit bg-red-900" disabled={form3Submitted}>
+            Submit
+          </button>
         </form>
       </center>
     </center>

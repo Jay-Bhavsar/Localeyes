@@ -15,6 +15,8 @@ import One from "./components/Auth/Form/One";
 import Second from "./components/Auth/Form/Second";
 import Third from "./components/Auth/Form/Third";
 import Fourth from "./components/Auth/Form/Fourth";
+import Fifth from "./components/Auth/Form/Fifth";
+import Admin from "./components/Auth/Admin/Admin";
 // import Form3 from "./components/Auth/Form/Form1";
 
 function App() {
@@ -27,6 +29,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route
               path="/user"
+              element={
+                <ProtectedRoute>
+                 <User/>
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/form"
               element={
                 <ProtectedRoute>
                  <Form/>
@@ -62,6 +72,22 @@ function App() {
               element={
                 <ProtectedRoute>
                  <Fourth/>
+                </ProtectedRoute>
+              }
+            />
+               <Route
+              path="/part5"
+              element={
+                <ProtectedRoute>
+                 <Fifth/>
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                 <Admin/>
                 </ProtectedRoute>
               }
             />

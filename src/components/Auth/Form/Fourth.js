@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from '../../Home/userNavbar'
@@ -23,20 +22,21 @@ const formsCollectionRef = db.collection("forms");
 function Fourth() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [form4Data, setForm4Data] = useState({});
+  const [form4Submitted, setForm4Submitted] = useState(
+    localStorage.getItem('form4Submitted') === 'true'
+  );
   useEffect(() => {
     const checkAndCreateDocument = async () => {
-      const docRef = db.collection("forms").doc("newform");
-
-      await docRef.set({
-        form1: {},
-      });
+      if (form4Submitted) {
+        localStorage.setItem('form4Submitted', 'true');
+      }
     };
 
     checkAndCreateDocument();
-  }, []);
+  }, [form4Submitted]);
   const handleForm4Submit = async (e) => {
     e.preventDefault();
-
+    setForm4Submitted(true);
     try {
       await formsCollectionRef.doc("combinedForm").update({
         form4: form4Data,
@@ -81,6 +81,8 @@ function Fourth() {
                   value={form4Data.Script}
                   onChange={handleForm4InputChange}
                   className="p-2 bg-blue-200 w-[100%]"
+                  disabled={form4Submitted}
+
                 >
                   <option value="Ahom Akhar">Ahom Akhar</option>
                   <option value="Jawi Akhar">Jawi Akhar</option>
@@ -189,6 +191,8 @@ function Fourth() {
                   value={form4Data.Language}
                   onChange={handleForm4InputChange}
                   className="p-2 bg-blue-200 w-[100%]"
+              disabled={form4Submitted}
+
                 >
                   <option value="Abhiri">Abhiri</option>
                   <option value="Agaria">Agaria</option>
@@ -574,6 +578,8 @@ function Fourth() {
                   value={form4Data.Material}
                   onChange={handleForm4InputChange}
                   className="p-2 bg-blue-200 w-[100%]"
+              disabled={form4Submitted}
+
                 >
                   <option value="Animal Products">Animal Products</option>
                   <option value="Bamboo leaf/बांस का पत्ता">
@@ -635,6 +641,8 @@ function Fourth() {
                     value="Acidic"
                     checked={form4Data.MSS_condition === "Acidic"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Acidic</span>
                 </label>
@@ -645,6 +653,8 @@ function Fourth() {
                     value="Bad"
                     checked={form4Data.MSS_condition === "Bad"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Bad</span>
                 </label>
@@ -655,6 +665,8 @@ function Fourth() {
                     value="Binding Loss"
                     checked={form4Data.MSS_condition === "Binding Loss"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Binding Loss</span>
                 </label>
@@ -665,6 +677,8 @@ function Fourth() {
                     value="Brittle"
                     checked={form4Data.MSS_condition === "Brittle"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Brittle</span>
                 </label>
@@ -675,6 +689,8 @@ function Fourth() {
                     value="Broken"
                     checked={form4Data.MSS_condition === "Broken"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Broken</span>
                 </label>
@@ -685,6 +701,8 @@ function Fourth() {
                     value="Fungal Infected"
                     checked={form4Data.MSS_condition === "Fungal Infected"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Fungal Infected</span>
                 </label>
@@ -695,6 +713,8 @@ function Fourth() {
                     value="Good"
                     checked={form4Data.MSS_condition === "Good"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Good</span>
                 </label>
@@ -705,6 +725,8 @@ function Fourth() {
                     value="Ink Loosed"
                     checked={form4Data.MSS_condition === "Ink Loosed"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Ink Loosed</span>
                 </label>
@@ -715,6 +737,8 @@ function Fourth() {
                     value="Stained"
                     checked={form4Data.MSS_condition === "Stained"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Stained</span>
                 </label>
@@ -725,6 +749,8 @@ function Fourth() {
                     value="Stuck"
                     checked={form4Data.MSS_condition === "Stuck"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Stuck</span>
                 </label>
@@ -735,6 +761,8 @@ function Fourth() {
                     value="worm_eaten"
                     checked={form4Data.MSS_condition === "worm_eaten"}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                   />
                   <span className="ml-2">Broken</span>
                 </label>
@@ -755,6 +783,8 @@ function Fourth() {
                     value={form4Data.MSS_Year || ""}
                     onChange={handleForm4InputChange}
                     // className="m-4 bg-blue-400"
+              disabled={form4Submitted}
+
                   />
                 </label>
                 <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
@@ -764,6 +794,8 @@ function Fourth() {
                     name="data_data"
                     value={form4Data.data_data || ""}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -774,6 +806,8 @@ function Fourth() {
                     name="place_of_writing"
                     value={form4Data.place_of_writing || ""}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -786,6 +820,8 @@ function Fourth() {
                   value={form4Data.Date_Samvat}
                   onChange={handleForm4InputChange}
                   className="p-2 bg-blue-200 w-[50%]"
+              disabled={form4Submitted}
+
                 >
                   <option value="Bangali (बंगाली) san">
                     Bangali (बंगाली) san
@@ -849,6 +885,8 @@ function Fourth() {
                   value={form4Data.Manu_date_christian}
                   onChange={handleForm4InputChange}
                   className="p-2 bg-blue-200 w-[50%]"
+              disabled={form4Submitted}
+
                 >
                   <option value="10 (Tenth/10th/दसवीं/10वीं)">
                     10 (Tenth/10th/दसवीं/10वीं)
@@ -922,6 +960,8 @@ function Fourth() {
                     name="states_union"
                     value={form4Data.states_union || ""}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -932,6 +972,8 @@ function Fourth() {
                     name="city_village"
                     value={form4Data.city_village || ""}
                     onChange={handleForm4InputChange}
+              disabled={form4Submitted}
+
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -945,6 +987,8 @@ function Fourth() {
                   value={form4Data.manu_source || ""}
                   onChange={handleForm4InputChange}
                   className="w-[50%] bg-blue-200 p-3"
+              disabled={form4Submitted}
+
                 >
                   <option value="">Source of Manuscript</option>
                   <option value="Academy of Snskrit Research, Melkote">
@@ -1403,7 +1447,8 @@ function Fourth() {
             <br />
             <br />
             <br />
-            <button type="submit bg-red-900">Submit</button>
+            
+            <button type="submit bg-red-900"  disabled={form4Submitted} >Submit</button>
             <br />
             <br />
             <br />

@@ -11,9 +11,10 @@ const logo = require("../img/logo.png");
 
 const navigation = [
   { name: "Home", href: "/", current: false },
-  { name: "Research Status", href: "#", current: false },
-  { name: "Account Details", href: "#", current: false },
-  { name: "Your Research", href: "#", current: false },
+  { name: "Fill out the AMRRI form", href: "/form", current: false },
+  // { name: "Research Status", href: "#", current: false },
+  // { name: "Account Details", href: "#", current: false },
+  // { name: "Your Research", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -74,10 +75,16 @@ export default function Example() {
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center flex-shrink-0">
+                  <div className="flex items-center flex-shrink-0" ml-9 mt-4>
                     <Dropdown label="Your Profile">
                       <Link to="/profile">
-                      <Dropdown.Item>Update Profile</Dropdown.Item>
+                        <Dropdown.Item>Update Profile</Dropdown.Item>
+                      </Link>
+                      <Link to="/profile">
+                        <Dropdown.Item>Your Researches</Dropdown.Item>
+                      </Link>
+                      <Link to="/profile">
+                        <Dropdown.Item>Research Status</Dropdown.Item>
                       </Link>
                     </Dropdown>
                   </div>
