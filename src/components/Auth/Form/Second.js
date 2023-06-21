@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../../Home/userNavbar";
+import Footer from "../../Home/Footer"
+
+
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -19,9 +23,12 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const formsCollectionRef = db.collection("forms");
 
+
 function Second() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const Userid = sessionStorage.getItem("uid");
+  const Rid = localStorage.getItem("researchid");
+
 
   const [form2Data, setForm2Data] = useState({});
   const [form2Submitted, setForm2Submitted] = useState(
@@ -41,18 +48,17 @@ function Second() {
     setForm2Submitted(true);
 
     try {
-      await formsCollectionRef.doc(Userid).update({
+      await formsCollectionRef.doc(Rid).update({
         form2: form2Data,
-        docid:"ammri01"
       });
       alert("Form 2 submitted successfully!");
       console.log("Form 2 submitted successfully!");
       setForm2Data({}); // Reset form data
     } catch (error) {
-      alert("please fill out the Form 1 first");
       console.error("Error submitting Form 2:", error);
     }
   };
+
 
   const handleForm2InputChange = (e) => {
     setForm2Data({
@@ -62,6 +68,7 @@ function Second() {
   };
 
   return (
+    <>
     <center>
       <Navbar />
       <br />
@@ -191,6 +198,9 @@ function Second() {
         </form>
       </center>
     </center>
+
+    <Footer/>
+   </>
   );
 }
 

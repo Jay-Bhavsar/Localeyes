@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from '../../Home/userNavbar'
+import Footer from "../../Home/Footer"
+
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -22,6 +25,8 @@ const formsCollectionRef = db.collection("forms");
 function Fourth() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const Userid = sessionStorage.getItem("uid");
+  const Rid = localStorage.getItem("researchid");
+
 
   const [form4Data, setForm4Data] = useState({});
   const [form4Submitted, setForm4Submitted] = useState(
@@ -40,9 +45,8 @@ function Fourth() {
     e.preventDefault();
     setForm4Submitted(true);
     try {
-      await formsCollectionRef.doc(Userid).update({
+      await formsCollectionRef.doc(Rid).update({
         form4: form4Data,
-        docid:"ammri01"
       });
       alert("Form 4 submitted successfully!");
       console.log("Form 4 submitted successfully!");
@@ -60,6 +64,7 @@ function Fourth() {
   };
 
   return (
+    <>
     <center>
       <Navbar/>
       <br />
@@ -1459,6 +1464,8 @@ function Fourth() {
         </center>
       </center>
     </center>
+    <Footer/>
+    </>
   );
 }
 

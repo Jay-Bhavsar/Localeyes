@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../../Home/userNavbar";
+import Footer from "../../Home/Footer"
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -22,6 +24,8 @@ const formsCollectionRef = db.collection("forms");
 function Third() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const Userid = sessionStorage.getItem("uid");
+  const Rid = localStorage.getItem("researchid");
+
 
   const [form3Data, setForm3Data] = useState({});
   const [form3Submitted, setForm3Submitted] = useState(
@@ -40,9 +44,8 @@ function Third() {
     setForm3Submitted(true);
 
     try {
-      await formsCollectionRef.doc(Userid).update({
+      await formsCollectionRef.doc(Rid).update({
         form3: form3Data,
-        docid:"ammri01"
       });
       alert("Form 3 submitted successfully!");
       console.log("Form 3 submitted successfully!");
@@ -60,6 +63,7 @@ function Third() {
   };
 
   return (
+    <>
     <center>
       <Navbar />
       <br />
@@ -292,6 +296,8 @@ function Third() {
         </form>
       </center>
     </center>
+    <Footer/>
+   </>
   );
 }
 

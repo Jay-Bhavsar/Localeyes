@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../Home/userNavbar";
-
+import Footer from "../../Home/Footer"
 
 function Form() {
   return (
@@ -106,6 +106,8 @@ function Form() {
         <br />
         {/* <button className="p-4 mb-6 text-white bg-blue-500 rounded-md">Final Submission</button> */}
       </center>
+<Footer/>
+      
     </>
   );
 }

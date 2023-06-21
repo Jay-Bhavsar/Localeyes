@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 import { Dropdown } from "flowbite-react";
 const logo = require("../img/logo.png");
+const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn")
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -15,6 +16,8 @@ const navigation = [
   { name: "Published Research", href: "#", current: false },
   { name: "Reasearch in Review", href: "#", current: false },
   { name: "Update Profile", href: "/profile", current: false },
+  { name: isUserLoggedIn ? "Logout" : "Login", href: isUserLoggedIn ? "/logout": "/login", current: false },
+  
 ];
 
 function classNames(...classes) {

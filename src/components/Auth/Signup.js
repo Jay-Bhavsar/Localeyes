@@ -57,6 +57,7 @@ function Signup() {
       verifierPhone,
       verifierFax,
       verifierEmail,
+      admin:false
     };
     console.log(newUser);
 

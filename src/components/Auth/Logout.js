@@ -7,7 +7,7 @@ function Logout() {
     const { logOut } = useUserAuth();
     logOut()
     sessionStorage.clear()
-    alert("You've been logged out successfully")
+    // alert("You've been logged out successfully")
     redirect('/')
   return (
     <div>

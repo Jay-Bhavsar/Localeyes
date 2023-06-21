@@ -11,7 +11,10 @@ const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "About Us", href: "/vision", current: false },
   { name: isUserLoggedIn ? "Logout" : "Login", href: isUserLoggedIn ? "/logout": "/login", current: false },
-  { name: "Signup", href: "/signup", current: false },
+  { name: isUserLoggedIn ? "Back to Portal" : "", href: isUserLoggedIn ? "/user": "", current: false },
+  { name: isUserLoggedIn ? "" : "SignUp", href: isUserLoggedIn ? "": "/signup", current: false },
+ 
+
 
 ];
 

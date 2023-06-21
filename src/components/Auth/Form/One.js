@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../../Home/userNavbar";
-
+import Footer from "../../Home/Footer";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
@@ -34,29 +34,50 @@ function One() {
     };
     checkAndCreateDocument();
   }, [form1Submitted]);
+
+  function generateAlphanumericCode(length) {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let code = "";
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      code += characters.charAt(randomIndex);
+    }
+
+    return code;
+  }
+  const codeLength = 10;
+  const alphanumericCode = generateAlphanumericCode(codeLength);
+  console.log(alphanumericCode);
+
   async function handleForm1Submit(e) {
     e.preventDefault();
     // setform1Submitted(true);
     setForm1Submitted(true);
     try {
-      await formsCollectionRef.doc(Userid).set({
+      await formsCollectionRef.doc(alphanumericCode).set({
         form1: form1Data,
-        docid:"ammri01"
+        form1Submitted: true,
+        Rid: alphanumericCode,
+        uid: Userid,
       });
       alert("Form 1 submitted successfully!");
       console.log("Form 1 submitted successfully!");
       setForm1Data({}); // Reset form data
+      localStorage.setItem("researchid", alphanumericCode);
+      return alphanumericCode;
     } catch (error) {
       console.error("Error submitting Form 1:", error);
     }
   }
 
-  const handleForm1InputChange = (e) => {
+  function handleForm1InputChange(e) {
     setForm1Data({
       ...form1Data,
       [e.target.name]: e.target.value,
     });
-  };
+  }
   // const [form1Submitted, setform1Submitted] = useState(false);
 
   return (
@@ -175,6 +196,8 @@ function One() {
           </button>
         </form>
       </center>
+
+      <Footer />
     </>
   );
 }
