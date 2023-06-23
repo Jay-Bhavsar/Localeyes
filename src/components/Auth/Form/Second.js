@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../../Home/userNavbar";
-import Footer from "../../Home/Footer"
-
-
-
+import Footer from "../../Home/Footer";
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -23,12 +20,10 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const formsCollectionRef = db.collection("forms");
 
-
 function Second() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const Userid = sessionStorage.getItem("uid");
   const Rid = localStorage.getItem("researchid");
-
 
   const [form2Data, setForm2Data] = useState({});
   const [form2Submitted, setForm2Submitted] = useState(
@@ -59,7 +54,6 @@ function Second() {
     }
   };
 
-
   const handleForm2InputChange = (e) => {
     setForm2Data({
       ...form2Data,
@@ -67,140 +61,141 @@ function Second() {
     });
   };
 
+
   return (
     <>
-    <center>
-      <Navbar />
-      <br />
-      <br />
-      <br />
-      <br />
-      <div className="text-center oneliner">
-        <h1>Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
-      </div>
       <center>
-        <h2 className="font-bold">
-          Details of Principal investigator or overall trail coordinator
-          (Multi-center study)
-        </h2>
+        <Navbar />
         <br />
-        <form onSubmit={handleForm2Submit}>
-          <label className="flex flex-col  p-2 bg-blue-200 w-[50%] font-bold">
-            Name:
-            <input
-              type="text"
-              name="name"
-              value={form2Data.name || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-            Designation:
-            <input
-              type="text"
-              name="designation"
-              value={form2Data.designation || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-            Affiliation:
-            <input
-              type="text"
-              name="Affiliation"
-              value={form2Data.Affiliation || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-            Address:
-            <input
-              type="text"
-              name="Address"
-              value={form2Data.Address || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-            Phone Number:
-            <input
-              type="text"
-              name="Phno"
-              value={form2Data.Phno || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-            Email-id:
-            <input
-              type="text"
-              name="email"
-              value={form2Data.email || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          <br />
-          <br />
+        <br />
+        <br />
+        <br />
+        <div className="text-center oneliner">
+          <h1>Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
+        </div>
+        <center>
           <h2 className="font-bold">
-            Details of Contact person (Public Query)
+            Details of Principal investigator or overall trail coordinator
+            (Multi-center study)
           </h2>
           <br />
-          <br />
-          <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-            Name:
-            <input
-              type="text"
-              name="Public_Query_name"
-              value={form2Data.Public_Query_name || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-            Designation:
-            <input
-              type="text"
-              name="Public_Query_designation"
-              value={form2Data.Public_Query_designation || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-            Affiliation:
-            <input
-              type="text"
-              name="Public_Query_affiliation"
-              value={form2Data.Public_Query_affiliation || ""}
-              onChange={handleForm2InputChange}
-              // className="m-4 bg-blue-200"
-              disabled={form2Submitted}
-            />
-          </label>
-          {/* Add more inputs as needed */}
-          <button type="submit bg-red-900" disabled={form2Submitted}>
-            Submit
-          </button>
-        </form>
+          <form onSubmit={handleForm2Submit}>
+            <label className="flex flex-col  p-2 bg-blue-200 w-[50%] font-bold">
+              Name:
+              <input
+                type="text"
+                name="name"
+                value={form2Data.name || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
+              Designation:
+              <input
+                type="text"
+                name="designation"
+                value={form2Data.designation || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
+              Affiliation:
+              <input
+                type="text"
+                name="Affiliation"
+                value={form2Data.Affiliation || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
+              Address:
+              <input
+                type="text"
+                name="Address"
+                value={form2Data.Address || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
+              Phone Number:
+              <input
+                type="text"
+                name="Phno"
+                value={form2Data.Phno || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
+              Email-id:
+              <input
+                type="text"
+                name="email"
+                value={form2Data.email || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            <br />
+            <br />
+            <h2 className="font-bold">
+              Details of Contact person (Public Query)
+            </h2>
+            <br />
+            <br />
+            <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
+              Name:
+              <input
+                type="text"
+                name="Public_Query_name"
+                value={form2Data.Public_Query_name || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
+              Designation:
+              <input
+                type="text"
+                name="Public_Query_designation"
+                value={form2Data.Public_Query_designation || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
+              Affiliation:
+              <input
+                type="text"
+                name="Public_Query_affiliation"
+                value={form2Data.Public_Query_affiliation || ""}
+                onChange={handleForm2InputChange}
+                // className="m-4 bg-blue-200"
+                disabled={form2Submitted}
+              />
+            </label>
+            {/* Add more inputs as needed */}
+            <button type="submit bg-red-900" disabled={form2Submitted}>
+              Submit
+            </button>
+          </form>
+        </center>
       </center>
-    </center>
 
-    <Footer/>
-   </>
+      <Footer />
+    </>
   );
 }
 

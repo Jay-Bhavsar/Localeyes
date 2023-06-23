@@ -25,6 +25,7 @@ function Signup() {
   const [verifierPhone, setverifierPhone] = useState("");
   const [verifierFax, setVerifierfax] = useState("");
   const [verifierEmail, setVerifieremail] = useState("");
+  
 
   const [newCompanytype, setNewcompanytype] = useState("");
 
@@ -57,7 +58,7 @@ function Signup() {
       verifierPhone,
       verifierFax,
       verifierEmail,
-      admin:false
+      role:"user"
     };
     console.log(newUser);
 
@@ -93,7 +94,7 @@ function Signup() {
           <br />
           <br />
           <label className="w-[100%]">
-            Email{" "}
+            Email
             <span className="text-red-600">
               *(please recheck email id and mobile number before submission of
               form):

@@ -8,7 +8,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const { login, googleSignIn } = useUserAuth();
+  const { login} = useUserAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,24 +20,10 @@ function Login() {
     } catch (err) {
       setError(err.message);
     }
-    // try{
-    //   await login('admin@gmail.com', 'admin@1234');
-    //   navigate("/admin")
- 
-    // }catch(err){
-    //   setError(err.message)
-    // }
+
   };
 
-  const handleGoogleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      await googleSignIn();
-      navigate("/user");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+ 
   return (
     <>
       <Navbar />

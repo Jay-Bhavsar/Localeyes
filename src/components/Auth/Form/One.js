@@ -61,6 +61,8 @@ function One() {
         form1Submitted: true,
         Rid: alphanumericCode,
         uid: Userid,
+        approved:false,
+        rejected:false
       });
       alert("Form 1 submitted successfully!");
       console.log("Form 1 submitted successfully!");

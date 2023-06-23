@@ -6,35 +6,6 @@ import { db } from "../../firebase";
 
 function User() {
   const Userid = sessionStorage.getItem("uid");
-  const getDocumentCount = async (docId) => {
-    try {
-      const docRef = db.collection('forms').doc(docId);
-      const docSnapshot = await docRef.get();
-      
-      if (docSnapshot.exists) {
-        const collectionRef = db.collection('forms');
-        const querySnapshot = await collectionRef.where('docid', '==', docId).get();
-        const count = querySnapshot.size;
-        return count;
-      }
-      
-      return 0;
-    } catch (error) {
-      console.error('Error retrieving document count:', error);
-      return 0;
-    }
-  };
-  
-  const [documentCount, setDocumentCount] = useState(0);
-  useEffect(() => {
-    const fetchDocumentCount = async () => {
-      const count = await getDocumentCount('hello');
-      setDocumentCount(count);
-      console.log(count);
-    };
-
-    fetchDocumentCount();
-  }, []);
   
   return (
     <>
@@ -66,21 +37,12 @@ function User() {
                 </th>
                 
                 <th scope="col" class="px-6 py-3">
-                  {documentCount}
+                  1
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-white border-b dark:bg-blue-100 dark:border-blue-100">
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-xl text-blue-900 whitespace-nowrap dark:text-black"
-                >
-                  Under Entry Stage
-                </th>
-                <td class="px-6 py-4 ">1</td>
               
-              </tr>
               <tr class="bg-white border-b dark:bg-blue-100 dark:border-blue-100">
                 <th
                   scope="row"

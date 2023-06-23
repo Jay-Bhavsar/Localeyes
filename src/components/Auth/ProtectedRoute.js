@@ -8,7 +8,7 @@ function ProtectedRoute({ children }) {
     console.log(user.uid);
     console.log("user log in stored in sessionStorage");
     sessionStorage.setItem("isUserLoggedIn", true);
-    sessionStorage.setItem("uid",user.uid)
+    sessionStorage.setItem("uid", user.uid);
   }
   const userLoggedIn = sessionStorage.getItem("isUserLoggedIn");
   if (!userLoggedIn) {

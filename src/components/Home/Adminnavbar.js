@@ -13,14 +13,13 @@ const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn")
 const navigation = [
   { name: "Home", href: "/", current: false },
   // { name: "Fill out the AMRRI form", href: "/form", current: false },
-  { name: "Published Research", href: "/published", current: false },
-  { name: "Reasearch in Review", href: "/review", current: false },
-  { name: "Rejected Researches", href: "/rejected", current: false },
-  { name: "Portal", href: "/user", current: false },
-  { name: "Update Profile", href: "/profile", current: false },
+  { name: "All the Researches", href: "/adminallresearch", current: false },
+  { name: "Approved Researches", href: "/adminapproved", current: false },
+  { name: "Rejected Researches", href: "/adminrejected", current: false },
+//   { name: "Portal", href: "/user", current: false },
+//   { name: "Update Profile", href: "/profile", current: false },
   { name: isUserLoggedIn ? "Logout" : "Login", href: isUserLoggedIn ? "/logout": "/login", current: false },
 
-  
 ];
 
 function classNames(...classes) {

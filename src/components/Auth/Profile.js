@@ -5,43 +5,57 @@ import Navbar from "../Home/userNavbar";
 
 const Userid = sessionStorage.getItem("uid");
 
-const firebaseConfig = {
-  // Your Firebase configuration object
-  apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
-  authDomain: "amrri-cdeb4.firebaseapp.com",
-  projectId: "amrri-cdeb4",
-  storageBucket: "amrri-cdeb4.appspot.com",
-  messagingSenderId: "739660662641",
-  appId: "1:739660662641:web:5dc201b3c017dd80ccd8d0",
-  measurementId: "G-0BT7XZRL7E",
-};
-
-firebase.initializeApp(firebaseConfig);
-
 function Profile() {
   const [documentData, setDocumentData] = useState([]);
+  const [editedData, setEditedData] = useState({});
+  const [isEditing, setIsEditing] = useState({});
 
   useEffect(() => {
-    const fetchDocumentData = async () => {
-      try {
-        const firestore = firebase.firestore();
-        const documentRef = firestore.collection("users").doc(Userid);
-        const documentSnapshot = await documentRef.get();
+    const firestore = firebase.firestore();
+    const documentRef = firestore.collection("users").doc(Userid);
 
-        if (documentSnapshot.exists) {
-          const data = documentSnapshot.data();
-          console.log(data);
-          setDocumentData(data);
-        } else {
-          console.log("Document does not exist");
-        }
-      } catch (error) {
-        console.error("Error fetching document:", error);
+    const unsubscribe = documentRef.onSnapshot((documentSnapshot) => {
+      if (documentSnapshot.exists) {
+        const data = documentSnapshot.data();
+        setDocumentData(data);
+        setEditedData(data);
+      } else {
+        console.log("Document does not exist");
       }
-    };
+    });
 
-    fetchDocumentData();
+    return () => {
+      unsubscribe();
+    };
   }, []);
+
+  const handleEdit = (field) => {
+    setIsEditing((prevState) => ({ ...prevState, [field]: true }));
+  };
+
+  const handleUpdate = async (field) => {
+    try {
+      const firestore = firebase.firestore();
+      const documentRef = firestore.collection("users").doc(Userid);
+
+      await documentRef.update({
+        [field]: editedData[field],
+      });
+
+      setIsEditing((prevState) => ({ ...prevState, [field]: false }));
+      setDocumentData((prevState) => ({
+        ...prevState,
+        [field]: editedData[field],
+      }));
+    } catch (error) {
+      console.error("Error updating document:", error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditedData((prevState) => ({ ...prevState, [name]: value }));
+  };
 
   return (
     <>
@@ -57,36 +71,170 @@ function Profile() {
         <center>
           <h2 className="mt-6 mb-6 text-xl font-bold">User Profile</h2>
           {documentData ? (
-            <div className="shadow-xl w-[50%] p-10 flex flex-col items-start">
+            <div className="shadow-xl w-[50%] p-10 flex flex-col items-start justify-around">
               <h1 className="text-xl font-bold">
-                Login ID :
-                <span className="text-xl font-light">
-                  {documentData.loginId}
-                </span>
+                Login Id:
+                {isEditing.loginId ? (
+                  <>
+                    <input
+                      type="text"
+                      name="loginId"
+                      value={editedData.loginId}
+                      onChange={handleInputChange}
+                      className="p-1 ml-2 bg-blue-300 rounded-md"
+                    />
+                    <button
+                      onClick={() => handleUpdate("loginId")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Update
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className="ml-2 text-xl font-light">
+                      {documentData.loginId}
+                    </span>
+                    <button
+                      onClick={() => handleEdit("loginId")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Edit
+                    </button>
+                  </>
+                )}
               </h1>
+              <br />
               <h1 className="text-xl font-bold">
-                Firstname :
-                <span className="text-xl font-light">
-                {documentData.firstname}
-                </span>
+                Firstname:{" "}
+                {isEditing.firstname ? (
+                  <>
+                    <input
+                      type="text"
+                      name="firstname"
+                      value={editedData.firstname}
+                      onChange={handleInputChange}
+                      className="p-1 ml-2 bg-blue-300 rounded-md"
+                    />
+                    <button
+                      onClick={() => handleUpdate("firstname")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Update
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className="ml-2 text-xl font-light">
+                      {documentData.firstname}
+                    </span>
+                    <button
+                      onClick={() => handleEdit("firstname")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Edit
+                    </button>
+                  </>
+                )}
               </h1>
+              <br />
               <h1 className="text-xl font-bold">
-                Lastname :
-                <span className="text-xl font-light">
-                {documentData.lastname}
-                </span>
+                Lastname:{" "}
+                {isEditing.lastname ? (
+                  <>
+                    <input
+                      type="text"
+                      name="lastname"
+                      value={editedData.lastname}
+                      onChange={handleInputChange}
+                      className="p-1 ml-2 bg-blue-300 rounded-md"
+                    />
+                    <button
+                      onClick={() => handleUpdate("lastname")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Update
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className="ml-2 text-xl font-light">
+                      {documentData.lastname}
+                    </span>
+                    <button
+                      onClick={() => handleEdit("lastname")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Edit
+                    </button>
+                  </>
+                )}
               </h1>
+              <br />
               <h1 className="text-xl font-bold">
-                Official Address :
-                <span className="text-xl font-light">
-                    {documentData.officialAddress}
-                </span>
+                Official Address:{" "}
+                {isEditing.officialAddress ? (
+                  <>
+                    <input
+                      type="text"
+                      name="officialAddress"
+                      value={editedData.officialAddress}
+                      onChange={handleInputChange}
+                      className="p-1 ml-2 bg-blue-300 rounded-md"
+                    />
+                    <button
+                      onClick={() => handleUpdate("officialAddress")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Update
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className="ml-2 text-xl font-light">
+                      {documentData.officialAddress}
+                    </span>
+                    <button
+                      onClick={() => handleEdit("officialAddress")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Edit
+                    </button>
+                  </>
+                )}
               </h1>
+              <br />
               <h1 className="text-xl font-bold">
-                Gender :
-                <span className="text-xl font-light">
-                    {documentData.gender}
-                </span>
+                Gender:{" "}
+                {isEditing.gender ? (
+                  <>
+                    <input
+                      type="text"
+                      name="gender"
+                      value={editedData.gender}
+                      onChange={handleInputChange}
+                      className="p-1 ml-2 bg-blue-300 rounded-md"
+                    />
+                    <button
+                      onClick={() => handleUpdate("gender")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Update
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className="ml-2 text-xl font-light">
+                      {documentData.gender}
+                    </span>
+                    <button
+                      onClick={() => handleEdit("gender")}
+                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                    >
+                      Edit
+                    </button>
+                  </>
+                )}
               </h1>
             </div>
           ) : (
