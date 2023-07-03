@@ -62,7 +62,8 @@ function One() {
         Rid: alphanumericCode,
         uid: Userid,
         approved:false,
-        rejected:false
+        rejected:false,
+        step:2
       });
       alert("Form 1 submitted successfully!");
       console.log("Form 1 submitted successfully!");

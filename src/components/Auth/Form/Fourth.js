@@ -32,21 +32,30 @@ function Fourth() {
   const [form4Submitted, setForm4Submitted] = useState(
     localStorage.getItem('form4Submitted') === 'true'
   );
+  const [isStep4, setIsStep4] = useState(false); // Added state to track if step 2 is available
+
   useEffect(() => {
-    const checkAndCreateDocument = async () => {
-      if (form4Submitted) {
-        localStorage.setItem('form4Submitted', 'true');
+    const checkStep4 = async () => {
+      try {
+        const formDoc = await formsCollectionRef.doc(Rid).get();
+        const formData = formDoc.data();
+        if (formData.step === 4) {
+          setIsStep4(true);
+        }
+      } catch (error) {
+        console.error("Error retrieving form data:", error);
       }
     };
 
-    checkAndCreateDocument();
-  }, [form4Submitted]);
+    checkStep4();
+  }, [Rid]);
   const handleForm4Submit = async (e) => {
     e.preventDefault();
     setForm4Submitted(true);
     try {
       await formsCollectionRef.doc(Rid).update({
         form4: form4Data,
+        step:5
       });
       alert("Form 4 submitted successfully!");
       console.log("Form 4 submitted successfully!");
@@ -80,7 +89,8 @@ function Fourth() {
         <br />
        
         <center>
-          <form onSubmit={handleForm4Submit} className="">
+        {isStep4 ? (
+            <form onSubmit={handleForm4Submit} className="">
             <div className="flex flex-col justify-center w-[50%]">
               <center>
                 <h2>Script</h2>
@@ -1461,6 +1471,10 @@ function Fourth() {
             <br />
             <br />
           </form>
+        ) : (
+          <p>Please fill out the Third Form first</p>
+        )}
+       
         </center>
       </center>
     </center>

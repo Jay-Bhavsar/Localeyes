@@ -18,8 +18,8 @@ const navigation = [
   { name: "Rejected Researches", href: "/rejected", current: false },
   { name: "Portal", href: "/user", current: false },
   { name: "Update Profile", href: "/profile", current: false },
-  { name: isUserLoggedIn ? "Logout" : "Login", href: isUserLoggedIn ? "/logout": "/login", current: false },
-
+  // { name: isUserLoggedIn ? "Logout" : "Login", href: isUserLoggedIn ? "/logout": "/login", current: false },
+  {name:"logout",href:"/logout"}
   
 ];
 

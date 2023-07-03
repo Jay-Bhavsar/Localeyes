@@ -31,15 +31,23 @@ function Fifth() {
   const [form5Submitted, setForm5Submitted] = useState(
     localStorage.getItem('form5Submitted') === 'true'
   );
+  const [isStep5, setIsStep5] = useState(false); // Added state to track if step 2 is available
+
   useEffect(() => {
-    const checkAndCreateDocument = async () => {
-      if (form5Submitted) {
-        localStorage.setItem('form5Submitted', 'true');
+    const checkStep5 = async () => {
+      try {
+        const formDoc = await formsCollectionRef.doc(Rid).get();
+        const formData = formDoc.data();
+        if (formData.step === 5) {
+          setIsStep5(true);
+        }
+      } catch (error) {
+        console.error("Error retrieving form data:", error);
       }
     };
 
-    checkAndCreateDocument();
-  }, [form5Submitted]);
+    checkStep5();
+  }, [Rid]);
   const handleForm5Submit = async (e) => {
     e.preventDefault();
     setForm5Submitted(true);
@@ -75,7 +83,9 @@ function Fifth() {
         <h1>Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
       </div>
       <center>
-        <form action="" className="" onSubmit={handleForm5Submit}>
+      {isStep5 ? (
+          <form onSubmit={handleForm5Submit}>
+              <form action="" className="" onSubmit={handleForm5Submit}>
           
           <center>
             <h2 className="mt-16 text-lg font-bold">Declaration</h2>
@@ -117,6 +127,11 @@ function Fifth() {
           </div>
           <button type="submit bg-red-900" disabled={form5Submitted}>Submit</button>
         </form>
+          </form>
+        ) : (
+          <p>Please fill out all the form first</p>
+        )}
+      
       </center>
       <Footer/>
     </>
