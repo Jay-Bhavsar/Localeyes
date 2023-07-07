@@ -30,7 +30,8 @@ function Second() {
     localStorage.getItem("form2Submitted") === "true"
   );
   const [isStep2, setIsStep2] = useState(false); // Added state to track if step 2 is available
-
+  const [isLoading, setLoading] = useState(true);
+  const [isDataAvailable, setDataAvailable] = useState(false);
   useEffect(() => {
     const checkStep2 = async () => {
       try {
@@ -39,8 +40,12 @@ function Second() {
         if (formData.step === 2) {
           setIsStep2(true);
         }
+        setLoading(false);
+        setDataAvailable(true);
       } catch (error) {
         console.error("Error retrieving form data:", error);
+        setLoading(false);
+        setDataAvailable(false);
       }
     };
 
@@ -70,6 +75,13 @@ function Second() {
     });
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isDataAvailable) {
+    return <div>No data found.</div>;
+  }
 
   return (
     <>
@@ -202,7 +214,7 @@ function Second() {
              </button>
            </form>
         ) : (
-          <p>Please fill out the Form 1 first</p>
+          <p className="mt-10 mb-36">Please fill out the Form 1 first</p>
         )}
           <br />
        

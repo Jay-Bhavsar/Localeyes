@@ -4,6 +4,8 @@ import "firebase/compat/firestore";
 import Navbar from "../../Home/userNavbar";
 import Footer from "../../Home/Footer";
 
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
   authDomain: "amrri-cdeb4.firebaseapp.com",
@@ -36,17 +38,18 @@ function One() {
   }, [form1Submitted]);
 
   function generateAlphanumericCode(length) {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let code = "";
-
-    for (let i = 0; i < length; i++) {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const prefix = "AMMRI";
+    let code = prefix;
+  
+    for (let i = 0; i < length - prefix.length; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       code += characters.charAt(randomIndex);
     }
-
+  
     return code;
   }
+  
   const codeLength = 10;
   const alphanumericCode = generateAlphanumericCode(codeLength);
   console.log(alphanumericCode);

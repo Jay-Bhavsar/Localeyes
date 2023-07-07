@@ -30,6 +30,8 @@ function Third() {
     localStorage.getItem("form3Submitted") === "true"
   );
   const [isStep3, setIsStep3] = useState(false); // Added state to track if step 2 is available
+  const [isLoading, setLoading] = useState(true);
+  const [isDataAvailable, setDataAvailable] = useState(false);
 
   useEffect(() => {
     const checkStep3 = async () => {
@@ -39,8 +41,12 @@ function Third() {
         if (formData.step === 3) {
           setIsStep3(true);
         }
+        setLoading(false);
+        setDataAvailable(true);
       } catch (error) {
         console.error("Error retrieving form data:", error);
+        setLoading(false);
+        setDataAvailable(false);
       }
     };
 
@@ -60,6 +66,8 @@ function Third() {
       setForm3Data({}); // Reset form data
     } catch (error) {
       console.error("Error submitting Form 2:", error);
+      setLoading(false);
+      setDataAvailable(false);
     }
   };
 
@@ -69,6 +77,14 @@ function Third() {
       [e.target.name]: e.target.value,
     });
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isDataAvailable) {
+    return <div>No data found.</div>;
+  }
 
   return (
     <>
@@ -305,7 +321,7 @@ function Third() {
               </button>
             </form>
           ) : (
-            <p>Please fill out the Second Form first</p>
+            <p className="mt-10 mb-36">Please fill out the Second Form first</p>
           )}
         </center>
       </center>

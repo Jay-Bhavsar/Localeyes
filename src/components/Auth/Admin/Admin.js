@@ -13,7 +13,9 @@ function Admin() {
       try {
         const firestore = firebase.firestore();
         const collectionRef = firestore.collection("forms");
-        const snapshot = await collectionRef.get();
+        const snapshot = await collectionRef
+        .where("step", "==", 0)
+        .get();
 
         const data = snapshot.docs.map((doc) => {
           const docData = doc.data();

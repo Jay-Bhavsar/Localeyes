@@ -28,6 +28,7 @@ function Adminrejected() {
         const querySnapshot = await collectionRef
           .where("approved", "==", false)
           .where("rejected","==",true)
+          .where("step", "==", 0)
           .get();
 
         const data = querySnapshot.docs.map((doc) => {

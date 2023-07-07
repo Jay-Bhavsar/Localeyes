@@ -80,7 +80,7 @@ function User() {
             ...docData,
           };
         });
-        setApprovedres(data);
+        setReviewres(data);
         console.log(data);
         console.log("Array Length:", data.length); // Get the length of the data array
       } catch (error) {
@@ -117,47 +117,47 @@ function User() {
       <center>
         <div class="relative overflow-x-auto">
           <table class="w-[50%] text-sm text-left text-black dark:text-black">
-            <thead class="text-xs text-blue-100 uppercase bg-blue-50 dark:bg-blue-100 dark:text-black">
-              <tr>
-                <th scope="col" class="px-6 py-3">
+            <thead class="text-xs text-blue-100 uppercase bg-blue-50 dark:bg-blue-500 dark:text-black">
+              <tr class="bg-white border-b dark:bg-blue-500 dark:border-blue-500">
+                <th scope="col" class="px-6 py-3 text-white text-lg">
                   Total Researches
                 </th>
                 
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 text-lg text-white">
                   {reviewres.length+rejectedres.length+approvedres.length}
                 </th>
               </tr>
             </thead>
             <tbody>
               
-              <tr class="bg-white border-b dark:bg-blue-100 dark:border-blue-100">
+              <tr class="bg-white border-b dark:bg-blue-500 dark:border-blue-500">
                 <th
                   scope="row"
-                  class="px-6 py-4 font-xl text-blue-900 whitespace-nowrap dark:text-black"
+                  class="px-6 py-4 font-lg whitespace-nowrap text-lg text-white dark:text-white"
                 >
-                  Under Review Stage
+                  UNDER REVIEW STAGE
                 </th>
-                <td class="px-6 py-4 font-xl">{reviewres.length}</td>
+                <td class="px-6 py-4 font-lg text-white text-lg text">{reviewres.length}</td>
              
               </tr>
-              <tr class="bg-white dark:bg-blue-100">
+              <tr class="bg-white border-b dark:bg-blue-500 dark:border-blue-500">
                 <th
                   scope="row"
-                  class="px-6 py-4 font-xl text-blue-900 whitespace-nowrap dark:text-black"
+                  class="px-6 py-4 font-lg text-white whitespace-nowrap dark:text-white text-lg"
                 >
-                  Registered Researches
+                  REGISTERED RESEARCHES
                 </th>
-                <td class="px-6 py-4">{approvedres.length}</td>
+                <td class="px-6 py-4 text-white text-lg">{approvedres.length}</td>
               
               </tr>
-              <tr class="bg-white dark:bg-blue-100">
+              <tr class="bg-white dark:bg-blue-500">
                 <th
                   scope="row"
-                  class="px-6 py-4 font-xl text-blue-900 whitespace-nowrap dark:text-black"
+                  class="px-6 py-4 font-lg text-blue-900 whitespace-nowrap dark:text-white text-lg"
                 >
-                  Terminated/Suspended Researches
+                  TERMINATED/SUSPENDED RESEARCHES
                 </th>
-                <td class="px-6 py-4">{rejectedres.length}</td>
+                <td class="px-6 py-4 text-lg text-white">{rejectedres.length}</td>
               
               </tr>
             </tbody>

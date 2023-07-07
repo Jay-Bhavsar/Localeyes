@@ -29,6 +29,7 @@ function Published({id,data,onClose}) {
         const querySnapshot = await collectionRef
           .where("uid", "==", Userid)
           .where("approved", "==", true)
+          .where("step", "==", 0)
           .get();
 
         const data = querySnapshot.docs.map((doc) => {

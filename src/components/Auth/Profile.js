@@ -3,7 +3,9 @@ import firebase from "firebase/compat/app";
 import "firebase/firestore";
 import Navbar from "../Home/userNavbar";
 
+
 const Userid = sessionStorage.getItem("uid");
+
 
 function Profile() {
   const [documentData, setDocumentData] = useState([]);
@@ -11,22 +13,25 @@ function Profile() {
   const [isEditing, setIsEditing] = useState({});
 
   useEffect(() => {
-    const firestore = firebase.firestore();
-    const documentRef = firestore.collection("users").doc(Userid);
+    const fetchUserData = async () => {
+      try {
+        const firestore = firebase.firestore();
+        const userRef = firestore.collection("users");
+        const userDoc = await userRef.doc(sessionStorage.getItem("uid")).get();
 
-    const unsubscribe = documentRef.onSnapshot((documentSnapshot) => {
-      if (documentSnapshot.exists) {
-        const data = documentSnapshot.data();
-        setDocumentData(data);
-        setEditedData(data);
-      } else {
-        console.log("Document does not exist");
+        if (userDoc.exists) {
+          const userData = userDoc.data();
+          setDocumentData(userData);
+          setEditedData(userData);
+        } else {
+          console.log("Document does not exist");
+        }
+      } catch (error) {
+        console.error("Error retrieving document:", error);
       }
-    });
-
-    return () => {
-      unsubscribe();
     };
+
+    fetchUserData();
   }, []);
 
   const handleEdit = (field) => {

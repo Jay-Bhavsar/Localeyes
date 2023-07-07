@@ -30,6 +30,7 @@ function Researchrev() {
           .where("uid", "==", Userid)
           .where("approved", "==", false)
           .where("rejected", "==", false)
+          .where("step", "==", 0)
           .get();
 
         const data = querySnapshot.docs.map((doc) => {
