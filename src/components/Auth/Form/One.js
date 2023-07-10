@@ -3,8 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../../Home/userNavbar";
 import Footer from "../../Home/Footer";
-
-
+import "firebase/compat/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
@@ -41,15 +40,15 @@ function One() {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const prefix = "AMMRI";
     let code = prefix;
-  
+
     for (let i = 0; i < length - prefix.length; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       code += characters.charAt(randomIndex);
     }
-  
+
     return code;
   }
-  
+
   const codeLength = 10;
   const alphanumericCode = generateAlphanumericCode(codeLength);
   console.log(alphanumericCode);
@@ -59,14 +58,27 @@ function One() {
     // setform1Submitted(true);
     setForm1Submitted(true);
     try {
+      const storageRef = firebase.storage().ref();
+      const fileInput = document.getElementById("authorizationDocument");
+      const file = fileInput.files[0];
+
+      if (file) {
+        const fileRef = storageRef.child(
+          `authorizationDocuments/${alphanumericCode}`
+        );
+        await fileRef.put(file);
+        const downloadUrl = await fileRef.getDownloadURL();
+        form1Data.authorizationDocumentUrl = downloadUrl;
+      }
+
       await formsCollectionRef.doc(alphanumericCode).set({
         form1: form1Data,
         form1Submitted: true,
         Rid: alphanumericCode,
         uid: Userid,
-        approved:false,
-        rejected:false,
-        step:2
+        approved: false,
+        rejected: false,
+        step: 2,
       });
       alert("Form 1 submitted successfully!");
       console.log("Form 1 submitted successfully!");
@@ -193,6 +205,11 @@ function One() {
                   disabled={form1Submitted}
                 />
                 <span className="ml-2">Dicephering</span>
+              </label>
+              <label htmlFor="" className="p-2 bg-blue-200">
+                Attach an authorization document from the Institute/ repository,
+                where the MSS is collected. Files submitted:
+                <input type="file" id="authorizationDocument" name="" disabled={form1Submitted} />
               </label>
             </div>
           </div>

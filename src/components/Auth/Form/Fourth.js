@@ -3,6 +3,8 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../../Home/userNavbar";
 import Footer from "../../Home/Footer";
+const loader = require('../../img/loader.gif')
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -78,7 +80,9 @@ function Fourth() {
 
   
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><center>
+      <div><img src={loader} alt="" /></div>
+      </center></div>;
   }
 
   if (!isDataAvailable) {
