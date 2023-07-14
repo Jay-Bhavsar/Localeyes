@@ -42,7 +42,7 @@ function Profile() {
     try {
       const firestore = firebase.firestore();
       const documentRef = firestore.collection("users").doc(Userid);
-
+      alert("your data is been updated")
       await documentRef.update({
         [field]: editedData[field],
       });
@@ -90,7 +90,7 @@ function Profile() {
                     />
                     <button
                       onClick={() => handleUpdate("loginId")}
-                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                      className="p-1 ml-2 text-white rounded-md shadow-md bg-rose-900"
                     >
                       Update
                     </button>
@@ -123,7 +123,7 @@ function Profile() {
                     />
                     <button
                       onClick={() => handleUpdate("firstname")}
-                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                      className="p-1 ml-2 text-white rounded-md shadow-md bg-rose-900"
                     >
                       Update
                     </button>
@@ -156,7 +156,7 @@ function Profile() {
                     />
                     <button
                       onClick={() => handleUpdate("lastname")}
-                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                      className="p-1 ml-2 text-white rounded-md shadow-md bg-rose-900"
                     >
                       Update
                     </button>
@@ -189,7 +189,7 @@ function Profile() {
                     />
                     <button
                       onClick={() => handleUpdate("officialAddress")}
-                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                      className="p-1 ml-2 text-white rounded-md shadow-md bg-rose-900"
                     >
                       Update
                     </button>
@@ -222,7 +222,7 @@ function Profile() {
                     />
                     <button
                       onClick={() => handleUpdate("gender")}
-                      className="p-1 ml-2 bg-blue-300 rounded-md shadow-md"
+                      className="p-1 ml-2 text-white rounded-md shadow-md bg-rose-900"
                     >
                       Update
                     </button>
