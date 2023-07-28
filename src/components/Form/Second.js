@@ -107,7 +107,7 @@ function Second() {
           {isStep2 ? (
              <form onSubmit={handleForm2Submit}>
              <label className="flex flex-col  p-2 bg-blue-200 w-[50%] font-bold">
-               Name:
+              <h4>Name<span className="text-red-600">*</span>:</h4>  
                <input
                  type="text"
                  name="name"
@@ -115,10 +115,11 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+                 required
                />
              </label>
              <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-               Designation:
+              <h4> Designation<span className="text-red-600">*</span>:</h4>
                <input
                  type="text"
                  name="designation"
@@ -126,10 +127,11 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+                 required
                />
              </label>
              <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-               Affiliation:
+              <h4>Affiliation<span className="text-red-600">*</span>:</h4> 
                <input
                  type="text"
                  name="Affiliation"
@@ -137,10 +139,11 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+                 required
                />
              </label>
              <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-               Address:
+              <h4>Address<span className="text-red-600">*</span>:</h4> 
                <input
                  type="text"
                  name="Address"
@@ -148,10 +151,11 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+                 required
                />
              </label>
              <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-               Phone Number:
+              <h4> Phone Number<span className="text-red-600">*</span>:</h4>
                <input
                  type="text"
                  name="Phno"
@@ -159,10 +163,11 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+                 required
                />
              </label>
              <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-               Email-id:
+              <h4> Email-id<span className="text-red-600">*</span>:</h4>
                <input
                  type="text"
                  name="email"
@@ -170,17 +175,18 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+                 required
                />
              </label>
              <br />
              <br />
              <h2 className="font-bold">
-               Details of Contact person (Public Query)
+               Details of Contact person-Public Query <span className="text-red-600">(If Same as above then skip)</span>
              </h2>
              <br />
              <br />
              <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-               Name:
+              <h4>Name:</h4> 
                <input
                  type="text"
                  name="Public_Query_name"
@@ -188,10 +194,11 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+               
                />
              </label>
              <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-               Designation:
+              <h4>Designation:</h4> 
                <input
                  type="text"
                  name="Public_Query_designation"
@@ -199,10 +206,11 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+                
                />
              </label>
              <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-               Affiliation:
+              <h4>Affiliation:</h4> 
                <input
                  type="text"
                  name="Public_Query_affiliation"
@@ -210,6 +218,7 @@ function Second() {
                  onChange={handleForm2InputChange}
                  // className="m-4 bg-blue-200"
                  disabled={form2Submitted}
+                 
                />
              </label>
              {/* Add more inputs as needed */}

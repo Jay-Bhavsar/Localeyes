@@ -65,9 +65,9 @@ export default function Example() {
                         <h1>AMRRI</h1>
                       </div>
                       {navigation.map((item) => (
-                        <Link
+                        <a
                           key={item.name}
-                          to={item.href}
+                          href={item.href}
                           className={classNames(
                             item.current
                               ? "bg-gray-900 text-white"
@@ -77,7 +77,7 @@ export default function Example() {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                        </Link>
+                        </a>
                       ))}
                     </div>
                   </div>

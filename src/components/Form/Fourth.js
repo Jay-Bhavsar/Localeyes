@@ -3,8 +3,8 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../Home/userNavbar";
 import Footer from "../Home/Footer";
-const loader = require('../img/loader.gif')
-
+import { redirect } from "react-router-dom";
+const loader = require("../img/loader.gif");
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -35,7 +35,6 @@ function Fourth() {
   const [isLoading, setLoading] = useState(true);
   const [isDataAvailable, setDataAvailable] = useState(false);
 
-
   useEffect(() => {
     const checkStep4 = async () => {
       try {
@@ -55,6 +54,10 @@ function Fourth() {
 
     checkStep4();
   }, [Rid]);
+
+  const [selectedScript, setSelectedScript] = useState("");
+  const [customScript, setCustomScript] = useState("");
+
   const handleForm4Submit = async (e) => {
     e.preventDefault();
     setForm4Submitted(true);
@@ -66,6 +69,7 @@ function Fourth() {
       alert("Form 4 submitted successfully!");
       console.log("Form 4 submitted successfully!");
       setForm4Data({}); // Reset form data
+      redirect("/form");
     } catch (error) {
       console.error("Error submitting Form 2:", error);
     }
@@ -76,13 +80,24 @@ function Fourth() {
       ...form4Data,
       [e.target.name]: e.target.value,
     });
+    const { name, value } = e.target;
+    if (name === "Script") {
+      setSelectedScript(value);
+    } else if (name === "custom_script") {
+      setCustomScript(value);
+    }
   };
 
-  
   if (isLoading) {
-    return <div><center>
-      <div><img src={loader} alt="" /></div>
-      </center></div>;
+    return (
+      <div>
+        <center>
+          <div>
+            <img src={loader} alt="" />
+          </div>
+        </center>
+      </div>
+    );
   }
 
   if (!isDataAvailable) {
@@ -217,6 +232,19 @@ function Fourth() {
                       <option value="Vattaluttu">Vattaluttu</option>
                       <option value="Others">Others</option>
                     </select>
+                    {selectedScript === "Others" && (
+                      <label className="flex items-center p-2">
+                        <span className="ml-2">Please specify:</span>
+                        <input
+                          type="text"
+                          name="custom_script"
+                          value={customScript}
+                          onChange={handleForm4InputChange}
+                          disabled={form4Submitted}
+                          required
+                        />
+                      </label>
+                    )}
                     <br />
                     <br />
                     <h2>Language</h2>
@@ -1467,9 +1495,7 @@ function Fourth() {
                       <option value="Others">Others (Please specify...)</option>
                     </select>
                     <br />
-                   
-                   
-                   
+
                     <label className="flex flex-col bg-blue-200 w-[50%] p-2">
                       <h2 className="font-bold">Cover Page Text</h2>
                       <input

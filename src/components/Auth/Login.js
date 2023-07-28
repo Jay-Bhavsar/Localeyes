@@ -8,7 +8,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const { login} = useUserAuth();
+  const { login } = useUserAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,10 +20,8 @@ function Login() {
     } catch (err) {
       setError(err.message);
     }
-
   };
 
- 
   return (
     <>
       <Navbar />
@@ -41,7 +39,11 @@ function Login() {
       <br />
       <div className="form">
         {error && <div>{error}</div>}
-        <form action="" onSubmit={handleSubmit} className="w-[90%] md:w-[30%] shadow-xl">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="w-[90%] md:w-[30%] shadow-xl"
+        >
           <h3>Login</h3>
           <input
             type="email"
@@ -59,8 +61,12 @@ function Login() {
           />
           <button className="button">Log In</button>
 
-          {/* <button onClick={handleGoogleSignIn}>Login with Google</button> */}
-          <p>
+        
+          <p className="mr-16">
+           <Link to="/forgetpass" className="text-red-700-950">Forget Password</Link>
+          </p>
+        
+          <p className="mt-3">
             Don't have a account? <Link to="/signup"> Sign Up</Link>
           </p>
         </form>

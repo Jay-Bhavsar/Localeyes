@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../Home/userNavbar";
 import Footer from "../Home/Footer";
-const loader = require('../img/loader.gif')
+const loader = require("../img/loader.gif");
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -79,9 +79,15 @@ function Third() {
     });
   };
   if (isLoading) {
-    return <div><center>
-      <div><img src={loader} alt="" /></div>
-      </center></div>;
+    return (
+      <div>
+        <center>
+          <div>
+            <img src={loader} alt="" />
+          </div>
+        </center>
+      </div>
+    );
   }
 
   if (!isDataAvailable) {
@@ -100,7 +106,10 @@ function Third() {
           <h1>Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
         </div>
         <center>
-          <h2 className="font-bold">Primary Sponsorship</h2>
+          <h2 className="font-bold">
+            Monetary Support <span className="text-red-700">(if Any)-</span>
+            Primary Sponsorship
+          </h2>
           <br />
           {isStep3 ? (
             <form onSubmit={handleForm3Submit}>
@@ -133,7 +142,9 @@ function Third() {
               <br />
 
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                Title in Catalogue:
+                <h4>
+                  Title in Catalogue<span className="text-red-600">*</span>:
+                </h4>
                 <input
                   type="text"
                   name="catalog_title"
@@ -141,10 +152,13 @@ function Third() {
                   onChange={handleForm3InputChange}
                   // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
+                  required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                Title of MSS:
+                <h4>
+                  Title of MSS<span className="text-red-600">*</span>:
+                </h4>
                 <input
                   type="text"
                   name="MSS_title"
@@ -152,10 +166,13 @@ function Third() {
                   onChange={handleForm3InputChange}
                   // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
+                  required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                Given Title:
+                <h4>
+                  Given Title<span className="text-red-600">*</span>:
+                </h4>
                 <input
                   type="text"
                   name="given_title"
@@ -163,10 +180,13 @@ function Third() {
                   onChange={handleForm3InputChange}
                   // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
+                  required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                Subject:
+                <h4>
+                  Subject<span className="text-red-600">*</span>:
+                </h4>
                 <input
                   type="text"
                   name="subject"
@@ -174,10 +194,13 @@ function Third() {
                   onChange={handleForm3InputChange}
                   // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
+                  required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                Author:
+                <h4>
+                  Author<span className="text-red-600">*</span>:
+                </h4>
                 <input
                   type="text"
                   name="author"
@@ -185,10 +208,13 @@ function Third() {
                   onChange={handleForm3InputChange}
                   // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
+                  required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                MSS Owner:
+                <h4>
+                  MSS OWNER<span className="text-red-600">*</span>:
+                </h4>
                 <input
                   type="text"
                   name="MSS_owner"
@@ -196,10 +222,13 @@ function Third() {
                   onChange={handleForm3InputChange}
                   // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
+                  required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                Scribe:
+                <h4>
+                  Scribe<span className="text-red-600">*</span>:
+                </h4>
                 <input
                   type="text"
                   name="scribe"
@@ -207,6 +236,7 @@ function Third() {
                   onChange={handleForm3InputChange}
                   // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
+                  required
                 />
               </label>
 
@@ -264,7 +294,7 @@ function Third() {
               </label>
 
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                Date of Commencement/Collection:
+                Date of Commencement:
                 <input
                   type="text"
                   name="date_of_collection"
@@ -275,7 +305,13 @@ function Third() {
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
-                Estimated Duration(Eg :3 Year, 2 Months):
+                Estimated Duration-{" "}
+                <span className="text-red-700">
+                  Note: Expected duration of at least two years from
+                  commencement of the study/ as per university rules and
+                  regulations{" "}
+                </span>{" "}
+                (Eg :3 Year, 2 Months):
                 <input
                   type="text"
                   name="duration"
@@ -288,32 +324,61 @@ function Third() {
 
               <div className="flex flex-col w-[50%] bg-blue-200">
                 <center>
-                  <center>
-                    <h2 className="text-lg font-bold ">Status</h2>
-                  </center>
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="status"
-                      value="Complete"
-                      checked={form3Data.status === "Complete"}
-                      onChange={handleForm3InputChange}
-                      disabled={form3Submitted}
-                    />
-                    <span className="ml-2">Complete</span>
-                  </label>
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="status"
-                      value="incomplete"
-                      checked={form3Data.status === "incomplete"}
-                      onChange={handleForm3InputChange}
-                      disabled={form3Submitted}
-                    />
-                    <span className="ml-2">Incomplete</span>
-                  </label>
+                  <h2 className="text-lg font-bold">
+                    Status<span className="text-red-600">*</span>:
+                  </h2>
                 </center>
+                <label className="flex items-center p-2">
+                  <input
+                    type="radio"
+                    name="status"
+                    value="Complete"
+                    checked={form3Data.status === "Complete"}
+                    onChange={handleForm3InputChange}
+                    disabled={form3Submitted}
+                    required
+                  />
+                  <span className="ml-2">Complete</span>
+                </label>
+                <label className="flex items-center p-2">
+                  <input
+                    type="radio"
+                    name="status"
+                    value="incomplete"
+                    checked={form3Data.status === "incomplete"}
+                    onChange={handleForm3InputChange}
+                    disabled={form3Submitted}
+                    required
+                  />
+                  <span className="ml-2">Incomplete</span>
+                </label>
+                {/* Add the new radio button with a text option */}
+                <label className="flex items-center p-2">
+                  <input
+                    type="radio"
+                    name="status"
+                    value="custom"
+                    checked={form3Data.status === "custom"}
+                    onChange={handleForm3InputChange}
+                    disabled={form3Submitted}
+                    required
+                  />
+                  <span className="ml-2">Custom Status</span>
+                </label>
+                {/* Add the text input for the custom option */}
+                {form3Data.status === "custom" && (
+                  <label className="flex items-center p-2">
+                    <span className="ml-2">Please specify:</span>
+                    <input
+                      type="text"
+                      name="custom_status"
+                      value={form3Data.custom_status || ""}
+                      onChange={handleForm3InputChange}
+                      disabled={form3Submitted}
+                      required
+                    />
+                  </label>
+                )}
               </div>
 
               {/* Add more inputs as needed */}

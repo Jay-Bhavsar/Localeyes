@@ -22,6 +22,7 @@ import Published from "./components/Auth/Published";
 import Rejected from "./components/Auth/Rejected";
 import Adminapproved from "./components/Admin/Adminrejected";
 import Adminrejected from "./components/Admin/Adminapproved";
+import ForgotPassword from "./components/Auth/ForgotPassword";
 // import Form3 from "./components/Auth/Form/Form1";
 
 function App() {
@@ -152,6 +153,7 @@ function App() {
             <Route path="/logout" element={<Logout />}></Route>
 
             <Route path="/signup" element={<Signup />} />
+            <Route path="/forgetpass" element={<ForgotPassword/>} />
           </Routes>
         </UserAuthContextProvider>
       </div>

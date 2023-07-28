@@ -4,6 +4,7 @@ import "firebase/compat/firestore";
 import Navbar from "../Home/Navbar";
 import Footer from "../Home/Footer";
 import "firebase/compat/storage";
+import { redirect } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
@@ -61,6 +62,7 @@ function One() {
       const storageRef = firebase.storage().ref();
       const fileInput = document.getElementById("authorizationDocument");
       const file = fileInput.files[0];
+      redirect('/form')
 
       if (file) {
         const fileRef = storageRef.child(
@@ -111,30 +113,38 @@ function One() {
       <center>
         <form action="" className="" onSubmit={handleForm1Submit}>
           <label className="flex flex-col bg-blue-200 w-[50%] p-2">
-            <h2 className="font-bold">Public Title of Study:</h2>
+            <h2 className="font-bold">
+              Public Title of Study <span className="text-red-600">*</span>:
+            </h2>
             <input
               type="text"
               name="public_title"
               value={form1Data.public_title || ""}
               onChange={handleForm1InputChange}
               disabled={form1Submitted}
+              required
               // className="m-4 bg-blue-200"
             />
           </label>
 
           <label className="flex flex-col bg-blue-200 w-[50%] p-2">
-            <h2 className="font-bold">Scientific Title of Study:</h2>
+            <h2 className="font-bold">
+              Scientific Title of Study<span className="text-red-600">*</span>:
+            </h2>
             <input
               type="text"
               name="sci_title"
               value={form1Data.sci_title || ""}
               onChange={handleForm1InputChange}
               disabled={form1Submitted}
+              required
               // className="m-4 bg-blue-200"
             />
           </label>
           <center>
-            <h2 className="mt-16 text-lg font-bold">Type of Research</h2>
+            <h2 className="mt-16 text-lg font-bold">
+              Type of Research<span className="text-red-600">*</span>
+            </h2>
           </center>
           <div className="flex flex-col w-[50%] bg-blue-200">
             {/* <label className="font-bold">Type of Research:</label> */}
@@ -148,6 +158,7 @@ function One() {
                   checked={form1Data.type_of_research === "collection"}
                   onChange={handleForm1InputChange}
                   disabled={form1Submitted}
+                  required
                 />
                 <span className="ml-2">Collection</span>
               </label>
@@ -159,6 +170,7 @@ function One() {
                   checked={form1Data.type_of_research === "Catalog"}
                   onChange={handleForm1InputChange}
                   disabled={form1Submitted}
+                  required
                 />
                 <span className="ml-2">Catalouging</span>
               </label>
@@ -170,6 +182,7 @@ function One() {
                   checked={form1Data.type_of_research === "translation"}
                   onChange={handleForm1InputChange}
                   disabled={form1Submitted}
+                  required
                 />
                 <span className="ml-2">Translation</span>
               </label>
@@ -181,6 +194,7 @@ function One() {
                   checked={form1Data.type_of_research === "Transliteration"}
                   onChange={handleForm1InputChange}
                   disabled={form1Submitted}
+                  required
                 />
                 <span className="ml-2">Transliteration</span>
               </label>
@@ -192,6 +206,7 @@ function One() {
                   checked={form1Data.type_of_research === "Transcription"}
                   onChange={handleForm1InputChange}
                   disabled={form1Submitted}
+                  required
                 />
                 <span className="ml-2">Transcription</span>
               </label>
@@ -203,13 +218,45 @@ function One() {
                   checked={form1Data.type_of_research === "Dicephering"}
                   onChange={handleForm1InputChange}
                   disabled={form1Submitted}
+                  required
                 />
                 <span className="ml-2">Dicephering</span>
               </label>
+              <label className="flex items-center p-2">
+                <input
+                  type="radio"
+                  name="type_of_research"
+                  value="custom"
+                  checked={form1Data.type_of_research === "custom"}
+                  onChange={handleForm1InputChange}
+                  disabled={form1Submitted}
+                  required
+                />
+                <span className="ml-2">Others</span>
+              </label>
+              {form1Data.type_of_research === "custom" && (
+                <label className="flex items-center p-2">
+                  <span className="ml-2">Please specify:</span>
+                  <input
+                    type="text"
+                    name="custom_research"
+                    value={form1Data.custom_research || ""}
+                    onChange={handleForm1InputChange}
+                    disabled={form1Submitted}
+                    required
+                  />
+                </label>
+              )}
               <label htmlFor="" className="p-2 bg-blue-200">
                 Attach an authorization document from the Institute/ repository,
                 where the MSS is collected. Files submitted:
-                <input type="file" id="authorizationDocument" name="" disabled={form1Submitted} />
+                <input
+                  type="file"
+                  id="authorizationDocument"
+                  name=""
+                  disabled={form1Submitted}
+                  required
+                />
               </label>
             </div>
           </div>

@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Navbar from "../Home/userNavbar";
 import Footer from "../Home/Footer";
-const loader = require('../img/loader.gif')
+const loader = require("../img/loader.gif");
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -77,17 +77,30 @@ function Fifth() {
     });
   };
 
-  
   if (isLoading) {
-    return <div><center>
-      <div><img src={loader} alt="" /></div>
-      </center></div>;
+    return (
+      <div>
+        <center>
+          <div>
+            <img src={loader} alt="" />
+          </div>
+        </center>
+      </div>
+    );
   }
 
   if (!isDataAvailable) {
-    return <div>Fill out the first form</div>;
+    return (
+      <>
+        <div>You have Registered the Research it is in review stage</div>
+        <a href="/form">
+          <button className="p-4 font-bold text-white bg-blue-500">
+            Go back to Portal
+          </button>
+        </a>
+      </>
+    );
   }
-
 
   return (
     <>
@@ -139,7 +152,11 @@ function Fifth() {
                 </label>
               </div>
             </div>
-            <button type="submit" className="bg-blue-500" disabled={form5Submitted}>
+            <button
+              type="submit"
+              className="bg-blue-500"
+              disabled={form5Submitted}
+            >
               Submit
             </button>
           </form>

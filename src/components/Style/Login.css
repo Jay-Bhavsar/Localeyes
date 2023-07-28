@@ -30,12 +30,26 @@ form h3{
     font-weight:500;
     color: rgb(43, 104, 228);
 }
+.forgot h3{
+    font-size: 1.5rem;
+    font-weight:500;
+    color: rgb(43, 104, 228);
+}
 form input{
     margin:10px 0px 10px 0px;
     /* width: 80%; */
     height: 30px;
     border: 2px solid white;
     border-bottom-color: rgb(43, 104, 228);
+}
+
+.forgot input{
+    margin:10px 0px 10px 0px;
+    /* width: 80%; */
+    height: 30px;
+    border: 2px solid white;
+    border-bottom-color: rgb(43, 104, 228);
+    width: 60%;
 }
 
 input:focus{
@@ -50,8 +64,18 @@ form button{
     color: white;
     border: 2px solid white;
 }
+.forgot button{
+    margin: 10px 0px 10px 0px;
+    width: 60%;
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgb(43, 104, 228);
+    color: white;
+    border: 2px solid white;
+}
 .button{
     background-color: rgb(43, 104, 228);
+    width: 80%;
 }
 .oneliner{
     display: flex;

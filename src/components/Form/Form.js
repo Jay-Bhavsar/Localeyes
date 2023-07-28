@@ -48,7 +48,7 @@ function Form() {
                     coordinator (Multi-center study)
                   </li>
                   <li>5. Details of Contact person (Public Query)</li>
-                  <li>6. Monetary Support</li>
+                  
                 </ul>
               </div>
             </div>
@@ -63,6 +63,7 @@ function Form() {
             <div className="flex flex-col w-[100%] bg-white p-0.5 ">
               <div className="flex ">
                 <ul className="flex flex-col justify-start text-left">
+                <li>6. Monetary Support</li>
                   <li>7. Primary Sponsorship</li>
                   <li>8. BASIC DATA OF Manuscript</li>
                   <li>9. Technical Section - Manuscript details</li>
