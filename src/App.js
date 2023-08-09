@@ -57,38 +57,38 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
+            {/* <Route
               path="/part2"
               element={
                 <ProtectedRoute>
                   <Second />
                 </ProtectedRoute>
               }
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/part3"
               element={
                 <ProtectedRoute>
                   <Third />
                 </ProtectedRoute>
               }
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/part4"
               element={
                 <ProtectedRoute>
                   <Fourth />
                 </ProtectedRoute>
               }
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/part5"
               element={
                 <ProtectedRoute>
                   <Fifth />
                 </ProtectedRoute>
               }
-            />
+            /> */}
           
             <Route
               path="/review"
@@ -119,15 +119,16 @@ function App() {
               path="/adminapproved"
               element={
                 <ProtectedRoute>
-                  <Adminapproved/>
+                  <Adminrejected/>
                 </ProtectedRoute>
+                   
               }
             />
             <Route
               path="/adminrejected"
               element={
                 <ProtectedRoute>
-                 <Adminrejected/>
+                <Adminapproved/>
                 </ProtectedRoute>
               }
             />

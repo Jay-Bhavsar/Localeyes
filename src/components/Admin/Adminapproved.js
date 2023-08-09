@@ -5,20 +5,20 @@ import Navbar from "../Home/Adminnavbar"
 import { Button, Modal } from "flowbite-react";
 
 const firebaseConfig = {
-  // Your Firebase configuration object
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID",
+  apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
+  authDomain: "amrri-cdeb4.firebaseapp.com",
+  projectId: "amrri-cdeb4",
+  storageBucket: "amrri-cdeb4.appspot.com",
+  messagingSenderId: "739660662641",
+  appId: "1:739660662641:web:5dc201b3c017dd80ccd8d0",
+  measurementId: "G-0BT7XZRL7E",
 };
 
 // firebase.initializeApp(firebaseConfig);
 
 function Adminapproved() {
   const [usersData, setUsersData] = useState([]);
+  const Userid = sessionStorage.getItem("uid");
 
   useEffect(() => {
     const fetchUsersData = async () => {
@@ -27,8 +27,6 @@ function Adminapproved() {
         const collectionRef = firestore.collection("forms");
         const querySnapshot = await collectionRef
           .where("approved", "==", true)
-          .where("rejected","==",false)
-          .where("step", "==", 0)
           .get();
 
         const data = querySnapshot.docs.map((doc) => {
@@ -105,55 +103,55 @@ function Adminapproved() {
                   <h1 className="text-xl font-bold">
                     Name:
                     <span className="text-xl font-light">
-                      {userData.form2.name}
+                      {userData.form1.name}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Affiliation:
                     <span className="text-xl font-light">
-                      {userData.form2.Affiliation}
+                      {userData.form1.Affiliation}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Phone No.:
                     <span className="text-xl font-light">
-                      {userData.form2.Phno}
+                      {userData.form1.Phno}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Designation:
                     <span className="text-xl font-light">
-                      {userData.form2.designation}
+                      {userData.form1.designation}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Email:
                     <span className="text-xl font-light">
-                      {userData.form2.email}
+                      {userData.form1.email}
                     </span>
                   </h1>
-                  <h1 className="text-xl font-bold">
+                  {/* <h1 className="text-xl font-bold">
                     Name:
                     <span className="text-xl font-light">
-                      {userData.form2.name}
+                      {userData.form1.name}
                     </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
+                  </h1> */}
+                  {/* <h1 className="text-xl font-bold">
                     Public Query Affifliation :
                     <span className="text-xl font-light">
-                      {userData.form2.Public_Query_affiliation}
+                      {userData.form1.Public_Query_affiliation}
                     </span>
-                  </h1>
+                  </h1> */}
                   <h1 className="text-xl font-bold">
                     Public Query Designation:
                     <span className="text-xl font-light">
-                      {userData.form2.Public_Query_designation}
+                      {userData.form1.Public_Query_designation}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Public Query Name:
                     <span className="text-xl font-light">
-                      {userData.form2.Public_Query_name}
+                      {userData.form1.Public_Query_name}
                     </span>
                   </h1>
                   <br />
@@ -161,97 +159,97 @@ function Adminapproved() {
                   <h1 className="text-xl font-bold">
                     MSS Owner :
                     <span className="text-xl font-light">
-                      {userData.form3.MSS_owner}
+                      {userData.form1.MSS_owner}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     MSS Title :
                     <span className="text-xl font-light">
-                      {userData.form3.MSS_title}
+                      {userData.form1.MSS_title}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     MSS Topic :
                     <span className="text-xl font-light">
-                      {userData.form3.Manu_Topic}
+                      {userData.form1.Manu_Topic}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     MSS Binding :
                     <span className="text-xl font-light">
-                      {userData.form3.Manu_binding}
+                      {userData.form1.Manu_binding}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     MSS Subject :
                     <span className="text-xl font-light">
-                      {userData.form3.Manu_Subject}
+                      {userData.form1.Manu_Subject}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     MSS Size :
                     <span className="text-xl font-light">
-                      {userData.form3.Manu_size}
+                      {userData.form1.Manu_size}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Primary Sponsorship Address:
                     <span className="text-xl font-light">
-                      {userData.form3.Prim_Sponsorship_address}
+                      {userData.form1.Prim_Sponsorship_address}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Primary Sponsorship Name:
                     <span className="text-xl font-light">
-                      {userData.form3.Prim_Sponsorship_name}
+                      {userData.form1.Prim_Sponsorship_name}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Author:
                     <span className="text-xl font-light">
-                      {userData.form3.author}
+                      {userData.form1.author}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Catalog Title:
                     <span className="text-xl font-light">
-                      {userData.form3.catalog_title}
+                      {userData.form1.catalog_title}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Date of Collection :
                     <span className="text-xl font-light">
-                      {userData.form3.date_of_collection}
+                      {userData.form1.date_of_collection}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Duration :
                     <span className="text-xl font-light">
-                      {userData.form3.duration}
+                      {userData.form1.duration}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Given Title :
                     <span className="text-xl font-light">
-                      {userData.form3.given_title}
+                      {userData.form1.given_title}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Scribe :
                     <span className="text-xl font-light">
-                      {userData.form3.scribe}
+                      {userData.form1.scribe}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Status :
                     <span className="text-xl font-light">
-                      {userData.form3.status}
+                      {userData.form1.status}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Subject :
                     <span className="text-xl font-light">
-                      {userData.form3.subject}
+                      {userData.form1.subject}
                     </span>
                   </h1>
                   <br />
@@ -259,80 +257,80 @@ function Adminapproved() {
                   <h1 className="text-xl font-bold">
                     Date_Samvat :
                     <span className="text-xl font-light">
-                      {userData.form4.Date_Samvat}
+                      {userData.form1.Date_Samvat}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Language :
                     <span className="text-xl font-light">
-                      {userData.form4.Language}
+                      {userData.form1.Language}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     MSS year :
                     <span className="text-xl font-light">
-                      {userData.form4.MSS_Year}
+                      {userData.form1.MSS_Year}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     MSS Condition :
                     <span className="text-xl font-light">
-                      {userData.form4.MSS_condition}
+                      {userData.form1.MSS_condition}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Manu Date Christian :
                     <span className="text-xl font-light">
-                      {userData.form4.Manu_date_christian}
+                      {userData.form1.Manu_date_christian}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Material :
                     <span className="text-xl font-light">
-                      {userData.form4.Material}
+                      {userData.form1.Material}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Script :
                     <span className="text-xl font-light">
-                      {userData.form4.Script}
+                      {userData.form1.Script}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     City/Village :
                     <span className="text-xl font-light">
-                      {userData.form4.city_village}
+                      {userData.form1.city_village}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Data Date :
                     <span className="text-xl font-light">
-                      {userData.form4.data_data}
+                      {userData.form1.data_data}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     ManuScript Source :
                     <span className="text-xl font-light">
-                      {userData.form4.manu_source}
+                      {userData.form1.manu_source}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     Place of Writing :
                     <span className="text-xl font-light">
-                      {userData.form4.place_of_writing}
+                      {userData.form1.place_of_writing}
                     </span>
                   </h1>
                   <h1 className="text-xl font-bold">
                     State/Union Teritory :
                     <span className="text-xl font-light">
-                      {userData.form4.states_union}
+                      {userData.form1.states_union}
                     </span>
                   </h1>
                   <br />
                   <h1 className="text-xl font-bold">
                     Declaration :
                     <span className="text-xl font-light">
-                      {userData.form5.Declaration}
+                      {userData.form1.Declaration}
                     </span>
                   </h1>
                 </div>

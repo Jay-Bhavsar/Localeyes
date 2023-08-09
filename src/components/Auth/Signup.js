@@ -6,6 +6,7 @@ import Navbar from "../Home/Navbar";
 import { useUserAuth } from "../../context/UserAuthContext";
 import Footer from "../Home/Footer";
 import SecurityCode from "./SecurityCode";
+const logo = require("../img/logo.png");
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -25,7 +26,6 @@ function Signup() {
   const [verifierPhone, setverifierPhone] = useState("");
   const [verifierFax, setVerifierfax] = useState("");
   const [verifierEmail, setVerifieremail] = useState("");
-  
 
   const [newCompanytype, setNewcompanytype] = useState("");
 
@@ -36,7 +36,7 @@ function Signup() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("You have Signed In")
+    alert("You have Signed In");
     setError("");
     setMessage("");
 
@@ -58,7 +58,7 @@ function Signup() {
       verifierPhone,
       verifierFax,
       verifierEmail,
-      role:"user"
+      role: "user",
     };
     console.log(newUser);
 
@@ -78,335 +78,353 @@ function Signup() {
       <br />
 
       <div className="text-center oneliner">
-        <h1>'Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
+        <h1>Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
       </div>
       <br />
       <br />
       {message?.msg && <div>{message?.msg}</div>}
       {error && <div>{error}</div>}
-      <div className="flex flex-row form">
-        <form
-          action=""
-          onSubmit={handleSubmit}
-          className="flex justify-start w-[90%] md:w-[32%] shadow-2xl"
-        >
-          <h2 className="text-2xl text-blue-700">Applicant Registration</h2>
-          <br />
-          <br />
-          <label className="w-[100%]">
-            Email
-            <span className="text-red-600">
-              *(please recheck email id and mobile number before submission of
-              form):
-            </span>
-            <input
-              type="email"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-
-          <br />
-          <label className="w-[100%]">
-            Password*:
-            <input
-              type="password"
-              name=""
-              id=""
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-
-          <br />
-          <label className="w-[100%]">
-            Select Gender*:
+      <center>
+        <div className="bg-blue-600 w-[100%] shadow-xl md:w-[40%] text-white font-extrabold text-xl p-3">
+          <h2>AMRRI PORTAL NIA JAIPUR</h2>
+          <h2>Registration for Portal</h2>
+        </div>
+        <div className="flex flex-col shadow-xl w-[100%] md:w-[40%] form">
+          <div className="flex flex-col justify-center items-center w-[100%] md:w-[50%] p-4">
             <br />
-            <select
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              className="w-[90%] bg-blue-700 p-2 rounded text-white"
-              required
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female </option>
-            </select>
-          </label>
-
-          <br />
-          <label className="w-[100%]">
-            Official Address with Name of Organization*:
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder=""
-              onChange={(e) => {
-                setOfficialAddress(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-
-          <br />
-          <label className="w-[100%]">
-            Login Id*:
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setLoginid(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-
-          <br />
-          <label className="w-[100%]">
-            Firstname*:
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setFirstname(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-
-          <br />
-          <label className="w-[100%]">
-            Lastname*:
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setLastname(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Only Ten Digit Mobile No:(please do not include '0' before number)
-            <span className="text-red-600">
-              {" "}
-              *(please recheck email id and mobile number before submission of
-              form):
-            </span>
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setmobNo(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Designation*:
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setDesignation(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-
-          <label className="w-[100%]">
-            Company/Organisation*:
+            <img src={logo} alt="" className="w-[100px] h-[100px]" />
             <br />
-            <select
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              className="w-[90%] bg-blue-700 p-2 rounded text-white"
-              required
-            >
-              <option value="">NIL</option>
-              <option value="company1">Company1</option>
-              <option value="company2">Company2</option>
-              <option value="company3">Company3</option>
-            </select>
-          </label>
+            <h1 className="text-xl font-bold">
+              National Institute of Ayurveda
+            </h1>
+            <h4 className="">
+              Deemed to be University(De Novo) Ministry of AYUSH, Govt. of India
+            </h4>
+          </div>
+          <form
+            action=""
+            onSubmit={handleSubmit}
+            className="flex justify-start w-[90%] md:w-[100%]"
+          >
+            {/* <h2 className="text-2xl text-blue-700">Applicant Registration</h2> */}
+            <br />
+            <br />
+            <label className="w-[100%]">
+              Email
+              <span className="text-red-600">
+                *(please recheck email id and mobile number before submission):
+              </span>
+              <input
+                type="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
 
-          <br />
-          <label className="w-[100%]">
-            Register New Company/Organisation:
             <br />
-            <span className="text-red-600">
-              in case Company not available in list:{" "}
-            </span>
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setnewCompany(e.target.value);
-              }}
-              className="w-[90%]"
-            />
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Address & other Details:
-            <br />
-            <span className="text-red-600">
-              in case Company not available in list:{" "}
-            </span>
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setNewaddress(e.target.value);
-              }}
-              className="w-[90%]"
-            />
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Company/Organisation type:
-            <br />
-            <span className="text-red-600">
-              in case Company not available in list:
-            </span>
-            <br />
-            <select
-              value={newCompanytype}
-              onChange={(e) => setNewcompanytype(e.target.value)}
-              className="w-[90%] bg-blue-700 p-2 rounded text-white"
-              required
-            >
-              <option value="Pharmaceutical_industry_Indian">
-                Pharmaceutical industry-Indian
-              </option>
-              <option value="Pharmaceutical_industry_Global">
-                Pharmaceutical industry-Global
-              </option>
-              <option value="Contract_research_Organization">
-                Contract research Organization
-              </option>
-              <option value="Research_Institution">Research Institution</option>
-              <option value="Research_institution_and_hospital">
-                Research institution and hospital
-              </option>
-              <option value="Government_funding_agency">
-                Government funding agency
-              </option>
-              <option value="Government_Medical_College">
-                Government Medical College
-              </option>
-              <option value="Private_Medical_College">
-                Private Medical College
-              </option>
-              <option value="Private_Hospital_clinic">
-                Private Hospital/clinic
-              </option>
-              <option value="other">Other</option>
-            </select>
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Verifier Name:*
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setVerifiername(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Verifier's Official Address with Name of Organization: *
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setVerifieraddress(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Verifier Phone: *
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setverifierPhone(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Verifier Fax:
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setVerifierfax(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-          <br />
-          <label className="w-[100%]">
-            Verifier Email:
-            <input
-              type="text"
-              name=""
-              id=""
-              onChange={(e) => {
-                setVerifieremail(e.target.value);
-              }}
-              className="w-[90%]"
-              required
-            />
-          </label>
-          <br />
-          {/* <SecurityCode correctCode="1234" onSuccess={handleSubmit} /> */}
-          
+            <label className="w-[100%]">
+              Password*:
+              <input
+                type="password"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
 
-          <button className="button w-[90%]">Sign Up</button>
-          <p>
-            Already Registered? <Link to="/login">Login</Link>
-          </p>
-        </form>
-      </div>
+            <br />
+            <label className="w-[100%]">
+              Select Gender*:
+              <br />
+              <select
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                className="w-[90%] bg-blue-700 p-2 rounded text-white"
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female </option>
+              </select>
+            </label>
 
+            <br />
+            <label className="w-[100%]">
+              Official Address with Name of Organization*:
+              <input
+                type="text"
+                name=""
+                id=""
+                placeholder=""
+                onChange={(e) => {
+                  setOfficialAddress(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+
+            <br />
+            <label className="w-[100%]">
+              Login Id*:
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setLoginid(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+
+            <br />
+            <label className="w-[100%]">
+              Firstname*:
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setFirstname(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+
+            <br />
+            <label className="w-[100%]">
+              Lastname*:
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setLastname(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Only Ten Digit Mobile No:(please do not include '0' before number)
+              <span className="text-red-600">
+                {" "}
+                *(please recheck email id and mobile number before submission of
+                form):
+              </span>
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setmobNo(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Designation*:
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setDesignation(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+
+            <label className="w-[100%]">
+              Company/Organisation*:
+              <br />
+              <select
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                className="w-[90%] bg-blue-700 p-2 rounded text-white"
+                required
+              >
+                <option value="">NIL</option>
+                <option value="company1">Company1</option>
+                <option value="company2">Company2</option>
+                <option value="company3">Company3</option>
+              </select>
+            </label>
+
+            <br />
+            <label className="w-[100%]">
+              Register New Company/Organisation:
+              <br />
+              <span className="text-red-600">
+                in case Company not available in list:{" "}
+              </span>
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setnewCompany(e.target.value);
+                }}
+                className="w-[90%]"
+              />
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Address & other Details:
+              <br />
+              <span className="text-red-600">
+                in case Company not available in list:{" "}
+              </span>
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setNewaddress(e.target.value);
+                }}
+                className="w-[90%]"
+              />
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Company/Organisation type:
+              <br />
+              <span className="text-red-600">
+                in case Company not available in list:
+              </span>
+              <br />
+              <select
+                value={newCompanytype}
+                onChange={(e) => setNewcompanytype(e.target.value)}
+                className="w-[90%] bg-blue-700 p-2 rounded text-white"
+                required
+              >
+                <option value="Pharmaceutical_industry_Indian">
+                  Pharmaceutical industry-Indian
+                </option>
+                <option value="Pharmaceutical_industry_Global">
+                  Pharmaceutical industry-Global
+                </option>
+                <option value="Contract_research_Organization">
+                  Contract research Organization
+                </option>
+                <option value="Research_Institution">
+                  Research Institution
+                </option>
+                <option value="Research_institution_and_hospital">
+                  Research institution and hospital
+                </option>
+                <option value="Government_funding_agency">
+                  Government funding agency
+                </option>
+                <option value="Government_Medical_College">
+                  Government Medical College
+                </option>
+                <option value="Private_Medical_College">
+                  Private Medical College
+                </option>
+                <option value="Private_Hospital_clinic">
+                  Private Hospital/clinic
+                </option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Verifier Name:*
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setVerifiername(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Verifier's Official Address with Name of Organization: *
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setVerifieraddress(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Verifier Phone: *
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setverifierPhone(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Verifier Fax:
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setVerifierfax(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+            <br />
+            <label className="w-[100%]">
+              Verifier Email:
+              <input
+                type="text"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setVerifieremail(e.target.value);
+                }}
+                className="w-[90%]"
+                required
+              />
+            </label>
+            <br />
+            {/* <SecurityCode correctCode="1234" onSuccess={handleSubmit} /> */}
+
+            <button className="button w-[90%]">Sign Up</button>
+            <p>
+              Already Registered? <Link to="/login">Login</Link>
+            </p>
+          </form>
+        </div>
+      </center>
+      <br />
+      <br />
       <Footer />
     </>
   );

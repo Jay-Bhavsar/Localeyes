@@ -19,9 +19,9 @@ function Form() {
           <div className="flex flex-col items-center justify-center parts">
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 1</p>
-              <p>
+              {/* <p>
                 <a href="/part1">Click</a>
-              </p>
+              </p> */}
             </div>
             <div className="flex flex-col w-[100%] p-0.5 ">
               <div className="flex bg-white ">
@@ -36,9 +36,9 @@ function Form() {
           <div className="flex flex-col items-center justify-center parts">
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 2</p>
-              <p>
+              {/* <p>
                 <a href="/part2">Click</a>
-              </p>
+              </p> */}
             </div>
             <div className="flex flex-col w-[100%] bg-white p-0.5 ">
               <div className="flex ">
@@ -56,9 +56,9 @@ function Form() {
           <div className="flex flex-col items-center justify-center parts">
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 3</p>
-              <p>
+              {/* <p>
                 <a href="/part3">Click</a>
-              </p>
+              </p> */}
             </div>
             <div className="flex flex-col w-[100%] bg-white p-0.5 ">
               <div className="flex ">
@@ -74,9 +74,9 @@ function Form() {
           <div className="flex flex-col items-center justify-center parts">
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 4</p>
-              <p>
+              {/* <p>
                 <a href="/part4">Click</a>
-              </p>
+              </p> */}
             </div>
             <div className="flex flex-col w-[100%] bg-white p-0.5 ">
               <div className="flex ">
@@ -91,9 +91,9 @@ function Form() {
           <div className="flex flex-col items-center justify-center parts">
             <div className="flex flex-row justify-between bg-blue-500 w-[100%] text-white p-0.5 head">
               <p>Part 5</p>
-              <p>
+              {/* <p>
                 <a href="/part5">Click</a>
-              </p>
+              </p> */}
             </div>
             <div className="flex flex-col w-[100%] bg-white p-0.5 ">
               <div className="flex ">
@@ -104,6 +104,9 @@ function Form() {
             </div>
           </div>
         </div>
+        <br />
+      <a href="/part1"><button className="p-4 font-bold text-white bg-blue-500">Fill out the AMRRI FORM</button></a>  
+      <br />
         <br />
         {/* <button className="p-4 mb-6 text-white bg-blue-500 rounded-md">Final Submission</button> */}
       </center>

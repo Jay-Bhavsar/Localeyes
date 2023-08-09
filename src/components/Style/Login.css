@@ -8,17 +8,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width:100%;
-    /* margin-top:5%; */
+  
+    
 }
 form{
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* width: 30%; */
-    margin-bottom: 10%;
+    
+    
     padding: 30px;
-    /* box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px; */
+    
 
 }
 .formlist{
@@ -37,15 +37,16 @@ form h3{
 }
 form input{
     margin:10px 0px 10px 0px;
-    /* width: 80%; */
+  
     height: 30px;
     border: 2px solid white;
     border-bottom-color: rgb(43, 104, 228);
+ 
 }
 
 .forgot input{
     margin:10px 0px 10px 0px;
-    /* width: 80%; */
+   
     height: 30px;
     border: 2px solid white;
     border-bottom-color: rgb(43, 104, 228);
@@ -53,7 +54,7 @@ form input{
 }
 
 input:focus{
-    outline: 2px solid rgb(255, 255, 255);     /* oranges! yey */
+    outline: 2px solid rgb(255, 255, 255);    
   }
 form button{
     margin: 10px 0px 10px 0px;

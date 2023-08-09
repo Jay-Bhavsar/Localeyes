@@ -4,39 +4,32 @@ import "firebase/firestore";
 import Navbar from "../Home/Adminnavbar"
 import { Button, Modal } from "flowbite-react";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
-  authDomain: "amrri-cdeb4.firebaseapp.com",
-  projectId: "amrri-cdeb4",
-  storageBucket: "amrri-cdeb4.appspot.com",
-  messagingSenderId: "739660662641",
-  appId: "1:739660662641:web:5dc201b3c017dd80ccd8d0",
-  measurementId: "G-0BT7XZRL7E",
-};
-
-// firebase.initializeApp(firebaseConfig);
-
 function Admin() {
   const [usersData, setUsersData] = useState([]);
+  
 
   useEffect(() => {
     const fetchUsersData = async () => {
       try {
         const firestore = firebase.firestore();
         const collectionRef = firestore.collection("forms");
-        const querySnapshot = await collectionRef
-          .get();
+        const snapshot = await collectionRef
+        .where("approved", "==", true&&"rejected","==",true)
+        .get();
 
-        const data = querySnapshot.docs.map((doc) => {
+        const data = snapshot.docs.map((doc) => {
           const docData = doc.data();
           return {
             ...docData,
+            approved: docData.approved || false,
+            rejected: docData.rejected || false,
+
           };
         });
         setUsersData(data);
         console.log(data);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching users data:", error);
       }
     };
 
@@ -62,6 +55,7 @@ function Admin() {
       console.error("Error approving research:", error);
     }
   };
+
   const handleRejectResearch = (index) => {
     const updatedUsersData = [...usersData];
     updatedUsersData[index].rejected = true;
@@ -81,6 +75,8 @@ function Admin() {
       console.error("Error rejecting research:", error);
     }
   };
+  
+
   return (
     <>
       <Navbar />
@@ -99,7 +95,7 @@ function Admin() {
           {usersData.length > 0 ? (
             usersData.map((userData, index) => (
               <>
-                {userData.approved  || userData.rejected  ? (
+                {userData.approved || userData.rejected ? (
                   <div
                     key={userData.Rid}
                     className="flex flex-col items-start m-4 text-white bg-rose-900 w-[100%] rounded-md p-4 md:w-[30%]"
@@ -643,7 +639,6 @@ function Admin() {
                     <button onClick={() => handleRejectResearch(index)} className="bg-blue-100 w-[100%] items-center text-blue-700 font-bold mt-4">
                       Reject
                     </button>
-                  
                   </div>
                 )}
               </>
