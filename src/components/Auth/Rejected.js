@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/firestore";
 import Navbar from "../Home/userNavbar";
 import { Button, Modal } from "flowbite-react";
+import DefaultSidebar from "../Home/Sidebar";
 
 const firebaseConfig = {
   // Your Firebase configuration object
@@ -57,15 +58,18 @@ function Rejected() {
       <br />
       <br />
       <br />
-      <div className="text-center oneliner">
-        <h1>Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
-      </div>
+     
       <div className="w-[100%]">
         <center>
           <h2 className="mt-6 mb-6 text-xl font-bold">
-            AMRRI FORM APPLICATIONS
+            Rejected Researches
           </h2>
-          {usersData.length > 0 ? (
+          <div>
+            <div>
+              <DefaultSidebar/>
+            </div>
+            <div>
+            {usersData.length > 0 ? (
             usersData.map((userData) => (
               <>
                 <div
@@ -372,6 +376,10 @@ function Rejected() {
           ) : (
             <p>Loading...</p>
           )}
+
+            </div>
+          </div>
+         
         </center>
       </div>
     </>

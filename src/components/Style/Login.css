@@ -8,18 +8,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  
-    
 }
 form{
     display: flex;
     align-items: center;
     flex-direction: column;
-    
-    
     padding: 30px;
-    
-
 }
 .formlist{
     border: 2px solid rgb(88, 88, 227);
@@ -36,21 +30,44 @@ form h3{
     color: rgb(43, 104, 228);
 }
 form input{
-    margin:10px 0px 10px 0px;
+    margin:0px 0px 10px 0px;
   
     height: 30px;
     border: 2px solid white;
-    border-bottom-color: rgb(43, 104, 228);
+   
  
 }
 
+form select{
+    background-color: rgb(227, 217, 217);
+}
+
+input[type=text] {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    background-color: rgb(227, 217, 217);
+    height: 40px;
+  }
+
+  input[type=email] {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    background-color: rgb(227, 217, 217);
+    height: 40px;
+  }
+  input[type=password] {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    background-color: rgb(227, 217, 217);
+    height: 40px;
+  }
 .forgot input{
     margin:10px 0px 10px 0px;
    
     height: 30px;
     border: 2px solid white;
     border-bottom-color: rgb(43, 104, 228);
-    width: 60%;
+    
 }
 
 input:focus{

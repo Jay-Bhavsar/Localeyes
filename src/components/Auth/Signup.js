@@ -12,22 +12,11 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [officialAddress, setOfficialAddress] = useState("");
-  const [loginId, setLoginid] = useState("");
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [mobNo, setmobNo] = useState("");
   const [gender, setGender] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [company, setCompany] = useState("");
-  const [newCompany, setnewCompany] = useState("");
-  const [newAddress, setNewaddress] = useState("");
-  const [verifierName, setVerifiername] = useState("");
-  const [verifierAddress, setVerifieraddress] = useState("");
-  const [verifierPhone, setverifierPhone] = useState("");
-  const [verifierFax, setVerifierfax] = useState("");
-  const [verifierEmail, setVerifieremail] = useState("");
-
-  const [newCompanytype, setNewcompanytype] = useState("");
 
   const [message, setMessage] = useState({ error: false, msg: "" });
 
@@ -41,23 +30,12 @@ function Signup() {
     setMessage("");
 
     const newUser = {
-      loginId,
       officialAddress,
       lastname,
       firstname,
       email,
       gender,
       mobNo,
-      designation,
-      company,
-      newCompany,
-      newAddress,
-      newCompanytype,
-      verifierName,
-      verifierAddress,
-      verifierPhone,
-      verifierFax,
-      verifierEmail,
       role: "user",
     };
     console.log(newUser);
@@ -173,21 +151,6 @@ function Signup() {
 
             <br />
             <label className="w-[100%]">
-              Login Id*:
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setLoginid(e.target.value);
-                }}
-                className="w-[90%]"
-                required
-              />
-            </label>
-
-            <br />
-            <label className="w-[100%]">
               Firstname*:
               <input
                 type="text"
@@ -234,186 +197,7 @@ function Signup() {
                 required
               />
             </label>
-            <br />
-            <label className="w-[100%]">
-              Designation*:
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setDesignation(e.target.value);
-                }}
-                className="w-[90%]"
-                required
-              />
-            </label>
 
-            <label className="w-[100%]">
-              Company/Organisation*:
-              <br />
-              <select
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                className="w-[90%] bg-blue-700 p-2 rounded text-white"
-                required
-              >
-                <option value="">NIL</option>
-                <option value="company1">Company1</option>
-                <option value="company2">Company2</option>
-                <option value="company3">Company3</option>
-              </select>
-            </label>
-
-            <br />
-            <label className="w-[100%]">
-              Register New Company/Organisation:
-              <br />
-              <span className="text-red-600">
-                in case Company not available in list:{" "}
-              </span>
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setnewCompany(e.target.value);
-                }}
-                className="w-[90%]"
-              />
-            </label>
-            <br />
-            <label className="w-[100%]">
-              Address & other Details:
-              <br />
-              <span className="text-red-600">
-                in case Company not available in list:{" "}
-              </span>
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setNewaddress(e.target.value);
-                }}
-                className="w-[90%]"
-              />
-            </label>
-            <br />
-            <label className="w-[100%]">
-              Company/Organisation type:
-              <br />
-              <span className="text-red-600">
-                in case Company not available in list:
-              </span>
-              <br />
-              <select
-                value={newCompanytype}
-                onChange={(e) => setNewcompanytype(e.target.value)}
-                className="w-[90%] bg-blue-700 p-2 rounded text-white"
-                required
-              >
-                <option value="Pharmaceutical_industry_Indian">
-                  Pharmaceutical industry-Indian
-                </option>
-                <option value="Pharmaceutical_industry_Global">
-                  Pharmaceutical industry-Global
-                </option>
-                <option value="Contract_research_Organization">
-                  Contract research Organization
-                </option>
-                <option value="Research_Institution">
-                  Research Institution
-                </option>
-                <option value="Research_institution_and_hospital">
-                  Research institution and hospital
-                </option>
-                <option value="Government_funding_agency">
-                  Government funding agency
-                </option>
-                <option value="Government_Medical_College">
-                  Government Medical College
-                </option>
-                <option value="Private_Medical_College">
-                  Private Medical College
-                </option>
-                <option value="Private_Hospital_clinic">
-                  Private Hospital/clinic
-                </option>
-                <option value="other">Other</option>
-              </select>
-            </label>
-            <br />
-            <label className="w-[100%]">
-              Verifier Name:*
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setVerifiername(e.target.value);
-                }}
-                className="w-[90%]"
-                required
-              />
-            </label>
-            <br />
-            <label className="w-[100%]">
-              Verifier's Official Address with Name of Organization: *
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setVerifieraddress(e.target.value);
-                }}
-                className="w-[90%]"
-                required
-              />
-            </label>
-            <br />
-            <label className="w-[100%]">
-              Verifier Phone: *
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setverifierPhone(e.target.value);
-                }}
-                className="w-[90%]"
-                required
-              />
-            </label>
-            <br />
-            <label className="w-[100%]">
-              Verifier Fax:
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setVerifierfax(e.target.value);
-                }}
-                className="w-[90%]"
-                required
-              />
-            </label>
-            <br />
-            <label className="w-[100%]">
-              Verifier Email:
-              <input
-                type="text"
-                name=""
-                id=""
-                onChange={(e) => {
-                  setVerifieremail(e.target.value);
-                }}
-                className="w-[90%]"
-                required
-              />
-            </label>
-            <br />
             {/* <SecurityCode correctCode="1234" onSuccess={handleSubmit} /> */}
 
             <button className="button w-[90%]">Sign Up</button>
