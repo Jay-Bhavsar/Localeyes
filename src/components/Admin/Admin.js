@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/firestore";
-import Navbar from "../Home/Adminnavbar"
+import Navbar from "../Home/Adminnavbar";
 import { Button, Modal } from "flowbite-react";
+import Footer from "../Home/Footer";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
@@ -18,14 +19,30 @@ const firebaseConfig = {
 
 function Admin() {
   const [usersData, setUsersData] = useState([]);
+  const Userid = sessionStorage.getItem("uid");
+
+  const handleDownload = async (rid) => {
+    try {
+      const storageRef = firebase.storage().ref();
+      const pdfRef = storageRef.child(`pdfs/form_data_${Userid}_${rid}.pdf`);
+      const downloadUrl = await pdfRef.getDownloadURL();
+
+      // Trigger the download
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = `form_data_${Userid}_${rid}.pdf`;
+      link.click();
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchUsersData = async () => {
       try {
         const firestore = firebase.firestore();
         const collectionRef = firestore.collection("forms");
-        const querySnapshot = await collectionRef
-          .get();
+        const querySnapshot = await collectionRef.get();
 
         const data = querySnapshot.docs.map((doc) => {
           const docData = doc.data();
@@ -47,16 +64,16 @@ function Admin() {
     const updatedUsersData = [...usersData];
     updatedUsersData[index].approved = true;
     setUsersData(updatedUsersData);
-  
+
     try {
       const firestore = firebase.firestore();
       const collectionRef = firestore.collection("forms");
       const documentRef = collectionRef.doc(updatedUsersData[index].Rid);
-  
-       documentRef.update({
-        approved: true
+
+      documentRef.update({
+        approved: true,
       });
-  
+
       console.log("Research approved successfully!");
     } catch (error) {
       console.error("Error approving research:", error);
@@ -99,551 +116,93 @@ function Admin() {
           {usersData.length > 0 ? (
             usersData.map((userData, index) => (
               <>
-                {userData.approved  || userData.rejected  ? (
+                {userData.approved || userData.rejected ? (
                   <div
                     key={userData.Rid}
-                    className="flex flex-col items-start m-4 text-white bg-rose-900 w-[100%] rounded-md p-4 md:w-[30%]"
+                    className="flex flex-row justify-evenly m-4 text-white bg-rose-900 w-[100%] rounded-md p-2 md:w-[70%]"
                   >
-                    <h1 className="text-xl font-bold">
-                      AMRRI FORM OF User-Id :
-                      <span className="text-xl font-light"> {userData.uid}</span>
-                    </h1>
+                    <div className="flex flex-col items-center justify-center w-[25%]">
+                      <h1 className="text-xl font-bold">Public Title:</h1>
+                      <p className="text-xl font-light">
+                        {userData.form1.public_title}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center w-[25%]">
+                      <h1 className="text-xl font-bold">Scietific Title:</h1>
+                      <p className="text-xl font-light">
+                        {userData.form1.sci_title}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-center justify-center w-[25%]">
+                      <h1 className="text-xl font-bold">Type of Research:</h1>
+                      <p className="text-xl font-light">
+                        {userData.form1.type_of_research}
+                      </p>
+                    </div>
+
+                    <div key={userData.id}>
+                      <button
+                        className="p-2 text-blue-800 bg-white"
+                        onClick={() => handleDownload(userData.Rid)}
+                      >
+                        Download PDF
+                      </button>
+                    </div>
+
                     <br />
-                  <h1 className="text-xl font-bold">Form1:</h1>
-                  <h1 className="text-xl font-bold">
-                    Public Title:
-                    <span className="text-xl font-light">
-                      {userData.form1.public_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Scietific Title:
-                    <span className="text-xl font-light">
-                      {userData.form1.sci_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Type of Research:
-                    <span className="text-xl font-light">
-                      {userData.form1.type_of_research}
-                    </span>
-                  </h1>
-                  <br />
-                  <h1 className="text-xl font-bold">
-                    Details of Principal investigator or overall trail
-                    coordinator (Multi-center study):
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Name:
-                    <span className="text-xl font-light">
-                      {userData.form1.name}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Affiliation:
-                    <span className="text-xl font-light">
-                      {userData.form1.Affiliation}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Phone No.:
-                    <span className="text-xl font-light">
-                      {userData.form1.Phno}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Designation:
-                    <span className="text-xl font-light">
-                      {userData.form1.designation}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Email:
-                    <span className="text-xl font-light">
-                      {userData.form1.email}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Name:
-                    <span className="text-xl font-light">
-                      {userData.form1.name}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Public Query Affifliation :
-                    <span className="text-xl font-light">
-                      {userData.form1.Public_Query_affiliation}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Public Query Designation:
-                    <span className="text-xl font-light">
-                      {userData.form1.Public_Query_designation}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Public Query Name:
-                    <span className="text-xl font-light">
-                      {userData.form1.Public_Query_name}
-                    </span>
-                  </h1>
-                  <br />
-                  <h2 className="text-xl font-bold">Form3:</h2>
-                  <h1 className="text-xl font-bold">
-                    MSS Owner :
-                    <span className="text-xl font-light">
-                      {userData.form1.MSS_owner}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Title :
-                    <span className="text-xl font-light">
-                      {userData.form1.MSS_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Topic :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_Topic}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Binding :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_binding}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Subject :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_Subject}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Size :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_size}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Primary Sponsorship Address:
-                    <span className="text-xl font-light">
-                      {userData.form1.Prim_Sponsorship_address}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Primary Sponsorship Name:
-                    <span className="text-xl font-light">
-                      {userData.form1.Prim_Sponsorship_name}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Author:
-                    <span className="text-xl font-light">
-                      {userData.form1.author}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Catalog Title:
-                    <span className="text-xl font-light">
-                      {userData.form1.catalog_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Date of Collection :
-                    <span className="text-xl font-light">
-                      {userData.form1.date_of_collection}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Duration :
-                    <span className="text-xl font-light">
-                      {userData.form1.duration}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Given Title :
-                    <span className="text-xl font-light">
-                      {userData.form1.given_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Scribe :
-                    <span className="text-xl font-light">
-                      {userData.form1.scribe}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Status :
-                    <span className="text-xl font-light">
-                      {userData.form1.status}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Subject :
-                    <span className="text-xl font-light">
-                      {userData.form1.subject}
-                    </span>
-                  </h1>
-                  <br />
-                  <h1 className="text-xl font-bold">Form4 : </h1>
-                  <h1 className="text-xl font-bold">
-                    Date_Samvat :
-                    <span className="text-xl font-light">
-                      {userData.form1.Date_Samvat}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Language :
-                    <span className="text-xl font-light">
-                      {userData.form1.Language}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS year :
-                    <span className="text-xl font-light">
-                      {userData.form1.MSS_Year}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Condition :
-                    <span className="text-xl font-light">
-                      {userData.form1.MSS_condition}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Manu Date Christian :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_date_christian}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Material :
-                    <span className="text-xl font-light">
-                      {userData.form1.Material}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Script :
-                    <span className="text-xl font-light">
-                      {userData.form1.Script}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    City/Village :
-                    <span className="text-xl font-light">
-                      {userData.form1.city_village}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Data Date :
-                    <span className="text-xl font-light">
-                      {userData.form1.data_data}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    ManuScript Source :
-                    <span className="text-xl font-light">
-                      {userData.form1.manu_source}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Place of Writing :
-                    <span className="text-xl font-light">
-                      {userData.form1.place_of_writing}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    State/Union Teritory :
-                    <span className="text-xl font-light">
-                      {userData.form1.states_union}
-                    </span>
-                  </h1>
-                  <br />
-                  <h1 className="text-xl font-bold">
-                    Declaration :
-                    <span className="text-xl font-light">
-                      {userData.form1.Declaration}
-                    </span>
-                  </h1>
-          
                   </div>
                 ) : (
                   <div
                     key={userData.Rid}
-                    className="flex flex-col items-start m-4 text-white bg-gray-900 w-[100%] rounded-md p-4 md:w-[30%]"
+                    className="flex flex-row justify-evenly items-center  m-4 text-white bg-gray-900 w-[100%] rounded-md p-2 md:w-[70%]"
                   >
-                    <h1 className="text-xl font-bold">
-                      AMRRI FORM OF User-Id :
-                      <span className="text-xl font-light"> {userData.uid}</span>
-                    </h1>
-                    {/* ... Render unapproved research data */}
+                    <div className="flex flex-col items-center justify-center w-[15%]">
+                      <h1 className="text-xl font-bold">Public Title:</h1>
+                      <p className="text-xl font-light">
+                        {userData.form1.public_title}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center w-[15%]">
+                      <h1 className="text-xl font-bold">Scietific Title:</h1>
+                      <p className="text-xl font-light">
+                        {userData.form1.sci_title}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center w-[15%]">
+                      <h1 className="text-xl font-bold">Type of Research:</h1>
+                      <p className="text-xl font-light">
+                        {userData.form1.type_of_research}
+                      </p>
+                    </div>
+
                     <br />
-                  <h1 className="text-xl font-bold">Form1:</h1>
-                  <h1 className="text-xl font-bold">
-                    Public Title:
-                    <span className="text-xl font-light">
-                      {userData.form1.public_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Scietific Title:
-                    <span className="text-xl font-light">
-                      {userData.form1.sci_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Type of Research:
-                    <span className="text-xl font-light">
-                      {userData.form1.type_of_research}
-                    </span>
-                  </h1>
-                  <br />
-                  <h1 className="text-xl font-bold">
-                    Details of Principal investigator or overall trail
-                    coordinator (Multi-center study):
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Name:
-                    <span className="text-xl font-light">
-                      {userData.form1.name}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Affiliation:
-                    <span className="text-xl font-light">
-                      {userData.form1.Affiliation}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Phone No.:
-                    <span className="text-xl font-light">
-                      {userData.form1.Phno}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Designation:
-                    <span className="text-xl font-light">
-                      {userData.form1.designation}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Email:
-                    <span className="text-xl font-light">
-                      {userData.form1.email}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Name:
-                    <span className="text-xl font-light">
-                      {userData.form1.name}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Public Query Affifliation :
-                    <span className="text-xl font-light">
-                      {userData.form1.Public_Query_affiliation}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Public Query Designation:
-                    <span className="text-xl font-light">
-                      {userData.form1.Public_Query_designation}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Public Query Name:
-                    <span className="text-xl font-light">
-                      {userData.form1.Public_Query_name}
-                    </span>
-                  </h1>
-                  <br />
-                  <h2 className="text-xl font-bold">Form3:</h2>
-                  <h1 className="text-xl font-bold">
-                    MSS Owner :
-                    <span className="text-xl font-light">
-                      {userData.form1.MSS_owner}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Title :
-                    <span className="text-xl font-light">
-                      {userData.form1.MSS_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Topic :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_Topic}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Binding :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_binding}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Subject :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_Subject}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Size :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_size}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Primary Sponsorship Address:
-                    <span className="text-xl font-light">
-                      {userData.form1.Prim_Sponsorship_address}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Primary Sponsorship Name:
-                    <span className="text-xl font-light">
-                      {userData.form1.Prim_Sponsorship_name}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Author:
-                    <span className="text-xl font-light">
-                      {userData.form1.author}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Catalog Title:
-                    <span className="text-xl font-light">
-                      {userData.form1.catalog_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Date of Collection :
-                    <span className="text-xl font-light">
-                      {userData.form1.date_of_collection}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Duration :
-                    <span className="text-xl font-light">
-                      {userData.form1.duration}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Given Title :
-                    <span className="text-xl font-light">
-                      {userData.form1.given_title}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Scribe :
-                    <span className="text-xl font-light">
-                      {userData.form1.scribe}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Status :
-                    <span className="text-xl font-light">
-                      {userData.form1.status}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Subject :
-                    <span className="text-xl font-light">
-                      {userData.form1.subject}
-                    </span>
-                  </h1>
-                  <br />
-                  <h1 className="text-xl font-bold">Form4 : </h1>
-                  <h1 className="text-xl font-bold">
-                    Date_Samvat :
-                    <span className="text-xl font-light">
-                      {userData.form1.Date_Samvat}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Language :
-                    <span className="text-xl font-light">
-                      {userData.form1.Language}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS year :
-                    <span className="text-xl font-light">
-                      {userData.form1.MSS_Year}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    MSS Condition :
-                    <span className="text-xl font-light">
-                      {userData.form1.MSS_condition}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Manu Date Christian :
-                    <span className="text-xl font-light">
-                      {userData.form1.Manu_date_christian}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Material :
-                    <span className="text-xl font-light">
-                      {userData.form1.Material}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Script :
-                    <span className="text-xl font-light">
-                      {userData.form1.Script}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    City/Village :
-                    <span className="text-xl font-light">
-                      {userData.form1.city_village}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Data Date :
-                    <span className="text-xl font-light">
-                      {userData.form1.data_data}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    ManuScript Source :
-                    <span className="text-xl font-light">
-                      {userData.form1.manu_source}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    Place of Writing :
-                    <span className="text-xl font-light">
-                      {userData.form1.place_of_writing}
-                    </span>
-                  </h1>
-                  <h1 className="text-xl font-bold">
-                    State/Union Teritory :
-                    <span className="text-xl font-light">
-                      {userData.form1.states_union}
-                    </span>
-                  </h1>
-                  <br />
-                  <h1 className="text-xl font-bold">
-                    Declaration :
-                    <span className="text-xl font-light">
-                      {userData.form1.Declaration}
-                    </span>
-                  </h1>
-          
-                    <button onClick={() => handleApproveResearch(index)} className="bg-blue-100 w-[100%] items-center text-blue-700 font-bold mt-4">
-                      Approve
-                    </button>
-                    <button onClick={() => handleRejectResearch(index)} className="bg-blue-100 w-[100%] items-center text-blue-700 font-bold mt-4">
-                      Reject
-                    </button>
-                  
+
+                    <div className="flex flex-col w-[20%]">
+                      <button
+                        onClick={() => handleApproveResearch(index)}
+                        className=" w-[100%] items-center  text-blue-800 bg-white font-bold m-2 "
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => handleRejectResearch(index)}
+                        className=" items-center  text-blue-800 bg-white font-bold m-2 w-[100%] "
+                      >
+                        Reject
+                      </button>
+                    </div>
+
+                    <div key={userData.id} >
+                      <button
+                        className="p-2 text-blue-800 bg-white"
+                        onClick={() => handleDownload(userData.Rid)}
+                      >
+                        Download PDF
+                      </button>
+                    </div>
                   </div>
                 )}
               </>
@@ -653,6 +212,7 @@ function Admin() {
           )}
         </center>
       </div>
+      <Footer />
     </>
   );
 }

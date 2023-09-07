@@ -1,0 +1,9 @@
+/* hero.css */
+
+.hero-section {
+    position: relative; /* Ensure the section is positioned relative */
+    z-index: -1;
+  }
+  
+
+  

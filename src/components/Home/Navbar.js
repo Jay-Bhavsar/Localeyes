@@ -10,6 +10,13 @@ const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "About Us", href: "/vision", current: false },
+ 
+  { name: "Trial Search", href: "/trialsearch", current: false },
+  { name: "Advanced Search", href: "/advancesearch", current: false },
+  { name: "FAQ", href: "/faq", current: false },
+  { name: "Disclaimer", href: "/disclaimer", current: false },
+  { name: "Feedback", href: "/feedback", current: false },
+  { name: "Sitemap", href: "/sitemap", current: false },
   {
     name: isUserLoggedIn ? "Logout" : "Login",
     href: isUserLoggedIn ? "/logout" : "/login",
@@ -25,6 +32,7 @@ const navigation = [
     href: isUserLoggedIn ? "" : "/signup",
     current: false,
   },
+
 ];
 
 function classNames(...classes) {
@@ -34,7 +42,7 @@ function classNames(...classes) {
 export default function Example() {
   return (
     <>
-      <Disclosure as="nav" className="fixed bg-gray-100 shadow-lg w-[100%]">
+      <Disclosure as="nav" className="fixed bg-gray-100 shadow-lg w-[100%] z-10">
         {({ open }) => (
           <>
             <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">

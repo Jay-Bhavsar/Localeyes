@@ -12,10 +12,10 @@ const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
 const navigation = [
   { name: "Home", href: "/", current: false },
   // { name: "Fill out the AMRRI form", href: "/form", current: false },
-  // { name: "Published Research", href: "/published", current: false },
-  // { name: "Reasearch in Review", href: "/review", current: false },
-  // { name: "Rejected Researches", href: "/rejected", current: false },
-  // { name: "Portal", href: "/user", current: false },
+  { name: "Published Research", href: "/published", current: false },
+  { name: "Reasearch in Review", href: "/review", current: false },
+  { name: "Rejected Researches", href: "/rejected", current: false },
+  { name: "Portal", href: "/user", current: false },
   // { name: "Update Profile", href: "/profile", current: false },
   // { name: isUserLoggedIn ? "Logout" : "Login", href: isUserLoggedIn ? "/logout": "/login", current: false },
   // { name: "logout", href: "/logout" },
@@ -28,7 +28,10 @@ function classNames(...classes) {
 export default function Example() {
   return (
     <>
-      <Disclosure as="nav" className="fixed bg-gray-100 shadow-lg w-[100%]">
+      <Disclosure
+        as="nav"
+        className="fixed bg-gray-100 shadow-lg w-[100%] z-10"
+      >
         {({ open }) => (
           <>
             <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -63,9 +66,9 @@ export default function Example() {
                         <h1>AMRRI</h1>
                       </div>
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
-                          href={item.href}
+                          to={item.href}
                           className={classNames(
                             item.current
                               ? "bg-gray-900 text-white"
@@ -75,27 +78,25 @@ export default function Example() {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
-                      <div className="ml-9">
-                      <Dropdown
-                        inline
-                        label={<Avatar alt="User settings" rounded />}
-                      
-                      >
-                        <div className="pl-4 pr-4">
-                          <a href="/profile">
-                            <div className="m-2 text-base">Update Profile</div>
-                          </a>
-
-                          <a href="/logout" className="mt-20">
-                            <div className="m-2 text-base">Logout</div>
-                          </a>
-                        </div>
-                      </Dropdown>
-                      </div>
-                     
                     </div>
+                  </div>
+                  <div className="flex flex-row items-center justify-center ml-[10%]">
+                    <Dropdown
+                      inline
+                      label={<Avatar alt="User settings" rounded />}
+                    >
+                      <div className="pl-4 pr-4">
+                        <a href="/profile">
+                          <div className="m-2 text-base">Update Profile</div>
+                        </a>
+
+                        <a href="/logout" className="mt-20">
+                          <div className="m-2 text-base">Logout</div>
+                        </a>
+                      </div>
+                    </Dropdown>
                   </div>
                 </div>
               </div>

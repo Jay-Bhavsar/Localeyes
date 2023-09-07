@@ -23,6 +23,17 @@ import Rejected from "./components/Auth/Rejected";
 import Adminapproved from "./components/Admin/Adminrejected";
 import Adminrejected from "./components/Admin/Adminapproved";
 import ForgotPassword from "./components/Auth/ForgotPassword";
+import Tnc from "./components/Home/Tnc";
+import Privacy from "./components/Home/Privacy";
+import Disclaimer from "./components/Home/Disclaimer";
+import FAQ from "./components/Home/FAQ";
+import Adminlogin from "./components/Auth/Adminlogin";
+import AdminProtectedRoute from "./components/Auth/AdminProtected";
+import Trialsearch from "./components/Home/Trialsearch";
+import Advance from "./components/Home/Advance";
+import Feedback from "./components/Home/Feedback";
+import Sitemap from "./components/Home/Sitemap";
+
 // import Form3 from "./components/Auth/Form/Form1";
 
 function App() {
@@ -57,39 +68,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* <Route
-              path="/part2"
-              element={
-                <ProtectedRoute>
-                  <Second />
-                </ProtectedRoute>
-              }
-            /> */}
-            {/* <Route
-              path="/part3"
-              element={
-                <ProtectedRoute>
-                  <Third />
-                </ProtectedRoute>
-              }
-            /> */}
-            {/* <Route
-              path="/part4"
-              element={
-                <ProtectedRoute>
-                  <Fourth />
-                </ProtectedRoute>
-              }
-            /> */}
-            {/* <Route
-              path="/part5"
-              element={
-                <ProtectedRoute>
-                  <Fifth />
-                </ProtectedRoute>
-              }
-            /> */}
-          
+
             <Route
               path="/review"
               element={
@@ -118,30 +97,33 @@ function App() {
             <Route
               path="/adminapproved"
               element={
-                <ProtectedRoute>
-                  <Adminrejected/>
-                </ProtectedRoute>
-                   
+                <AdminProtectedRoute>
+                  <Adminrejected />
+                </AdminProtectedRoute>
               }
             />
             <Route
               path="/adminrejected"
               element={
-                <ProtectedRoute>
-                <Adminapproved/>
-                </ProtectedRoute>
+                <AdminProtectedRoute>
+                  <Adminapproved />
+                </AdminProtectedRoute>
               }
             />
-             <Route
+            <Route
               path="/adminallresearch"
               element={
-                <ProtectedRoute>
-                  <Admin/>
-                </ProtectedRoute>
+            
+                  <AdminProtectedRoute>
+                                   <Admin />
+
+                </AdminProtectedRoute>
               }
             />
 
             <Route path="/vision" element={<Vision />} />
+            <Route path="/adminlogin" element={<Adminlogin />} />
+
             <Route
               path="/profile"
               element={
@@ -152,9 +134,18 @@ function App() {
             ></Route>
 
             <Route path="/logout" element={<Logout />}></Route>
+            <Route path="/tnc" element={<Tnc />}></Route>
+            <Route path="/privacy" element={<Privacy />}></Route>
+            <Route path="/disclaimer" element={<Disclaimer />}></Route>
+            <Route path="/FAQ" element={<FAQ />}></Route>
 
             <Route path="/signup" element={<Signup />} />
-            <Route path="/forgetpass" element={<ForgotPassword/>} />
+            <Route path="/trialsearch" element={<Trialsearch/>} />
+            <Route path="/advancesearch" element={<Advance/>} />
+            <Route path="/feedback" element={<Feedback/>} />
+            <Route path="/sitemap" element={<Sitemap/>} />
+
+            <Route path="/forgetpass" element={<ForgotPassword />} />
           </Routes>
         </UserAuthContextProvider>
       </div>

@@ -7,11 +7,11 @@
 .form{
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 form{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
     padding: 30px;
 }
@@ -55,7 +55,19 @@ input[type=text] {
     background-color: rgb(227, 217, 217);
     height: 40px;
   }
+  input[type=tel] {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    background-color: rgb(227, 217, 217);
+    height: 40px;
+  }
   input[type=password] {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    background-color: rgb(227, 217, 217);
+    height: 40px;
+  }
+  input[type=date] {
     border: 2px solid rgb(255, 255, 255);
     border-radius: 4px;
     background-color: rgb(227, 217, 217);

@@ -55,9 +55,7 @@ function Signup() {
       <br />
       <br />
 
-      <div className="text-center oneliner">
-        <h1>Ayurveda Manuscripts Research Registry of India (AMRRI)</h1>
-      </div>
+    
       <br />
       <br />
       {message?.msg && <div>{message?.msg}</div>}
@@ -67,7 +65,9 @@ function Signup() {
           <h2>AMRRI PORTAL NIA JAIPUR</h2>
           <h2>Registration for Portal</h2>
         </div>
+
         <div className="flex flex-col shadow-xl w-[100%] md:w-[40%] form">
+          <center>
           <div className="flex flex-col justify-center items-center w-[100%] md:w-[50%] p-4">
             <br />
             <img src={logo} alt="" className="w-[100px] h-[100px]" />
@@ -79,6 +79,8 @@ function Signup() {
               Deemed to be University(De Novo) Ministry of AYUSH, Govt. of India
             </h4>
           </div>
+          </center>
+         
           <form
             action=""
             onSubmit={handleSubmit}
@@ -187,7 +189,8 @@ function Signup() {
                 form):
               </span>
               <input
-                type="text"
+                type="tel"
+                pattern="[0-9]{10}"
                 name=""
                 id=""
                 onChange={(e) => {
@@ -199,8 +202,10 @@ function Signup() {
             </label>
 
             {/* <SecurityCode correctCode="1234" onSuccess={handleSubmit} /> */}
+<center>
+<button className="button w-[90%]">Sign Up</button>
 
-            <button className="button w-[90%]">Sign Up</button>
+</center>
             <p>
               Already Registered? <Link to="/login">Login</Link>
             </p>

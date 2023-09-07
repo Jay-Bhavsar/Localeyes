@@ -1,5 +1,6 @@
 import React from "react";
 import { Carousel, Typography, Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 import "../Style/hero.css";
 const logo = require("../img/logo.png");
 const manu1 = require("../img/manu1.jpg");
@@ -71,7 +72,7 @@ function Hero() {
     //   </div>
     // </section>
 
-    <Carousel className="rounded-xl">
+    <Carousel className="h-[50%]">
       <div className="relative w-full h-full">
         <img
           src={manu1}
@@ -82,7 +83,7 @@ function Hero() {
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+              className="mb-4 text-sm md:text-4xl lg:text-5xl"
             >
              Ayurveda Manuscripts Research Registry of India (AMRRI)
             </Typography>
@@ -91,18 +92,16 @@ function Hero() {
               color="white"
               className="mb-12 opacity-80"
             >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
+           
             </Typography>
             <div className="flex justify-center gap-2">
-              <Button size="lg" color="white">
+             <Link to="/vision">
+             <Button size="lg" color="white">
                 Explore
               </Button>
-              <Button size="lg" color="white" variant="text">
-                Gallery
-              </Button>
+             </Link>
+            
+              
             </div>
           </div>
         </div>
@@ -118,7 +117,7 @@ function Hero() {
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+              className="mb-4 text-sm md:text-4xl lg:text-5xl"
             >
               Ayurveda Manuscripts Research Registry of India (AMRRI)
             </Typography>
@@ -127,18 +126,16 @@ function Hero() {
               color="white"
               className="mb-12 opacity-80"
             >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
+             
             </Typography>
             <div className="flex gap-2">
+              <Link to="/vision">
               <Button size="lg" color="white">
                 Explore
               </Button>
-              <Button size="lg" color="white" variant="text">
-                Gallery
-              </Button>
+              </Link>
+            
+            
             </div>
           </div>
         </div>
@@ -154,27 +151,24 @@ function Hero() {
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+              className="mb-4 text-sm md:text-4xl lg:text-5xl"
             >
              Ayurveda Manuscripts Research Registry of India (AMRRI)
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80"
+              className="mb-12 text-sm opacity-80"
             >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
+              
             </Typography>
             <div className="flex gap-2">
-              <Button size="lg" color="white">
+              
+             <Link to="/vision">
+             <Button size="lg" color="white">
                 Explore
               </Button>
-              <Button size="lg" color="white" variant="text">
-                Gallery
-              </Button>
+             </Link>
             </div>
           </div>
         </div>

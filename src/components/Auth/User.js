@@ -5,6 +5,7 @@ import "firebase/firestore";
 import { Link } from "react-router-dom";
 import Footer from "../Home/Footer";
 import DefaultSidebar from "../Home/Sidebar";
+
 import { db } from "../../firebase";
 
 function User() {
@@ -98,14 +99,11 @@ function User() {
       <br /> <br />
       <br />
       <br />
-     
-      <div className="flex flex-row justify-start">
-        <div>
-          <DefaultSidebar />
-        </div>
-        <br /><br />
-        <div className="ml-[10%] md:ml-[40%]">
-
+      <div className="flex flex-row justify-center">
+       
+        <br />
+        <br />
+        <div className=" w-[100%] md:w-[50%]">
           <center>
             <Link to="/form">
               <button className="p-2 mt-8 text-white bg-blue-500 rounded-md">
@@ -116,64 +114,33 @@ function User() {
 
           <br />
 
-          
-          <center>
-            <div class="relative overflow-x-auto">
-              <table class="w-[70%] text-sm text-left text-black dark:text-black">
-                <thead class="text-xs text-blue-100 uppercase bg-blue-50 dark:bg-blue-500 dark:text-black">
-                  <tr class="bg-white border-b dark:bg-blue-500 dark:border-blue-500">
-                    <th scope="col" class="px-6 py-3 text-white text-lg">
-                      Total Researches
-                    </th>
-
-                    <th scope="col" class="px-6 py-3 text-lg text-white">
-                      {reviewres.length +
-                        rejectedres.length +
-                        approvedres.length}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="bg-white border-b dark:bg-blue-500 dark:border-blue-500">
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-lg whitespace-nowrap text-lg text-white dark:text-white"
-                    >
-                      UNDER REVIEW STAGE
-                    </th>
-                    <td class="px-6 py-4 font-lg text-white text-lg text">
-                      {reviewres.length}
-                    </td>
-                  </tr>
-                  <tr class="bg-white border-b dark:bg-blue-500 dark:border-blue-500">
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-lg text-white whitespace-nowrap dark:text-white text-lg"
-                    >
-                      REGISTERED RESEARCHES
-                    </th>
-                    <td class="px-6 py-4 text-white text-lg">
-                      {approvedres.length}
-                    </td>
-                  </tr>
-                  <tr class="bg-white dark:bg-blue-500">
-                    <th
-                      scope="row"
-                      class="px-6 py-4 font-lg text-blue-900 whitespace-nowrap dark:text-white text-lg"
-                    >
-                      TERMINATED/SUSPENDED RESEARCHES
-                    </th>
-                    <td class="px-6 py-4 text-lg text-white">
-                      {rejectedres.length}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div className="p-4 font-bold text-white bg-blue-500 w-[100%] text-lg">
+            <div className="flex flex-row justify-between">
+              <p>Total Researches</p>
+              <p>
+                {reviewres.length + rejectedres.length + approvedres.length}
+              </p>
             </div>
-          </center>
+            <br />
+            <div className="flex flex-row justify-between">
+              <p>Under Review Stage</p>
+              <p>{reviewres.length}</p>
+            </div>
+            <br />
+            <div className="flex flex-row justify-between">
+              <p>Registered Researches</p>
+              <p> {approvedres.length}</p>
+            </div>
+            <br />
+            <div className="flex flex-row justify-between">
+              <p>Terminated/Suspended Researches</p>
+              <p> {rejectedres.length}</p>
+            </div>
+          </div>
         </div>
       </div>
-     
+      <br />
+      <Footer />
     </>
   );
 }
