@@ -5,10 +5,9 @@ import "../Style/Home.css";
 // eslint-disable-next-line no-unused-vars
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-
-import { Dropdown } from "flowbite-react";
+import { Avatar, Dropdown } from "flowbite-react";
 const logo = require("../img/logo.png");
-const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn")
+const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -17,10 +16,9 @@ const navigation = [
   { name: "Reasearch in Review", href: "/review", current: false },
   { name: "Rejected Researches", href: "/rejected", current: false },
   { name: "Portal", href: "/user", current: false },
-  { name: "Update Profile", href: "/profile", current: false },
+  // { name: "Update Profile", href: "/profile", current: false },
   // { name: isUserLoggedIn ? "Logout" : "Login", href: isUserLoggedIn ? "/logout": "/login", current: false },
-  {name:"logout",href:"/logout"}
-  
+  // { name: "logout", href: "/logout" },
 ];
 
 function classNames(...classes) {
@@ -30,7 +28,10 @@ function classNames(...classes) {
 export default function Example() {
   return (
     <>
-      <Disclosure as="nav" className="fixed bg-gray-100 shadow-lg w-[100%]">
+      <Disclosure
+        as="nav"
+        className="fixed bg-gray-100 shadow-lg w-[100%] z-10"
+      >
         {({ open }) => (
           <>
             <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -60,14 +61,14 @@ export default function Example() {
                     />
                   </div>
                   <div className="hidden mt-5 sm:ml-6 sm:block">
-                    <div className="flex items-center justify-center space-x-4">
+                    <div className="flex items-center justify-around space-x-4">
                       <div className="amr">
                         <h1>AMRRI</h1>
                       </div>
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
-                          href={item.href}
+                          to={item.href}
                           className={classNames(
                             item.current
                               ? "bg-gray-900 text-white"
@@ -77,23 +78,26 @@ export default function Example() {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
-                  {/* <div className="flex items-center flex-shrink-0" ml-9 mt-4>
-                    <Dropdown label="Your Profile">
-                      <Link to="/profile">
-                        <Dropdown.Item>Update Profile</Dropdown.Item>
-                      </Link>
-                      <Link to="/profile">
-                        <Dropdown.Item>Your Researches</Dropdown.Item>
-                      </Link>
-                      <Link to="/profile">
-                        <Dropdown.Item>Research Status</Dropdown.Item>
-                      </Link>
+                  <div className="flex flex-row items-center justify-center ml-[10%]">
+                    <Dropdown
+                      inline
+                      label={<Avatar alt="User settings" rounded />}
+                    >
+                      <div className="pl-4 pr-4">
+                        <a href="/profile">
+                          <div className="m-2 text-base">Update Profile</div>
+                        </a>
+
+                        <a href="/logout" className="mt-20">
+                          <div className="m-2 text-base">Logout</div>
+                        </a>
+                      </div>
                     </Dropdown>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>

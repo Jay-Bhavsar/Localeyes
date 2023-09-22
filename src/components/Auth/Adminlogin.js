@@ -5,24 +5,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";
 import Footer from "../Home/Footer";
 const logo = require("../img/logo.png");
-function Login() {
+function Adminlogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
   const { login } = useUserAuth();
   const navigate = useNavigate();
-  const handleSubmit = async (e) => {
+
+  const handleAdminlogin = async (e) => {
     e.preventDefault();
     setError("");
-    try {
-      await login(email, password);
-      navigate("/user");
-      // navigate("/part1")
-    } catch (err) {
-      setError(err.message);
+
+    // Check if the provided email and password match the admin credentials
+    if (email === "admin1@gmail.com" && password === "qwertyuio") {
+      try {
+        await login(email, password);
+        navigate("/adminallresearch");
+      } catch (err) {
+        setError(err.message);
+      }
+    } else {
+      setError("Invalid email or password");
     }
   };
-
 
   return (
     <>
@@ -53,9 +58,11 @@ function Login() {
               Deemed to be University(De Novo) Ministry of AYUSH, Govt. of India
             </h4>
           </div>
+         
+
           <form
             action=""
-            onSubmit={handleSubmit}
+            onSubmit={handleAdminlogin}
             className=" flex flex-col justify-center w-[100%] md:w-[50%] h-[100%] shadow-xl"
           >
             <center>
@@ -74,7 +81,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               className="w-[80%]"
             />
-            <button className="button">Log In</button>
+            <button className="button">Admin Log In</button>
 
             <p className="mr-16">
               <Link to="/forgetpass" className="text-red-700-950">
@@ -82,13 +89,10 @@ function Login() {
               </Link>
             </p>
 
-            <p className="mt-3">
-              Don't have a account? <Link to="/signup"> Sign Up</Link>
-            </p>
+           
             </center>
            
           </form>
-
         </div>
       </center>
       <br />
@@ -98,4 +102,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Adminlogin;

@@ -17,7 +17,7 @@ function AboutUs() {
           funded Institute to be declared as Deemed to be University in the
           field of Ayush. 
         </p>
-        <button className="p-3 text-white rounded-md bg-rose-900 mt-7">Read More</button>
+     <a href="/vision"><button className="p-3 text-white rounded-md bg-rose-900 mt-7">Read More</button></a>   
       </div>
     </>
   );
