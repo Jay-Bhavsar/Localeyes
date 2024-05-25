@@ -12,7 +12,7 @@ const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
 const navigation = [
   { name: "Home", href: "/", current: false },
   // { name: "Fill out the AMRRI form", href: "/form", current: false },
-  { name: "Published Research", href: "/published", current: false },
+  { name: "Approved  Research", href: "/published", current: false },
   { name: "Reasearch in Review", href: "/review", current: false },
   { name: "Rejected Researches", href: "/rejected", current: false },
   { name: "Portal", href: "/user", current: false },
