@@ -9,7 +9,6 @@ import DefaultSidebar from "../Home/Sidebar";
 import Formsidebar from "../Home/Formsidebar";
 import jsPDF from "jspdf";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
   authDomain: "amrri-cdeb4.firebaseapp.com",
@@ -28,6 +27,7 @@ function One() {
   const Userid = sessionStorage.getItem("uid");
 
   const [selectedScript, setSelectedScript] = useState("");
+  const [selectedMaterial, setSelectedMaterial] = useState("");
   const [customScript, setCustomScript] = useState("");
 
   const [selectedlanguage, setSelectedlanguage] = useState("");
@@ -62,7 +62,7 @@ function One() {
 
   const codeLength = 10;
   const alphanumericCode = generateAlphanumericCode(codeLength);
-  console.log(alphanumericCode);
+  // console.log(alphanumericCode);
 
   async function handleForm1Submit(e) {
     e.preventDefault();
@@ -132,6 +132,7 @@ function One() {
 
       // Save PDF content to Firebase Storage
       const pdfBlob = pdf.output("blob");
+      console.log(pdfBlob);
       const pdfRef = storageRef.child(
         `pdfs/form_data_${Userid}_${alphanumericCode}.pdf`
       );
@@ -155,15 +156,14 @@ function One() {
         rejected: false,
         pdflink: `pdfs/form_data_${Userid}.${alphanumericCode}.pdf`,
       });
-      
+
       window.location.href = "/user";
       alert("Your Research is Posted");
       console.log("Form 1 submitted successfully!");
       setForm1Data({}); // Reset form data
       localStorage.setItem("researchid", alphanumericCode);
       return alphanumericCode;
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error submitting Form 1:", error);
     }
   }
@@ -179,11 +179,29 @@ function One() {
     } else if (name === "custom_script") {
       setCustomScript(value);
     }
+    if (name === "Material") {
+      setSelectedMaterial(value);
+    } else if (name === "custom_material") {
+      setSelectedMaterial(value);
+    }
 
     if (name === "Language") {
       setSelectedlanguage(value);
     } else if (name === "custom_language") {
       setCustomlanguage(value);
+    }
+  }
+  function handleFileChange(event) {
+    const file = event.target.files[0];
+    const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+    const fileError = document.getElementById("fileError");
+
+    if (file && file.size > maxSize) {
+      fileError.textContent =
+        "The file size exceeds the 2MB limit. Please upload a smaller file.";
+      event.target.value = ""; // Clear the file input
+    } else {
+      fileError.textContent = "";
     }
   }
   // const [form1Submitted, setform1Submitted] = useState(false);
@@ -270,7 +288,7 @@ function One() {
                         onChange={handleForm1InputChange}
                         required
                       />
-                      <span className="ml-2">Catalouging</span>
+                      <span className="ml-2">Cataloguing </span>
                     </label>
                     <label className="flex items-center p-2">
                       <input
@@ -300,12 +318,13 @@ function One() {
                       <input
                         type="radio"
                         name="type_of_research"
-                        value="Dicephering"
-                        checked={form1Data.type_of_research === "Dicephering"}
+                        value="Deciphering
+                        "
+                        checked={form1Data.type_of_research === "Deciphering"}
                         onChange={handleForm1InputChange}
                         required
                       />
-                      <span className="ml-2">Dicephering</span>
+                      <span className="ml-2">Deciphering</span>
                     </label>
                     <label className="flex items-center p-2">
                       <input
@@ -349,21 +368,28 @@ function One() {
                   </div>
                 </div>
                 <div className="w-[100%]">
-                  <label htmlFor="" className="p-2 font-bold text-justify">
-                    4.Attach an authorization document from the Institute/
-                    repository, where the MSS is collected. Files submitted:
+                  <label
+                    htmlFor="authorizationDocument"
+                    className="p-2 font-bold text-justify"
+                  >
+                    4. Attach an authorization document from the
+                    Institute/repository, where the MSS is collected *. Files
+                    submitted:
                     <input
                       type="file"
                       id="authorizationDocument"
-                      name=""
+                      name="authorizationDocument"
                       required
+                      onChange={handleFileChange}
                     />
                   </label>
+                  <p id="fileError" className="text-red-500"></p>
                 </div>
               </center>
 
               <br />
               <br />
+              {/* start */}
               <center>
                 <h2 className="font-bold" id="part2">
                   Details of Principal investigator or overall trial coordinator
@@ -467,6 +493,109 @@ function One() {
                   />
                 </label>
               </div>
+              {/* start */}
+              <center>
+                <h2 className="font-bold" id="part2">
+                  Details of Co - investigator
+                  <span className="text-red-600">*</span>
+                </h2>
+              </center>
+              <div className="flex flex-row w-[100%] mt-10">
+                <label className="flex flex-col p-2 font-bold w-[50%]">
+                  <h4>
+                    5.Name<span className="text-red-600">*</span>:
+                  </h4>
+                  <input
+                    type="text"
+                    name="CoinvestigatorName"
+                    value={form1Data.CoinvestigatorName || ""}
+                    onChange={handleForm1InputChange}
+                    // className="m-4 "
+
+                    required
+                  />
+                </label>
+                <label className="flex flex-col p-2 w-[50%] font-bold">
+                  <h4>
+                    {" "}
+                    6.Designation<span className="text-red-600">*</span>:
+                  </h4>
+                  <input
+                    type="text"
+                    name="CoinvestigatorDesignation"
+                    value={form1Data.CoinvestigatorDesignation || ""}
+                    onChange={handleForm1InputChange}
+                    // className="m-4 "
+
+                    required
+                  />
+                </label>
+              </div>
+
+              <div className="flex-row flex w-[100%]">
+                <label className="flex flex-col p-2 w-[50%] font-bold">
+                  <h4>
+                    7.Affiliation<span className="text-red-600">*</span>:
+                  </h4>
+                  <input
+                    type="text"
+                    name="CoinvestigatorAffiliation"
+                    value={form1Data.CoinvestigatorAffiliation || ""}
+                    onChange={handleForm1InputChange}
+                    // className="m-4 "
+
+                    required
+                  />
+                </label>
+                <label className="flex flex-col p-2 w-[50%] font-bold">
+                  <h4>
+                    8.Address<span className="text-red-600">*</span>:
+                  </h4>
+                  <input
+                    type="text"
+                    name="CoinvestigatorAddress"
+                    value={form1Data.CoinvestigatorAddress || ""}
+                    onChange={handleForm1InputChange}
+                    // className="m-4 "
+
+                    required
+                  />
+                </label>
+              </div>
+
+              <div className="flex flex-row w-[100%]">
+                <label className="flex flex-col p-2  w-[50%] font-bold">
+                  <h4>
+                    {" "}
+                    9.Phone Number<span className="text-red-600">*</span>:
+                  </h4>
+                  <input
+                    type="tel"
+                    pattern="[0-9]{10}"
+                    name="CoinvestigatorPhno"
+                    value={form1Data.CoinvestigatorPhno || ""}
+                    onChange={handleForm1InputChange}
+                    // className="m-4 "
+
+                    required
+                  />
+                </label>
+                <label className="flex flex-col p-2 w-[50%] font-bold">
+                  <h4>
+                    {" "}
+                    10.Email-id<span className="text-red-600">*</span>:
+                  </h4>
+                  <input
+                    type="text"
+                    name="CoinvestigatorEmail"
+                    value={form1Data.CoinvestigatorEmail || ""}
+                    onChange={handleForm1InputChange}
+                    // className="m-4 "
+
+                    required
+                  />
+                </label>
+              </div>
 
               <br />
               <br />
@@ -534,6 +663,16 @@ function One() {
                     type="text"
                     name="Prim_Sponsorship_address"
                     value={form1Data.Prim_Sponsorship_address || ""}
+                    onChange={handleForm1InputChange}
+                    // className="m-4 bg-blue-400"
+                  />
+                </label>
+                <label className="flex flex-col p-2  w-[50%] font-bold">
+                  15.Phone No:
+                  <input
+                    type="text"
+                    name="Prim_Sponsorship_Phno"
+                    value={form1Data.Prim_Sponsorship_Phno || ""}
                     onChange={handleForm1InputChange}
                     // className="m-4 bg-blue-400"
                   />
@@ -606,11 +745,21 @@ function One() {
                     // className="m-4 "
                   />
                 </label>
+                <label className="flex flex-col p-2  w-[50%] font-bold">
+                  <h4>Phone No:</h4>
+                  <input
+                    type="text"
+                    name="Guide_PhnNo"
+                    value={form1Data.Guide_PhnNo || ""}
+                    onChange={handleForm1InputChange}
+                    // className="m-4 "
+                  />
+                </label>
               </div>
 
               <br />
               <br />
-              <h2 className="font-bold">BASIC DATA OF Manuscript</h2>
+              <h2 className="font-bold">BASIC DATA OF MANUSCRIPT</h2>
               <br />
               <br />
               <div className="flex flex-row w-[100%]">
@@ -621,6 +770,8 @@ function One() {
                     name="catalog_title"
                     value={form1Data.catalog_title || ""}
                     onChange={handleForm1InputChange}
+                    required
+                    placeholder="NA if not aplicable"
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -643,6 +794,8 @@ function One() {
                     name="subject"
                     value={form1Data.subject || ""}
                     onChange={handleForm1InputChange}
+                    required
+                    placeholder="NA if not aplicable"
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -684,6 +837,8 @@ function One() {
                     name="scribe"
                     value={form1Data.scribe || ""}
                     onChange={handleForm1InputChange}
+                    required
+                    placeholder="NA if not aplicable"
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -691,12 +846,77 @@ function One() {
 
               <div className="flex flex-row w-[100%]">
                 <label className="flex flex-col p-2  w-[50%] font-bold">
-                  <h4>Source Of MSS:</h4>
+                  <h4>Source of MSS:</h4>
                   <input
                     type="text"
                     name="MSS_source"
                     value={form1Data.MSS_source || ""}
                     onChange={handleForm1InputChange}
+                    // className="m-4 bg-blue-400"
+                  />
+                </label>
+                <label className="flex flex-col p-2  w-[50%] font-bold">
+                  <h4>MRC Name</h4>
+                  <input
+                    type="text"
+                    name="MRC_Name"
+                    value={form1Data.MRC_Name || ""}
+                    onChange={handleForm1InputChange}
+                    required
+                    placeholder="NA if not aplicable"
+                    // className="m-4 bg-blue-400"
+                  />
+                </label>
+              </div>
+
+              <div className="flex flex-row w-[100%]">
+                <label className="flex flex-col p-2  w-[50%] font-bold">
+                  <h4> Accession Number</h4>
+                  <input
+                    type="text"
+                    name=" Accession_Number"
+                    value={form1Data.Accession_Number || ""}
+                    onChange={handleForm1InputChange}
+                    required
+                    placeholder="NA if not aplicable"
+                    // className="m-4 bg-blue-400"
+                  />
+                </label>
+                <label className="flex flex-col p-2  w-[50%] font-bold">
+                  <h4>MRC Name</h4>
+                  <input
+                    type="text"
+                    name="MRC_Name"
+                    value={form1Data.MRC_Name || ""}
+                    onChange={handleForm1InputChange}
+                    required
+                    placeholder="NA if not aplicable"
+                    // className="m-4 bg-blue-400"
+                  />
+                </label>
+              </div>
+              <div className="flex flex-row w-[100%]">
+                <label className="flex flex-col p-2  w-[50%] font-bold">
+                  <h4>Manuscript Number</h4>
+                  <input
+                    type="text"
+                    name=" Accession_Number"
+                    value={form1Data.Manuscript_Number || ""}
+                    onChange={handleForm1InputChange}
+                    required
+                    placeholder="NA if not aplicable"
+                    // className="m-4 bg-blue-400"
+                  />
+                </label>
+                <label className="flex flex-col p-2  w-[50%] font-bold">
+                  <h4>Institute/ Repository Name</h4>
+                  <input
+                    type="text"
+                    name="InstituteRepository_Name"
+                    value={form1Data.InstituteRepository_Name || ""}
+                    onChange={handleForm1InputChange}
+                    required
+                    placeholder="NA if not aplicable"
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -717,6 +937,7 @@ function One() {
                     name="Manu_Topic"
                     value={form1Data.Manu_Topic || ""}
                     onChange={handleForm1InputChange}
+                    required
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -727,6 +948,7 @@ function One() {
                     name="Manu_Subject"
                     value={form1Data.Manu_Subject || ""}
                     onChange={handleForm1InputChange}
+                    required
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -763,6 +985,7 @@ function One() {
                     name="date_of_collection"
                     value={form1Data.date_of_collection || ""}
                     onChange={handleForm1InputChange}
+                    required
                     // className="m-4 bg-blue-400"
                   />
                 </label>
@@ -774,13 +997,30 @@ function One() {
                     regulations{" "}
                   </span>{" "}
                   (Eg :3 Year, 2 Months):
-                  <input
-                    type="text"
-                    name="duration"
-                    value={form1Data.duration || ""}
-                    onChange={handleForm1InputChange}
-                    // className="m-4 bg-blue-400"
-                  />
+                  <div className="flex flex-wrap gap-3">
+                    <div className="flex  gap-1">
+                      <label htmlFor="duration_year"> Year: </label>
+                      <input
+                        type="number"
+                        name="duration_year"
+                        value={form1Data.duration_year || ""}
+                        onChange={handleForm1InputChange}
+                        className="w-1/2"
+                        // className="m-4 bg-blue-400"
+                      />
+                    </div>
+                    <div className="flex  gap-1">
+                      <label htmlFor="duration_months"> Months: </label>
+                      <input
+                        type="number"
+                        name="duration_months"
+                        value={form1Data.duration_number || ""}
+                        onChange={handleForm1InputChange}
+                        className="w-1/2"
+                        // className="m-4 bg-blue-400"
+                      />
+                    </div>
+                  </div>
                 </label>
               </div>
               <br />
@@ -825,18 +1065,6 @@ function One() {
                   <div>
                     {" "}
                     {/* Add the new radio button with a text option */}
-                    <label className="flex items-center ">
-                      <input
-                        type="radio"
-                        name="status"
-                        value="custom"
-                        checked={form1Data.status === "custom"}
-                        onChange={handleForm1InputChange}
-                        required
-                        className="ml-2"
-                      />
-                      <span className="mb-2 ml-4">Custom Status</span>
-                    </label>
                     {/* Add the text input for the custom option */}
                     {form1Data.status === "custom" && (
                       <label className="flex items-center">
@@ -1434,14 +1662,27 @@ function One() {
                   <option value="Textile/ cotton/सूती वस्त्र">
                     Textile/ cotton/सूती वस्त्र
                   </option>
+                  <option value="Others">Others</option>
                 </select>
+                {selectedScript === "Others" && (
+                  <label className="flex items-center p-2">
+                    <span className="ml-2">Please specify:</span>
+                    <input
+                      type="text"
+                      name="custom_material"
+                      value={customScript}
+                      onChange={handleForm1InputChange}
+                      required
+                    />
+                  </label>
+                )}
               </div>
 
               <br />
               <br />
-              <h2 className="font-bold">34.Condition of MSS</h2>
-              <div className="flex flex-col md:flex-row">
-                <div className="md:m-3">
+              <h2 className="font-bold">34. Condition of MSS</h2>
+              <div className="flex flex-col md:flex-row flex-wrap">
+                <div className="md:w-1/2 lg:w-1/3 p-2">
                   <label className="flex items-center p-2">
                     <input
                       type="radio"
@@ -1463,7 +1704,7 @@ function One() {
                     <span className="ml-2">Bad</span>
                   </label>
                 </div>
-                <div className="md:m-3">
+                <div className="md:w-1/2 lg:w-1/3 p-2">
                   <label className="flex items-center p-2">
                     <input
                       type="radio"
@@ -1485,7 +1726,7 @@ function One() {
                     <span className="ml-2">Broken</span>
                   </label>
                 </div>
-                <div className="md:m-3">
+                <div className="md:w-1/2 lg:w-1/3 p-2">
                   <label className="flex items-center p-2">
                     <input
                       type="radio"
@@ -1507,7 +1748,7 @@ function One() {
                     <span className="ml-2">Good</span>
                   </label>
                 </div>
-                <div className="md:m-3">
+                <div className="md:w-1/2 lg:w-1/3 p-2">
                   <label className="flex items-center p-2">
                     <input
                       type="radio"
@@ -1529,7 +1770,7 @@ function One() {
                     <span className="ml-2">Stained</span>
                   </label>
                 </div>
-                <div className="m-3">
+                <div className="md:w-1/2 lg:w-1/3 p-2">
                   <label className="flex items-center p-2">
                     <input
                       type="radio"
@@ -1548,8 +1789,10 @@ function One() {
                       checked={form1Data.MSS_condition === "worm_eaten"}
                       onChange={handleForm1InputChange}
                     />
-                    <span className="ml-2">Broken</span>
+                    <span className="ml-2">Worm Eaten</span>
                   </label>
+                </div>
+                <div className="md:w-1/2 lg:w-1/3 p-2">
                   <label className="flex items-center p-2">
                     <input
                       type="radio"
@@ -1580,9 +1823,9 @@ function One() {
                   />
                 </label>
                 <label className="flex flex-col p-2 font-bold w-[50%] ">
-                  Probable Date of current data :
+                  Probable Date of current Manuscript :
                   <input
-                    type="date"
+                    type="text"
                     name="data_data"
                     value={form1Data.data_data || ""}
                     onChange={handleForm1InputChange}
@@ -1604,20 +1847,60 @@ function One() {
                   />
                 </label>
                 <label className="flex flex-col p-2 font-bold w-[50%] ">
-                  STATE & UNION TERRITORIES :
-                  <input
-                    type="text"
-                    name="states_union"
-                    value={form1Data.states_union || ""}
+                  State & Union Territory :
+                  <select
+                    name="StateOrUnionTerritory"
+                    value={form1Data.StateOrUnionTerritory}
                     onChange={handleForm1InputChange}
-
-                    // className="m-4 bg-blue-400"
-                  />
+                    className="p-2 w-[100%]"
+                  >
+                    <option value="Select State ">Select State</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Andaman and Nicobar Islands">
+                      Andaman and Nicobar Islands
+                    </option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Dadra and Nagar Haveli and Daman and Diu">
+                      Dadra and Nagar Haveli and Daman and Diu
+                    </option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Puducherry">Puducherry</option>
+                    <option value="Ladakh">Ladakh</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                  </select>
                 </label>
               </div>
               <div className="flex flex-row w-[100%]">
                 <div className="w-[50%]">
-                  <h2 className="font-bold">35.Manuscript Date SAMVAT</h2>
+                  <h2 className="font-bold">35.Manuscript Date Samvat</h2>
                   <select
                     name="Date_Samvat"
                     value={form1Data.Date_Samvat}
@@ -1681,7 +1964,7 @@ function One() {
                   </select>
                 </div>
                 <div className="w-[50%]">
-                  <h2 className="font-bold">36.MANUSCRIPT DATE</h2>
+                  <h2 className="font-bold">36.Manuscript Date</h2>
 
                   <select
                     name="Manu_date_christian"
@@ -1755,23 +2038,11 @@ function One() {
               </div>
               <div className="flex flex-col justify-center">
                 <br />
-                <center>
-                  <label className="flex flex-col p-2 font-bold w-[50%] ">
-                    37.CITY/VILLAGE :
-                    <input
-                      type="text"
-                      name="city_village"
-                      value={form1Data.city_village || ""}
-                      onChange={handleForm1InputChange}
-
-                      // className="m-4 bg-blue-400"
-                    />
-                  </label>
-                </center>
+                <center></center>
 
                 <br />
                 <br />
-                <h2 className="font-bold">38.Source of Manuscripts</h2>
+                <h2 className="font-bold">38.Source of Manuscript</h2>
                 <br />
                 <center>
                   <select
@@ -2228,68 +2499,47 @@ function One() {
 
                 <div>
                   <label className="flex flex-col p-2 w-[50%]">
-                    <h2 className="font-bold">39.Title Page Text</h2>
-                    <input
-                      type="text"
-                      name="cover_page_text"
-                      value={form1Data.cover_page_text || ""}
-                      onChange={handleForm1InputChange}
-                      // className="m-4 "
-                    />
-                  </label>
-                  <label className="flex flex-col p-2 w-[50%]">
-                    <h2 className="font-bold">40.Flyleaf text</h2>
+                    <h2 className="font-bold">39.Flyleaf text</h2>
                     <input
                       type="text"
                       name="flyleaf_text"
                       value={form1Data.flyleaf_text || ""}
                       onChange={handleForm1InputChange}
+                      required
+                      placeholder="NA if not applicable"
                       // className="m-4 "
                     />
                   </label>
                   <label className="flex flex-col p-2 w-[50%]">
-                    <h2 className="font-bold">41.Colophon text</h2>
+                    <h2 className="font-bold">40.Beginning line</h2>
                     <input
                       type="text"
-                      name="colophon_text"
-                      value={form1Data.colophon_text || ""}
+                      name="Beginning_line"
+                      value={form1Data.Beginning_line || ""}
                       onChange={handleForm1InputChange}
+                      required
+                      placeholder="NA if not applicable"
                       // className="m-4 "
                     />
                   </label>
 
                   <label className="flex flex-col p-2 w-[50%]">
-                    <h2 className="font-bold">42.Post Colophon text</h2>
+                    <h2 className="font-bold">41.Colophon / Ending line</h2>
                     <input
                       type="text"
-                      name="postcolophon_text"
-                      value={form1Data.postcolophon_text || ""}
+                      name="ColophonEnding_line"
+                      value={form1Data.ColophonEnding_line || ""}
                       onChange={handleForm1InputChange}
+                      required
+                      placeholder="NA if not applicable"
                       // className="m-4 "
                     />
                   </label>
+
                   <label className="flex flex-col p-2 w-[50%]">
-                    <h2 className="font-bold">43.Begin text</h2>
-                    <input
-                      type="text"
-                      name="begin_text"
-                      value={form1Data.begin_text || ""}
-                      onChange={handleForm1InputChange}
-                      // className="m-4 "
-                    />
-                  </label>
-                  <label className="flex flex-col p-2 w-[50%]">
-                    <h2 className="font-bold">41.Ending text</h2>
-                    <input
-                      type="text"
-                      name="ending_text"
-                      value={form1Data.ending_text || ""}
-                      onChange={handleForm1InputChange}
-                      // className="m-4 "
-                    />
-                  </label>
-                  <label className="flex flex-col p-2 w-[50%]">
-                    <h2 className="font-bold">44.Aditional Notes</h2>
+                    <h2 className="font-bold">
+                      42.Additional Information if any
+                    </h2>
                     <input
                       type="text"
                       name="add_notes"
@@ -2384,27 +2634,25 @@ function One() {
                 </div>
               </div>
               <br />
-              <div className="flex flex-col w-[100%] text-justify p-4 ">
+              <div className="flex flex-col w-[100%] text-justify p-4">
                 <div className="flex flex-col">
-                  <p className="font-bold" id="part5">
-                    45.I hereby declare that the details furnished above are
-                    true and correct to the best of my knowledge and belief and
-                    I undertake to inform you of any changes therein,
-                    immediately. In case any of the above information is found
-                    to be false or untrue or misleading or misrepresenting, I am
-                    aware that I may be held liable for it
-                    <span className="text-red-600">*</span>:
-                  </p>
-                  <label className="flex items-center p-2">
+                  <label className="flex items-center">
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="Declaration"
                       value="Agree"
                       checked={form1Data.Declaration === "Agree"}
                       onChange={handleForm1InputChange}
-                      required
                     />
-                    <span className="ml- 2">Agree</span>
+                    <p className="font-bold ml-2" id="part5">
+                      I hereby declare that the details furnished above are true
+                      and correct to the best of my knowledge and belief and I
+                      undertake to inform you of any changes therein,
+                      immediately. In case any of the above information is found
+                      to be false or untrue or misleading or misrepresenting, I
+                      am aware that I may be held liable for it
+                      <span className="text-red-600">*</span>:
+                    </p>
                   </label>
                 </div>
               </div>
