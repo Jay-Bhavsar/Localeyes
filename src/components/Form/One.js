@@ -8,7 +8,7 @@ import "firebase/compat/storage";
 import DefaultSidebar from "../Home/Sidebar";
 import Formsidebar from "../Home/Formsidebar";
 import jsPDF from "jspdf";
-
+// new changes deployed
 
 const firebaseConfig = {
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
@@ -155,15 +155,14 @@ function One() {
         rejected: false,
         pdflink: `pdfs/form_data_${Userid}.${alphanumericCode}.pdf`,
       });
-      
+
       window.location.href = "/user";
       alert("Your Research is Posted");
       console.log("Form 1 submitted successfully!");
       setForm1Data({}); // Reset form data
       localStorage.setItem("researchid", alphanumericCode);
       return alphanumericCode;
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error submitting Form 1:", error);
     }
   }
