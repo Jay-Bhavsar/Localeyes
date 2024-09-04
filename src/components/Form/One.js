@@ -765,7 +765,9 @@ function One() {
               <br />
               <div className="flex flex-row w-[100%]">
                 <label className="flex flex-col p-2  w-[50%] font-bold">
-                  <h4>16.Title in Catalogue :</h4>
+                  <h4>
+                    16.Title in Catalogue<span className="text-red-600">*</span>:
+                  </h4>
                   <input
                     type="text"
                     name="catalog_title"
@@ -789,7 +791,9 @@ function One() {
               </div>
               <div className="flex flex-row w-[100%]">
                 <label className="flex flex-col p-2  w-[50%] font-bold">
-                  <h4>19.Subject:</h4>
+                  <h4>
+                    19.Subject<span className="text-red-600">*</span>:
+                  </h4>
                   <input
                     type="text"
                     name="subject"
@@ -818,7 +822,7 @@ function One() {
               <div className="flex flex-row w-[100%]">
                 <label className="flex flex-col p-2  w-[50%] font-bold">
                   <h4>
-                    21.Manuscripts Hypothecated to:
+                    21.Manuscripts Hypothecated to
                     <span className="text-red-600">*</span>:
                   </h4>
                   <input
@@ -832,7 +836,9 @@ function One() {
                   />
                 </label>
                 <label className="flex flex-col p-2  w-[50%] font-bold">
-                  <h4>22.Scribe:</h4>
+                  <h4>
+                    22.Scribe<span className="text-red-600">*</span>:
+                  </h4>
                   <input
                     type="text"
                     name="scribe"
@@ -857,7 +863,9 @@ function One() {
                   />
                 </label>
                 <label className="flex flex-col p-2  w-[50%] font-bold">
-                  <h4>MRC Name</h4>
+                  <h4>
+                    MRC Name<span className="text-red-600">*</span>:
+                  </h4>
                   <input
                     type="text"
                     name="MRC_Name"
@@ -871,16 +879,15 @@ function One() {
               </div>
 
               <div className="flex flex-row w-[100%]">
-                <label className="flex flex-col p-2  w-[50%] font-bold">
-                  <h4> Accession Number</h4>
+                <label className="flex flex-col p-2 w-[50%] font-bold">
+                  <h4>Accession Number<span className="text-red-600">*</span>:</h4>
                   <input
                     type="text"
-                    name=" Accession_Number"
+                    name="Accession_Number" // Removed leading space
                     value={form1Data.Accession_Number || ""}
                     onChange={handleForm1InputChange}
                     required
-                    placeholder="NA if not aplicable"
-                    // className="m-4 bg-blue-400"
+                    placeholder="NA if not applicable"
                   />
                 </label>
                 <label className="flex flex-col p-2  w-[50%] font-bold">
