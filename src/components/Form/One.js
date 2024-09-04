@@ -2645,10 +2645,11 @@ function One() {
                       value="Agree"
                       checked={form1Data.Declaration === "Agree"}
                       onChange={handleForm1InputChange}
+                      required // Make the checkbox required
                     />
                     <p className="font-bold ml-2" id="part5">
                       I hereby declare that the details furnished above are true
-                      and correct to the best of my knowledge and belief and I
+                      and correct to the best of my knowledge and belief, and I
                       undertake to inform you of any changes therein,
                       immediately. In case any of the above information is found
                       to be false or untrue or misleading or misrepresenting, I
