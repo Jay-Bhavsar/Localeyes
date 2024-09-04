@@ -5,7 +5,6 @@ import Hero from "./Hero";
 import AboutUs from "./AboutUs";
 import Footer from "./Footer";
 const dmash = require("../img/dmash.png");
-const munja = require("../img/munja.png");
 const sanjeev = require("../img/sanjeev.png");
 const sarban = require("../img/sarban.png");
 
@@ -24,28 +23,9 @@ function Home() {
           <center>
           <img src={dmash} alt="" className="rounded-full w-[60%] shadow-2xl" height="200px" width="200px" />
           <br />
-          <h2 className="text-xl font-bold">Pa dmashree Vd. Rajesh Kotecha</h2>
+          <h2 className="text-xl font-bold">Padmashree Vd. Rajesh Kotecha</h2>
           <p className="text-lg font-normal">Secretary</p>
           <p className="text-lg font-normal">Ministry of Ayush</p>
-          </center>
-         
-        </div>
-        <div className="flex flex-col items-center justify-center p-4 shadow-2xl">
-          <center>
-          <img
-            src={munja}
-            alt=""
-            className="rounded-full  w-[50%] shadow-2xl"
-          />
-          <br />
-          <h2 className="text-xl font-bold">Dr.Munjapara Mahendrabhai</h2>
-          <p className="text-lg font-normal">
-            Hon'ble Minister of State Ministry of Ayush
-          </p>
-          <p className="text-lg font-normal">&</p>
-          <p className="text-lg font-normal">
-            Ministry of Women and Child Development.
-          </p>
           </center>
          
         </div>
@@ -57,7 +37,7 @@ function Home() {
             className="rounded-full w-[60%] shadow-2xl"
           />
           <br />
-          <h2 className="text-xl font-bold">Prof. Sanjeev S harma</h2>
+          <h2 className="text-xl font-bold">Prof. Sanjeev Sharma</h2>
           <p className="text-lg font-normal">Vice Chancellor</p>
           <p className="text-lg font-normal">NIA, Jaipur.</p>
           </center>
@@ -68,7 +48,7 @@ function Home() {
           <img
             src={sarban}
             alt=""
-            className="rounded-full  w-[50%] shadow-2xl"
+            className="rounded-full w-[50%] shadow-2xl"
           />
           <br />
           <h2 className="text-xl font-bold">Shri Sarbananda Sonowal</h2>
