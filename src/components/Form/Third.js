@@ -143,70 +143,65 @@ function Third() {
 
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
                 <h4>
-                  Title in Catalogue<span className="text-red-600">*</span>:
+                  Title in Catalogue<span className="text-red-600">*</span><span>:</span>
                 </h4>
                 <input
                   type="text"
                   name="catalog_title"
                   value={form3Data.catalog_title || ""}
                   onChange={handleForm3InputChange}
-                  // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
                   required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
                 <h4>
-                  Title of MSS<span className="text-red-600">*</span>:
+                  Title of MSS<span className="text-red-600">*</span><span>:</span>
                 </h4>
                 <input
                   type="text"
                   name="MSS_title"
                   value={form3Data.MSS_title || ""}
                   onChange={handleForm3InputChange}
-                  // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
                   required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
                 <h4>
-                  Given Title<span className="text-red-600">*</span>:
+                  Given Title<span className="text-red-600">*</span><span>:</span>
                 </h4>
                 <input
                   type="text"
                   name="given_title"
                   value={form3Data.given_title || ""}
                   onChange={handleForm3InputChange}
-                  // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
                   required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
                 <h4>
-                  Subject<span className="text-red-600">*</span>:
+                  Subject<span className="text-red-600">*</span><span>:</span>
                 </h4>
                 <input
                   type="text"
                   name="subject"
                   value={form3Data.subject || ""}
                   onChange={handleForm3InputChange}
-                  // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
                   required
                 />
               </label>
               <label className="flex flex-col p-2 bg-blue-200 w-[50%] font-bold">
                 <h4>
-                  Author<span className="text-red-600">*</span>:
+                  Author<span className="text-red-600">*</span><span>:</span>
                 </h4>
                 <input
                   type="text"
                   name="author"
                   value={form3Data.author || ""}
                   onChange={handleForm3InputChange}
-                  // className="m-4 bg-blue-400"
                   disabled={form3Submitted}
                   required
                 />
