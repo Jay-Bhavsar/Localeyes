@@ -409,7 +409,7 @@ function One() {
                 </div>
               </center>
 
-
+              <center>
                 <div className="w-[100%]">
                   <label
                     htmlFor="authorizationDocument"
