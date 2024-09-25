@@ -197,6 +197,7 @@ function One() {
         (item) => item !== value
       );
     }
+    }
 
     if (name === "type_of_research") {
       // Handle the checkboxes for type_of_research
@@ -2414,6 +2415,9 @@ function One() {
                     <option value="Mahabharat Samsodhan Mandal">
                       Mahabharat Samsodhan Mandal
                     </option>
+                    <option value="Maharaja Sayajirao University, Central library of Vadodara">
+                     Maharaja Sayajirao University, Central library of Vadodara
+                    </option>
                     <option value="Mahachulalongkornrajavidyalaya Chiang Mai Campus Thailand">
                       Mahachulalongkornrajavidyalaya Chiang Mai Campus Thailand
                     </option>
@@ -2446,6 +2450,9 @@ function One() {
                     </option>
                     <option value="Nakshatravedhashala Deva Prayaga">
                       Nakshatravedhashala Deva Prayaga
+                    </option>
+                    <option value="National Institute of Ayurveda">
+                      National Institute of Ayurveda
                     </option>
                     <option value="National Institute Of Prakrit Studies & Research, Shravanabelagola">
                       National Institute Of Prakrit Studies & Research,
