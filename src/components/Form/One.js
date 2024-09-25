@@ -133,7 +133,7 @@ function One() {
       pdf.text(`Date Samvat: ${form1Data.Date_Samvat}`, 10, 40);
       pdf.text(`Language: ${form1Data.Language}`, 10, 50);
       pdf.text(`MSS Year: ${form1Data.MSS_Year}`, 10, 60);
-      pdf.text(`MSS Condition: ${form1Data.MSS_condition}`, 10, 70);
+      pdf.text(`MSS Condition: ${form1Data.MSS_condition.join(", ")}`,10,70);
       pdf.text(`Manuscript Date: ${form1Data.Manu_date_christian}`, 10, 80);
       pdf.text(`Material: ${form1Data.Material}`, 10, 90);
       pdf.text(`City/Village: ${form1Data.city_village}`, 10, 100);
@@ -184,6 +184,20 @@ function One() {
   function handleForm1InputChange(e) {
     const { name, value, checked } = e.target;
 
+    if (name === "MSS_condition") {
+    // Handle the checkboxes for MSS_condition
+    let updatedMSSCondition = form1Data.MSS_condition || [];
+
+    if (checked) {
+      // Add the value to the array
+      updatedMSSCondition = [...updatedMSSCondition, value];
+    } else {
+      // Remove the value from the array
+      updatedMSSCondition = updatedMSSCondition.filter(
+        (item) => item !== value
+      );
+    }
+
     if (name === "type_of_research") {
       // Handle the checkboxes for type_of_research
       let updatedTypeOfResearch = form1Data.type_of_research || [];
@@ -206,7 +220,13 @@ function One() {
         ...form1Data,
         custom_research: value,
       });
-    } else {
+    } else if (name === "MSS_condition"){
+      setForm1Data({
+      ...form1Data,
+      MSS_condition: updatedMSSCondition,
+    });
+    }
+    else {
       // For other inputs
       setForm1Data({
         ...form1Data,
@@ -1770,131 +1790,169 @@ function One() {
               <br />
               <br />
               <h2 className="font-bold">34. Condition of MSS</h2>
-              <div className="flex flex-col md:flex-row flex-wrap">
-                <div className="md:w-1/2 lg:w-1/3 p-2">
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Acidic"
-                      checked={form1Data.MSS_condition === "Acidic"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Acidic</span>
-                  </label>
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Bad"
-                      checked={form1Data.MSS_condition === "Bad"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Bad</span>
-                  </label>
-                </div>
-                <div className="md:w-1/2 lg:w-1/3 p-2">
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Brittle"
-                      checked={form1Data.MSS_condition === "Brittle"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Brittle</span>
-                  </label>
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Broken"
-                      checked={form1Data.MSS_condition === "Broken"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Broken</span>
-                  </label>
-                </div>
-                <div className="md:w-1/2 lg:w-1/3 p-2">
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Fungal Infected"
-                      checked={form1Data.MSS_condition === "Fungal Infected"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Fungal Infected</span>
-                  </label>
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Good"
-                      checked={form1Data.MSS_condition === "Good"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Good</span>
-                  </label>
-                </div>
-                <div className="md:w-1/2 lg:w-1/3 p-2">
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Ink Loosed"
-                      checked={form1Data.MSS_condition === "Ink Loosed"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Ink Loosed</span>
-                  </label>
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Stained"
-                      checked={form1Data.MSS_condition === "Stained"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Stained</span>
-                  </label>
-                </div>
-                <div className="md:w-1/2 lg:w-1/3 p-2">
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Stuck"
-                      checked={form1Data.MSS_condition === "Stuck"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Stuck</span>
-                  </label>
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="worm_eaten"
-                      checked={form1Data.MSS_condition === "worm_eaten"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Worm Eaten</span>
-                  </label>
-                </div>
-                <div className="md:w-1/2 lg:w-1/3 p-2">
-                  <label className="flex items-center p-2">
-                    <input
-                      type="radio"
-                      name="MSS_condition"
-                      value="Binding Loss"
-                      checked={form1Data.MSS_condition === "Binding Loss"}
-                      onChange={handleForm1InputChange}
-                    />
-                    <span className="ml-2">Binding Loss</span>
-                  </label>
-                </div>
-              </div>
-
+<div className="flex flex-col md:flex-row flex-wrap">
+  {/* First Column */}
+  <div className="md:w-1/2 lg:w-1/3 p-2">
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Acidic"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Acidic")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Acidic</span>
+    </label>
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Bad"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Bad")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Bad</span>
+    </label>
+  </div>
+  {/* Second Column */}
+  <div className="md:w-1/2 lg:w-1/3 p-2">
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Brittle"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Brittle")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Brittle</span>
+    </label>
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Broken"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Broken")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Broken</span>
+    </label>
+  </div>
+  {/* Third Column */}
+  <div className="md:w-1/2 lg:w-1/3 p-2">
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Fungal Infected"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Fungal Infected")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Fungal Infected</span>
+    </label>
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Good"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Good")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Good</span>
+    </label>
+  </div>
+  {/* Fourth Column */}
+  <div className="md:w-1/2 lg:w-1/3 p-2">
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Ink Loosed"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Ink Loosed")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Ink Loosed</span>
+    </label>
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Stained"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Stained")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Stained</span>
+    </label>
+  </div>
+  {/* Fifth Column */}
+  <div className="md:w-1/2 lg:w-1/3 p-2">
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Stuck"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Stuck")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Stuck</span>
+    </label>
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Worm Eaten"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Worm Eaten")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Worm Eaten</span>
+    </label>
+  </div>
+  {/* Sixth Column */}
+  <div className="md:w-1/2 lg:w-1/3 p-2">
+    <label className="flex items-center p-2">
+      <input
+        type="checkbox"
+        name="MSS_condition"
+        value="Binding Loss"
+        checked={
+          form1Data.MSS_condition &&
+          form1Data.MSS_condition.includes("Binding Loss")
+        }
+        onChange={handleForm1InputChange}
+      />
+      <span className="ml-2">Binding Loss</span>
+    </label>
+  </div>
+</div>
               <br />
               <br />
               <h2 className="font-bold">
@@ -2355,6 +2413,9 @@ function One() {
                     </option>
                     <option value="Mahabharat Samsodhan Mandal">
                       Mahabharat Samsodhan Mandal
+                    </option>
+                    <option value="Maharaja Sayajirao University, Central library of Vadodara">
+                      Maharaja Sayajirao University, Central library of Vadodara
                     </option>
                     <option value="Mahachulalongkornrajavidyalaya Chiang Mai Campus Thailand">
                       Mahachulalongkornrajavidyalaya Chiang Mai Campus Thailand
