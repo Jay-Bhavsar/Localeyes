@@ -2414,9 +2414,6 @@ function One() {
                     <option value="Mahabharat Samsodhan Mandal">
                       Mahabharat Samsodhan Mandal
                     </option>
-                    <option value="Maharaja Sayajirao University, Central library of Vadodara">
-                      Maharaja Sayajirao University, Central library of Vadodara
-                    </option>
                     <option value="Mahachulalongkornrajavidyalaya Chiang Mai Campus Thailand">
                       Mahachulalongkornrajavidyalaya Chiang Mai Campus Thailand
                     </option>
