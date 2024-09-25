@@ -307,123 +307,109 @@ function One() {
               </div>
 
               <center>
-                {/* Changed to checkbox */}
-                <h2 className="font-bold mt-9">
-                  3. Type of Research<span className="text-red-600">*</span>
-                </h2>
-              </center>
-              <center>
-                <div className="flex flex-col md:flex-row w-[80%] justify-between">
-                  {/* Column 1 */}
-                  <div className="flex flex-col md:m-4">
-                    <label className="flex items-center p-2">
-                      <input
-                        type="checkbox"
-                        name="type_of_research"
-                        value="collation"
-                        checked={form1Data.type_of_research.includes(
-                          "collation"
-                        )}
-                        onChange={handleForm1InputChange}
-                      />
-                      <span className="ml-2">Collation</span>
-                    </label>
-                    <label className="flex items-center p-2">
-                      <input
-                        type="checkbox"
-                        name="type_of_research"
-                        value="cataloguing"
-                        checked={form1Data.type_of_research.includes(
-                          "cataloguing"
-                        )}
-                        onChange={handleForm1InputChange}
-                      />
-                      <span className="ml-2">Cataloguing</span>
-                    </label>
-                    <label className="flex items-center p-2">
-                      <input
-                        type="checkbox"
-                        name="type_of_research"
-                        value="translation"
-                        checked={form1Data.type_of_research.includes(
-                          "translation"
-                        )}
-                        onChange={handleForm1InputChange}
-                      />
-                      <span className="ml-2">Translation</span>
-                    </label>
-                  </div>
+  {/* Changed to checkbox */}
+  <h2 className="font-bold mt-9">
+    3. Type of Research<span className="text-red-600">*</span>
+  </h2>
+</center>
+<center>
+  <div className="flex flex-col md:flex-row w-[80%] justify-between">
+    {/* Column 1 */}
+    <div className="flex flex-col md:m-4">
+      <label className="flex items-center p-2">
+        <input
+          type="checkbox"
+          name="type_of_research"
+          value="collation"
+          checked={form1Data.type_of_research.includes("collation")}
+          onChange={handleForm1InputChange}
+        />
+        <span className="ml-2">Collation</span>
+      </label>
+      <label className="flex items-center p-2">
+        <input
+          type="checkbox"
+          name="type_of_research"
+          value="cataloguing"
+          checked={form1Data.type_of_research.includes("cataloguing")}
+          onChange={handleForm1InputChange}
+        />
+        <span className="ml-2">Cataloguing</span>
+      </label>
+      <label className="flex items-center p-2">
+        <input
+          type="checkbox"
+          name="type_of_research"
+          value="translation"
+          checked={form1Data.type_of_research.includes("translation")}
+          onChange={handleForm1InputChange}
+        />
+        <span className="ml-2">Translation</span>
+      </label>
+    </div>
 
-                  {/* Column 2 */}
-                  <div className="flex flex-col md:m-4">
-                    <label className="flex items-center p-2">
-                      <input
-                        type="checkbox"
-                        name="type_of_research"
-                        value="transcription"
-                        checked={form1Data.type_of_research.includes(
-                          "transcription"
-                        )}
-                        onChange={handleForm1InputChange}
-                      />
-                      <span className="ml-2">Transcription</span>
-                    </label>
-                    <label className="flex items-center p-2">
-                      <input
-                        type="checkbox"
-                        name="type_of_research"
-                        value="deciphering"
-                        checked={form1Data.type_of_research.includes(
-                          "deciphering"
-                        )}
-                        onChange={handleForm1InputChange}
-                      />
-                      <span className="ml-2">Deciphering</span>
-                    </label>
-                    <label className="flex items-center p-2">
-                      <input
-                        type="checkbox"
-                        name="type_of_research"
-                        value="transliteration"
-                        checked={form1Data.type_of_research.includes(
-                          "transliteration"
-                        )}
-                        onChange={handleForm1InputChange}
-                      />
-                      <span className="ml-2">Transliteration</span>
-                    </label>
-                  </div>
+    {/* Column 2 */}
+    <div className="flex flex-col md:m-4">
+      <label className="flex items-center p-2">
+        <input
+          type="checkbox"
+          name="type_of_research"
+          value="transcription"
+          checked={form1Data.type_of_research.includes("transcription")}
+          onChange={handleForm1InputChange}
+        />
+        <span className="ml-2">Transcription</span>
+      </label>
+      <label className="flex items-center p-2">
+        <input
+          type="checkbox"
+          name="type_of_research"
+          value="deciphering"
+          checked={form1Data.type_of_research.includes("deciphering")}
+          onChange={handleForm1InputChange}
+        />
+        <span className="ml-2">Deciphering</span>
+      </label>
+      <label className="flex items-center p-2">
+        <input
+          type="checkbox"
+          name="type_of_research"
+          value="transliteration"
+          checked={form1Data.type_of_research.includes("transliteration")}
+          onChange={handleForm1InputChange}
+        />
+        <span className="ml-2">Transliteration</span>
+      </label>
+    </div>
 
-                  {/* Column 3 */}
-                  <div className="flex flex-col md:m-4">
-                    <label className="flex items-center p-2">
-                      <input
-                        type="checkbox"
-                        name="type_of_research"
-                        value="custom"
-                        checked={form1Data.type_of_research.includes(
-                          "custom"
-                        )}
-                        onChange={handleForm1InputChange}
-                      />
-                      <span className="ml-2">Others</span>
-                    </label>
-                    {form1Data.type_of_research.includes("custom") && (
-                      <label className="flex items-center p-2">
-                        <span className="ml-2">Please specify:</span>
-                        <input
-                          type="text"
-                          name="custom_research"
-                          value={form1Data.custom_research || ""}
-                          onChange={handleForm1InputChange}
-                          required
-                          className="ml-2 border p-1"
-                        />
-                      </label>
-                    )}
-                  </div>
-                </div>
-              </center>
+    {/* Column 3 */}
+    <div className="flex flex-col md:m-4">
+      <label className="flex items-center p-2">
+        <input
+          type="checkbox"
+          name="type_of_research"
+          value="custom"
+          checked={form1Data.type_of_research.includes("custom")}
+          onChange={handleForm1InputChange}
+        />
+        <span className="ml-2">Others</span>
+      </label>
+      {form1Data.type_of_research.includes("custom") && (
+        <label className="flex items-center p-2">
+          <span className="ml-2">Please specify:</span>
+          <input
+            type="text"
+            name="custom_research"
+            value={form1Data.custom_research || ""}
+            onChange={handleForm1InputChange}
+            className="ml-2 border p-1"
+          />
+        </label>
+      )}
+    </div>
+  </div>
+</center>
+
                 <div className="w-[100%]">
                   <label
                     htmlFor="authorizationDocument"
