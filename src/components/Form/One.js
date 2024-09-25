@@ -1103,7 +1103,7 @@ function One() {
                       <input
                         type="number"
                         name="duration_months"
-                        value={form1Data.duration_number || ""}
+                        value={form1Data.duration_months || ""}
                         onChange={handleForm1InputChange}
                         className="w-1/2"
                         // className="m-4 bg-blue-400"
