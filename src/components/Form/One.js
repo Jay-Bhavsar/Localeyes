@@ -38,6 +38,11 @@ function One() {
     type_of_research: [],
   });
 
+  const [selectedScript, setSelectedScript] = useState('');
+  const [customScript, setCustomScript] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState('');
+  const [customLanguage, setCustomLanguage] = useState('');
+
   const [form1Submitted, setForm1Submitted] = useState(
     localStorage.getItem("form1Submitted") === "true"
   );
@@ -131,40 +136,49 @@ function One() {
   }
 
   // Handle form input changes
-  function handleForm1InputChange(e) {
-    const { name, value, type, checked } = e.target;
+  // Handle form input changes
+function handleForm1InputChange(e) {
+  const { name, value, type, checked } = e.target;
 
-    if (name === "type_of_research") {
-      let updatedResearchTypes = [...form1Data.type_of_research];
+  if (name === "type_of_research") {
+    let updatedResearchTypes = [...form1Data.type_of_research];
 
-      if (checked) {
-        updatedResearchTypes.push(value);
-      } else {
-        updatedResearchTypes = updatedResearchTypes.filter(
-          (item) => item !== value
-        );
-
-        // If "custom" is unchecked, clear the custom_research field
-        if (value === "custom") {
-          setForm1Data((prevData) => ({
-            ...prevData,
-            custom_research: "",
-          }));
-        }
-      }
-
-      setForm1Data((prevData) => ({
-        ...prevData,
-        type_of_research: updatedResearchTypes,
-      }));
+    if (checked) {
+      updatedResearchTypes.push(value);
     } else {
-      // Handle other input fields
-      setForm1Data({
-        ...form1Data,
-        [name]: value,
-      });
+      updatedResearchTypes = updatedResearchTypes.filter(
+        (item) => item !== value
+      );
+
+      // If "custom" is unchecked, clear the custom_research field
+      if (value === "custom") {
+        setForm1Data((prevData) => ({
+          ...prevData,
+          custom_research: "",
+        }));
+      }
     }
+
+    setForm1Data((prevData) => ({
+      ...prevData,
+      type_of_research: updatedResearchTypes,
+    }));
+  } else if (name === "Script") {
+    setSelectedScript(value);  // Update selectedScript
+  } else if (name === "custom_script") {
+    setCustomScript(value);    // Update customScript
+  } else if (name === "Language") {
+    setSelectedLanguage(value);  // Update selectedLanguage
+  } else if (name === "custom_language") {
+    setCustomLanguage(value);    // Update customLanguage
+  } else {
+    // Handle other input fields
+    setForm1Data({
+      ...form1Data,
+      [name]: value,
+    });
   }
+}
 
   // Handle file input changes with validation
   function handleFileChange(event) {
