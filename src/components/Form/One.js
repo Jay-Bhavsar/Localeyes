@@ -984,31 +984,36 @@ function One() {
               </div>
 
               <div className="flex flex-row w-[100%]">
-                <label className="flex flex-col p-2 w-[50%] font-bold">
-                  <h4>Accession Number<span className="text-red-600">*</span>:</h4>
-                  <input
-                    type="text"
-                    name="Accession_Number" // Removed leading space
-                    value={form1Data.Accession_Number || ""}
-                    onChange={handleForm1InputChange}
-                    required
-                    placeholder="NA if not applicable"
-                  />
-                </label>
-              </div>
-              <div className="flex flex-row w-[100%]">
-                <label className="flex flex-col p-2 w-[50%] font-bold">
-                  <h4>Manuscript Number<span className="text-red-600">*</span>:</h4>
-                  <input
-                    type="text"
-                    name="Accession_Number" // Removed leading space
-                    value={form1Data.Accession_Number || ""} // Corrected to match the name
-                    onChange={handleForm1InputChange}
-                    required
-                    placeholder="NA if not applicable"
-                  />
-                </label>
-              </div>
+  <label className="flex flex-col p-2 w-[50%] font-bold">
+    <h4>
+      Accession Number<span className="text-red-600">*</span>:
+    </h4>
+    <input
+      type="text"
+      name="Accession_Number"
+      value={form1Data.Accession_Number || ""}
+      onChange={handleForm1InputChange}
+      required
+      placeholder="NA if not applicable"
+    />
+  </label>
+</div>
+<div className="flex flex-row w-[100%]">
+  <label className="flex flex-col p-2 w-[50%] font-bold">
+    <h4>
+      Manuscript Number<span className="text-red-600">*</span>:
+    </h4>
+    <input
+      type="text"
+      name="Manuscript_Number" // Changed from "Accession_Number" to "Manuscript_Number"
+      value={form1Data.Manuscript_Number || ""} // Changed to match the new name
+      onChange={handleForm1InputChange}
+      required
+      placeholder="NA if not applicable"
+    />
+  </label>
+</div>
+
               <br />
               <br />
               <h2 className="font-bold">
