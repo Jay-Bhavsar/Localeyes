@@ -26,6 +26,8 @@ const formsCollectionRef = db.collection("forms");
 function One() {
   const Userid = sessionStorage.getItem("uid");
 
+  const [isSameAsCoInvestigator, setIsSameAsCoInvestigator] = useState(false);
+
   const [selectedScript, setSelectedScript] = useState("");
   const [selectedMaterial, setSelectedMaterial] = useState("");
   const [customScript, setCustomScript] = useState("");
@@ -212,6 +214,24 @@ function One() {
       });
     }
 
+    if (isSameAsCoInvestigator) {
+      const coInvestigatorFields = {
+        CoinvestigatorName: 'Public_Query_name',
+        CoinvestigatorDesignation: 'Public_Query_designation',
+        CoinvestigatorAffiliation: 'Public_Query_affiliation',
+        CoinvestigatorEmail: 'email_id',
+        CoinvestigatorAddress: 'Prim_Sponsorship_address',
+        CoinvestigatorPhno: 'Prim_Sponsorship_Phno',
+      };
+
+      if (coInvestigatorFields[name]) {
+        setForm1Data((prevData) => ({
+          ...prevData,
+          [coInvestigatorFields[name]]: value,
+        }));
+      }
+    }
+
     if (name === "Script") {
       setSelectedScript(value);
     } else if (name === "custom_script") {
@@ -230,6 +250,36 @@ function One() {
     }
     //nothing
   }
+
+  function handleCheckboxChange(e) {
+    const { checked } = e.target;
+    setIsSameAsCoInvestigator(checked);
+
+    if (checked) {
+      // Copy Co-investigator fields to Public Query fields
+      setForm1Data((prevData) => ({
+        ...prevData,
+        Public_Query_name: prevData.CoinvestigatorName || '',
+        Public_Query_designation: prevData.CoinvestigatorDesignation || '',
+        Public_Query_affiliation: prevData.CoinvestigatorAffiliation || '',
+        email_id: prevData.CoinvestigatorEmail || '',
+        Prim_Sponsorship_address: prevData.CoinvestigatorAddress || '',
+        Prim_Sponsorship_Phno: prevData.CoinvestigatorPhno || '',
+      }));
+    } else {
+      // Clear Public Query fields
+      setForm1Data((prevData) => ({
+        ...prevData,
+        Public_Query_name: '',
+        Public_Query_designation: '',
+        Public_Query_affiliation: '',
+        email_id: '',
+        Prim_Sponsorship_address: '',
+        Prim_Sponsorship_Phno: '',
+      }));
+    }
+  }
+  
   function handleFileChange(event) {
     const file = event.target.files[0];
     const maxSize = 2 * 1024 * 1024; // 2MB in bytes
@@ -650,11 +700,17 @@ function One() {
               <br />
               <br />
               <h2 className="font-bold">
-                Details of Contact person-Public Query{" "}
-                <span className="text-red-600">
-                  (If Same as above then skip)
-                </span>
-              </h2>
+        Details of Contact person-Public Query{' '}
+        <span className="text-red-600">(If Same as above then skip)</span>
+        <label className="ml-2">
+          <input
+            type="checkbox"
+            checked={isSameAsCoInvestigator}
+            onChange={handleCheckboxChange}
+          />{' '}
+          Same as Co-investigator
+        </label>
+      </h2>
               <br />
               <br />
               <div className="flex flex-row w-[100%]">
