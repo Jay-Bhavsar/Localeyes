@@ -424,13 +424,12 @@ function One() {
                     className="p-2 font-bold text-justify"
                   >
                     4. Attach an authorization document from the
-                    Institute/repository, where the MSS is collected *. Files
+                    Institute/repository, where the MSS is collected. Files
                     submitted:
                     <input
                       type="file"
                       id="authorizationDocument"
                       name="authorizationDocument"
-                      required
                       onChange={handleFileChange}
                     />
                   </label>
