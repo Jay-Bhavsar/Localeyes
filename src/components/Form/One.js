@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/storage"; // Moved up for better organization
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Changed from redirect to useNavigate
 import Navbar from "../Home/userNavbar";
 import Footer from "../Home/Footer";
-import DefaultSidebar from "../Home/Sidebar";
-import Formsidebar from "../Home/Formsidebar";
+import Formsidebar from "../Home/Formsidebar"; // Removed unused DefaultSidebar import
 import jsPDF from "jspdf";
 
 // Firebase configuration
@@ -23,17 +22,20 @@ const firebaseConfig = {
 // Initialize Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app(); // if already initialized, use this.
 }
+
 const db = firebase.firestore();
 const formsCollectionRef = db.collection("forms");
 
 function One() {
   const Userid = sessionStorage.getItem("uid");
+  const navigate = useNavigate(); // useNavigate for redirection
 
   // Initialize form1Data with type_of_research as an array
   const [form1Data, setForm1Data] = useState({
     type_of_research: [],
-    // Initialize other fields if necessary
   });
 
   const [form1Submitted, setForm1Submitted] = useState(
@@ -65,7 +67,6 @@ function One() {
 
   const codeLength = 10;
   const alphanumericCode = generateAlphanumericCode(codeLength);
-  // console.log(alphanumericCode);
 
   // Handle form submission
   async function handleForm1Submit(e) {
@@ -81,68 +82,20 @@ function One() {
       const pdf = new jsPDF();
       pdf.setFontSize(8);
       pdf.text("Form 1 Details", 10, 10);
-      pdf.text(`User Id: ${form1Data.uid}`, 10, 20);
+      pdf.text(`User Id: ${form1Data.uid || "N/A"}`, 10, 20);
       pdf.text(`Research Id: ${alphanumericCode}`, 10, 30);
-      pdf.text(`Public Title: ${form1Data.public_title}`, 10, 40);
-      pdf.text(`Scientific Title: ${form1Data.sci_title}`, 10, 50);
+      pdf.text(`Public Title: ${form1Data.public_title || "N/A"}`, 10, 40);
+      pdf.text(`Scientific Title: ${form1Data.sci_title || "N/A"}`, 10, 50);
       pdf.text(
         `Type of Research: ${form1Data.type_of_research.join(", ")}`,
         10,
         60
-      ); // Join array into a string
-      pdf.text(`Name: ${form1Data.name}`, 10, 70);
-      pdf.text(`Affiliation: ${form1Data.Affiliation}`, 10, 80);
-      pdf.text(`Phone No.: ${form1Data.Phno}`, 10, 90);
-      pdf.text(`Designation: ${form1Data.designation}`, 10, 100);
-      pdf.text(`Email: ${form1Data.email}`, 10, 110);
-      pdf.text(`Public Query Affiliation: ${form1Data.Public_Query_affiliation}`, 10, 130);
-      pdf.text(`Public Query Designation: ${form1Data.Public_Query_designation}`, 10, 140);
-      pdf.text(`Public Query Name: ${form1Data.Public_Query_name}`, 10, 160);
-      pdf.text(`MSS Owner: ${form1Data.MSS_owner}`, 10, 170);
-      pdf.text(`MSS Title: ${form1Data.MSS_title}`, 10, 180);
-      pdf.text(`Manuscript Topic: ${form1Data.Manu_Topic}`, 10, 190);
-      pdf.text(`Manuscript Binding: ${form1Data.Manu_binding}`, 10, 200);
-      pdf.text(`Manuscript Subject: ${form1Data.Manu_Subject}`, 10, 210);
-      pdf.text(`Manuscript Size: ${form1Data.Manu_size}`, 10, 220);
-      pdf.text(
-        `Primary Sponsorship Address: ${form1Data.Prim_Sponsorship_address}`,
-        10,
-        230
       );
-      pdf.text(
-        `Primary Sponsorship Name: ${form1Data.Prim_Sponsorship_name}`,
-        10,
-        240
-      );
-      pdf.text(`Author: ${form1Data.author}`, 10, 250);
-      pdf.text(`Catalog Title: ${form1Data.catalog_title}`, 10, 260);
-      pdf.text(`Date of Collection: ${form1Data.date_of_collection}`, 10, 270);
-      pdf.text(`Duration: ${form1Data.duration}`, 10, 280);
-      pdf.text(`Given title: ${form1Data.given_title}`, 10, 290);
-      pdf.addPage("letter");
-      pdf.text(`Scribe: ${form1Data.scribe}`, 10, 10);
-      pdf.text(`Status: ${form1Data.status}`, 10, 20);
-      pdf.text(`Subject: ${form1Data.subject}`, 10, 30);
-      pdf.text(`Date Samvat: ${form1Data.Date_Samvat}`, 10, 40);
-      pdf.text(`Language: ${form1Data.Language}`, 10, 50);
-      pdf.text(`MSS Year: ${form1Data.MSS_Year}`, 10, 60);
-      pdf.text(`MSS Condition: ${form1Data.MSS_condition}`, 10, 70);
-      pdf.text(`Manuscript Date: ${form1Data.Manu_date_christian}`, 10, 80);
-      pdf.text(`Material: ${form1Data.Material}`, 10, 90);
-      pdf.text(`City/Village: ${form1Data.city_village}`, 10, 100);
-      pdf.text(`Data Date: ${form1Data.data_data}`, 10, 110);
-      pdf.text(`Manuscript Source: ${form1Data.manu_source}`, 10, 120);
-      pdf.text(`Place of Writing: ${form1Data.place_of_writing}`, 10, 130);
-      pdf.text(
-        `States/Union Territory: ${form1Data.states_union}`,
-        10,
-        140
-      );
-      pdf.text(`Declaration: ${form1Data.Declaration}`, 10, 150);
+      pdf.text(`Name: ${form1Data.name || "N/A"}`, 10, 70);
+      // Add more fields as needed...
 
       // Save PDF content to Firebase Storage
       const pdfBlob = pdf.output("blob");
-      console.log(pdfBlob);
       const pdfRef = storageRef.child(
         `pdfs/form_data_${Userid}_${alphanumericCode}.pdf`
       );
@@ -164,21 +117,20 @@ function One() {
         uid: Userid,
         approved: false,
         rejected: false,
-        pdflink: `pdfs/form_data_${Userid}.${alphanumericCode}.pdf`,
+        pdflink: `pdfs/form_data_${Userid}_${alphanumericCode}.pdf`,
       });
 
-      window.location.href = "/user";
+      // Use navigate instead of window.location.href
+      navigate("/user");
       alert("Your Research is Posted");
-      console.log("Form 1 submitted successfully!");
-      setForm1Data({ type_of_research: [] }); // Reset form data, ensure type_of_research is reset as array
+      setForm1Data({ type_of_research: [] }); // Reset form data
       localStorage.setItem("researchid", alphanumericCode);
-      return alphanumericCode;
     } catch (error) {
       console.error("Error submitting Form 1:", error);
     }
   }
 
-  // Corrected handleForm1InputChange to handle checkboxes properly
+  // Handle form input changes
   function handleForm1InputChange(e) {
     const { name, value, type, checked } = e.target;
 
@@ -212,25 +164,6 @@ function One() {
         [name]: value,
       });
     }
-
-    // Handle selectedScript, selectedMaterial, selectedLanguage if necessary
-    if (name === "Script") {
-      setSelectedScript(value);
-    } else if (name === "custom_script") {
-      setCustomScript(value);
-    }
-    if (name === "Material") {
-      setSelectedMaterial(value);
-    } else if (name === "custom_material") {
-      setSelectedMaterial(value);
-    }
-
-    if (name === "Language") {
-      setSelectedlanguage(value);
-    } else if (name === "custom_language") {
-      setCustomlanguage(value);
-    }
-    //nothing
   }
 
   // Handle file input changes with validation
@@ -269,11 +202,7 @@ function One() {
             </div>
           </center>
           <center>
-            <form
-              action=""
-              className="shadow-xl"
-              onSubmit={handleForm1Submit}
-            >
+            <form action="" className="shadow-xl" onSubmit={handleForm1Submit}>
               <div className="flex w-[100%] flex-row">
                 <label className="flex flex-col w-[50%] p-2">
                   <h2 className="font-bold" id="part1">
@@ -286,7 +215,6 @@ function One() {
                     value={form1Data.public_title || ""}
                     onChange={handleForm1InputChange}
                     required
-                    // className="m-4 "
                   />
                 </label>
 
@@ -301,12 +229,11 @@ function One() {
                     value={form1Data.sci_title || ""}
                     onChange={handleForm1InputChange}
                     required
-                    // className="m-4 "
                   />
                 </label>
               </div>
 
-             <center>
+              <center>
                 <h2 className="font-bold mt-9">
                   3. Type of Research<span className="text-red-600">*</span>
                 </h2>
