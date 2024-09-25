@@ -995,18 +995,6 @@ function One() {
                     placeholder="NA if not applicable"
                   />
                 </label>
-                <label className="flex flex-col p-2  w-[50%] font-bold">
-                  <h4>MRC Name</h4>
-                  <input
-                    type="text"
-                    name="MRC_Name"
-                    value={form1Data.MRC_Name || ""}
-                    onChange={handleForm1InputChange}
-                    required
-                    placeholder="NA if not aplicable"
-                    // className="m-4 bg-blue-400"
-                  />
-                </label>
               </div>
               <div className="flex flex-row w-[100%]">
                 <label className="flex flex-col p-2 w-[50%] font-bold">
@@ -1015,17 +1003,6 @@ function One() {
                     type="text"
                     name="Accession_Number" // Removed leading space
                     value={form1Data.Accession_Number || ""} // Corrected to match the name
-                    onChange={handleForm1InputChange}
-                    required
-                    placeholder="NA if not applicable"
-                  />
-                </label>
-                <label className="flex flex-col p-2 w-[50%] font-bold">
-                  <h4>Manuscript Number<span className="text-red-600">*</span>:</h4>
-                  <input
-                    type="text"
-                    name="Manuscript_Number" // Removed leading space
-                    value={form1Data.Manuscript_Number || ""}
                     onChange={handleForm1InputChange}
                     required
                     placeholder="NA if not applicable"
