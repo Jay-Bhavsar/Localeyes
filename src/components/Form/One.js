@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import "firebase/compat/storage"; // Moved up for better organization
 import { redirect } from "react-router-dom";
 import Navbar from "../Home/userNavbar";
 import Footer from "../Home/Footer";
-import "firebase/compat/storage";
 import DefaultSidebar from "../Home/Sidebar";
 import Formsidebar from "../Home/Formsidebar";
 import jsPDF from "jspdf";
 
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDXg6bof6EXM7TNfQjIQxYgKdR63SjURtE",
   authDomain: "amrri-cdeb4.firebaseapp.com",
@@ -19,21 +20,22 @@ const firebaseConfig = {
   measurementId: "G-0BT7XZRL7E",
 };
 
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 const db = firebase.firestore();
 const formsCollectionRef = db.collection("forms");
 
 function One() {
   const Userid = sessionStorage.getItem("uid");
 
-  const [selectedScript, setSelectedScript] = useState("");
-  const [selectedMaterial, setSelectedMaterial] = useState("");
-  const [customScript, setCustomScript] = useState("");
+  // Initialize form1Data with type_of_research as an array
+  const [form1Data, setForm1Data] = useState({
+    type_of_research: [],
+    // Initialize other fields if necessary
+  });
 
-  const [selectedlanguage, setSelectedlanguage] = useState("");
-  const [customlanguage, setCustomlanguage] = useState("");
-
-  const [form1Data, setForm1Data] = useState({});
   const [form1Submitted, setForm1Submitted] = useState(
     localStorage.getItem("form1Submitted") === "true"
   );
@@ -47,6 +49,7 @@ function One() {
     checkAndCreateDocument();
   }, [form1Submitted]);
 
+  // Function to generate alphanumeric code
   function generateAlphanumericCode(length) {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const prefix = "AMMRI";
@@ -64,6 +67,7 @@ function One() {
   const alphanumericCode = generateAlphanumericCode(codeLength);
   // console.log(alphanumericCode);
 
+  // Handle form submission
   async function handleForm1Submit(e) {
     e.preventDefault();
     setForm1Submitted(true);
@@ -81,17 +85,19 @@ function One() {
       pdf.text(`Research Id: ${alphanumericCode}`, 10, 30);
       pdf.text(`Public Title: ${form1Data.public_title}`, 10, 40);
       pdf.text(`Scientific Title: ${form1Data.sci_title}`, 10, 50);
-      pdf.text(`Type of Research: ${form1Data.type_of_research}`, 10, 60);
+      pdf.text(
+        `Type of Research: ${form1Data.type_of_research.join(", ")}`,
+        10,
+        60
+      ); // Join array into a string
       pdf.text(`Name: ${form1Data.name}`, 10, 70);
       pdf.text(`Affiliation: ${form1Data.Affiliation}`, 10, 80);
       pdf.text(`Phone No.: ${form1Data.Phno}`, 10, 90);
       pdf.text(`Designation: ${form1Data.designation}`, 10, 100);
       pdf.text(`Email: ${form1Data.email}`, 10, 110);
-      pdf.text(`Name: ${form1Data.name}`, 10, 120);
-      pdf.text(`Affiliation: ${form1Data.Public_Query_affiliation}`, 10, 130);
-      pdf.text(`Designation: ${form1Data.Public_Query_designation}`, 10, 140);
-      pdf.text(`Affiliation: ${form1Data.Public_Query_affiliation}`, 10, 150);
-      pdf.text(`Name: ${form1Data.Public_Query_name}`, 10, 160);
+      pdf.text(`Public Query Affiliation: ${form1Data.Public_Query_affiliation}`, 10, 130);
+      pdf.text(`Public Query Designation: ${form1Data.Public_Query_designation}`, 10, 140);
+      pdf.text(`Public Query Name: ${form1Data.Public_Query_name}`, 10, 160);
       pdf.text(`MSS Owner: ${form1Data.MSS_owner}`, 10, 170);
       pdf.text(`MSS Title: ${form1Data.MSS_title}`, 10, 180);
       pdf.text(`Manuscript Topic: ${form1Data.Manu_Topic}`, 10, 190);
@@ -127,7 +133,11 @@ function One() {
       pdf.text(`Data Date: ${form1Data.data_data}`, 10, 110);
       pdf.text(`Manuscript Source: ${form1Data.manu_source}`, 10, 120);
       pdf.text(`Place of Writing: ${form1Data.place_of_writing}`, 10, 130);
-      pdf.text(`States/Union Terretory: ${form1Data.states_union}`, 10, 140);
+      pdf.text(
+        `States/Union Territory: ${form1Data.states_union}`,
+        10,
+        140
+      );
       pdf.text(`Declaration: ${form1Data.Declaration}`, 10, 150);
 
       // Save PDF content to Firebase Storage
@@ -160,7 +170,7 @@ function One() {
       window.location.href = "/user";
       alert("Your Research is Posted");
       console.log("Form 1 submitted successfully!");
-      setForm1Data({}); // Reset form data
+      setForm1Data({ type_of_research: [] }); // Reset form data, ensure type_of_research is reset as array
       localStorage.setItem("researchid", alphanumericCode);
       return alphanumericCode;
     } catch (error) {
@@ -168,12 +178,42 @@ function One() {
     }
   }
 
+  // Corrected handleForm1InputChange to handle checkboxes properly
   function handleForm1InputChange(e) {
-    setForm1Data({
-      ...form1Data,
-      [e.target.name]: e.target.value,
-    });
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+
+    if (name === "type_of_research") {
+      let updatedResearchTypes = [...form1Data.type_of_research];
+
+      if (checked) {
+        updatedResearchTypes.push(value);
+      } else {
+        updatedResearchTypes = updatedResearchTypes.filter(
+          (item) => item !== value
+        );
+
+        // If "custom" is unchecked, clear the custom_research field
+        if (value === "custom") {
+          setForm1Data((prevData) => ({
+            ...prevData,
+            custom_research: "",
+          }));
+        }
+      }
+
+      setForm1Data((prevData) => ({
+        ...prevData,
+        type_of_research: updatedResearchTypes,
+      }));
+    } else {
+      // Handle other input fields
+      setForm1Data({
+        ...form1Data,
+        [name]: value,
+      });
+    }
+
+    // Handle selectedScript, selectedMaterial, selectedLanguage if necessary
     if (name === "Script") {
       setSelectedScript(value);
     } else if (name === "custom_script") {
@@ -192,6 +232,8 @@ function One() {
     }
     //nothing
   }
+
+  // Handle file input changes with validation
   function handleFileChange(event) {
     const file = event.target.files[0];
     const maxSize = 2 * 1024 * 1024; // 2MB in bytes
@@ -205,7 +247,6 @@ function One() {
       fileError.textContent = "";
     }
   }
-  // const [form1Submitted, setform1Submitted] = useState(false);
 
   return (
     <>
@@ -216,23 +257,27 @@ function One() {
       <br />
 
       <div className="flex flex-row justify-start">
-        <div className=" sidebar  w-[30%] justify-center items-center">
+        <div className="sidebar w-[30%] justify-center items-center">
           <Formsidebar />
         </div>
 
-        <div className="flex flex-col  shadow-xl w-[100%] md:w-[50%]">
+        <div className="flex flex-col shadow-xl w-[100%] md:w-[50%]">
           <center>
-            <div className="bg-blue-600 w-[100%] shadow-xl  text-white font-extrabold text-xl p-3">
+            <div className="bg-blue-600 w-[100%] shadow-xl text-white font-extrabold text-xl p-3">
               <h2>AMRRI PORTAL NIA JAIPUR</h2>
               <h2>Submit your Research</h2>
             </div>
           </center>
           <center>
-            <form action="" className="shadow-xl" onSubmit={handleForm1Submit}>
-              <div className="flex   w-[100%] flex-row">
+            <form
+              action=""
+              className="shadow-xl"
+              onSubmit={handleForm1Submit}
+            >
+              <div className="flex w-[100%] flex-row">
                 <label className="flex flex-col w-[50%] p-2">
                   <h2 className="font-bold" id="part1">
-                    1.Public Title of Study{" "}
+                    1. Public Title of Study{" "}
                     <span className="text-red-600">*</span>:
                   </h2>
                   <input
@@ -247,7 +292,7 @@ function One() {
 
                 <label className="flex flex-col w-[50%] p-2">
                   <h2 className="font-bold">
-                    2.Scientific Title of Study
+                    2. Scientific Title of Study
                     <span className="text-red-600">*</span>:
                   </h2>
                   <input
@@ -262,109 +307,123 @@ function One() {
               </div>
 
               <center>
-                      //changed to checkbox
+                {/* Changed to checkbox */}
                 <h2 className="font-bold mt-9">
-          3. Type of Research<span className="text-red-600">*</span>
-        </h2>
-      </center>
-      <center>
-        <div className="flex flex-col md:flex-row w-[80%] justify-between">
-          {/* Column 1 */}
-          <div className="flex flex-col md:m-4">
-            <label className="flex items-center p-2">
-              <input
-                type="checkbox"
-                name="type_of_research"
-                value="collation"
-                checked={form1Data.type_of_research.includes("collation")}
-                onChange={handleForm1InputChange}
-              />
-              <span className="ml-2">Collation</span>
-            </label>
-            <label className="flex items-center p-2">
-              <input
-                type="checkbox"
-                name="type_of_research"
-                value="cataloguing"
-                checked={form1Data.type_of_research.includes("cataloguing")}
-                onChange={handleForm1InputChange}
-              />
-              <span className="ml-2">Cataloguing</span>
-            </label>
-            <label className="flex items-center p-2">
-              <input
-                type="checkbox"
-                name="type_of_research"
-                value="translation"
-                checked={form1Data.type_of_research.includes("translation")}
-                onChange={handleForm1InputChange}
-              />
-              <span className="ml-2">Translation</span>
-            </label>
-          </div>
+                  3. Type of Research<span className="text-red-600">*</span>
+                </h2>
+              </center>
+              <center>
+                <div className="flex flex-col md:flex-row w-[80%] justify-between">
+                  {/* Column 1 */}
+                  <div className="flex flex-col md:m-4">
+                    <label className="flex items-center p-2">
+                      <input
+                        type="checkbox"
+                        name="type_of_research"
+                        value="collation"
+                        checked={form1Data.type_of_research.includes(
+                          "collation"
+                        )}
+                        onChange={handleForm1InputChange}
+                      />
+                      <span className="ml-2">Collation</span>
+                    </label>
+                    <label className="flex items-center p-2">
+                      <input
+                        type="checkbox"
+                        name="type_of_research"
+                        value="cataloguing"
+                        checked={form1Data.type_of_research.includes(
+                          "cataloguing"
+                        )}
+                        onChange={handleForm1InputChange}
+                      />
+                      <span className="ml-2">Cataloguing</span>
+                    </label>
+                    <label className="flex items-center p-2">
+                      <input
+                        type="checkbox"
+                        name="type_of_research"
+                        value="translation"
+                        checked={form1Data.type_of_research.includes(
+                          "translation"
+                        )}
+                        onChange={handleForm1InputChange}
+                      />
+                      <span className="ml-2">Translation</span>
+                    </label>
+                  </div>
 
-          {/* Column 2 */}
-          <div className="flex flex-col md:m-4">
-            <label className="flex items-center p-2">
-              <input
-                type="checkbox"
-                name="type_of_research"
-                value="transcription"
-                checked={form1Data.type_of_research.includes("transcription")}
-                onChange={handleForm1InputChange}
-              />
-              <span className="ml-2">Transcription</span>
-            </label>
-            <label className="flex items-center p-2">
-              <input
-                type="checkbox"
-                name="type_of_research"
-                value="deciphering"
-                checked={form1Data.type_of_research.includes("deciphering")}
-                onChange={handleForm1InputChange}
-              />
-              <span className="ml-2">Deciphering</span>
-            </label>
-            <label className="flex items-center p-2">
-              <input
-                type="checkbox"
-                name="type_of_research"
-                value="transliteration"
-                checked={form1Data.type_of_research.includes("transliteration")}
-                onChange={handleForm1InputChange}
-              />
-              <span className="ml-2">Transliteration</span>
-            </label>
-          </div>
+                  {/* Column 2 */}
+                  <div className="flex flex-col md:m-4">
+                    <label className="flex items-center p-2">
+                      <input
+                        type="checkbox"
+                        name="type_of_research"
+                        value="transcription"
+                        checked={form1Data.type_of_research.includes(
+                          "transcription"
+                        )}
+                        onChange={handleForm1InputChange}
+                      />
+                      <span className="ml-2">Transcription</span>
+                    </label>
+                    <label className="flex items-center p-2">
+                      <input
+                        type="checkbox"
+                        name="type_of_research"
+                        value="deciphering"
+                        checked={form1Data.type_of_research.includes(
+                          "deciphering"
+                        )}
+                        onChange={handleForm1InputChange}
+                      />
+                      <span className="ml-2">Deciphering</span>
+                    </label>
+                    <label className="flex items-center p-2">
+                      <input
+                        type="checkbox"
+                        name="type_of_research"
+                        value="transliteration"
+                        checked={form1Data.type_of_research.includes(
+                          "transliteration"
+                        )}
+                        onChange={handleForm1InputChange}
+                      />
+                      <span className="ml-2">Transliteration</span>
+                    </label>
+                  </div>
 
-          {/* Column 3 */}
-          <div className="flex flex-col md:m-4">
-            <label className="flex items-center p-2">
-              <input
-                type="checkbox"
-                name="type_of_research"
-                value="custom"
-                checked={form1Data.type_of_research.includes("custom")}
-                onChange={handleForm1InputChange}
-              />
-              <span className="ml-2">Others</span>
-            </label>
-            {form1Data.type_of_research.includes("custom") && (
-              <label className="flex items-center p-2">
-                <span className="ml-2">Please specify:</span>
-                <input
-                  type="text"
-                  name="custom_research"
-                  value={form1Data.custom_research || ""}
-                  onChange={handleForm1InputChange}
-                  required
-                  className="ml-2 border p-1"
-                />
-              </label>
-            )}
-          </div>
-        </div>
-        //changed to checkbox
+                  {/* Column 3 */}
+                  <div className="flex flex-col md:m-4">
+                    <label className="flex items-center p-2">
+                      <input
+                        type="checkbox"
+                        name="type_of_research"
+                        value="custom"
+                        checked={form1Data.type_of_research.includes(
+                          "custom"
+                        )}
+                        onChange={handleForm1InputChange}
+                      />
+                      <span className="ml-2">Others</span>
+                    </label>
+                    {form1Data.type_of_research.includes("custom") && (
+                      <label className="flex items-center p-2">
+                        <span className="ml-2">Please specify:</span>
+                        <input
+                          type="text"
+                          name="custom_research"
+                          value={form1Data.custom_research || ""}
+                          onChange={handleForm1InputChange}
+                          required
+                          className="ml-2 border p-1"
+                        />
+                      </label>
+                    )}
+                  </div>
+                </div>
+              </center>
                 <div className="w-[100%]">
                   <label
                     htmlFor="authorizationDocument"
