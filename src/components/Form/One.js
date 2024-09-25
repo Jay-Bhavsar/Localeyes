@@ -184,21 +184,6 @@ function One() {
   function handleForm1InputChange(e) {
     const { name, value, checked } = e.target;
 
-    if (name === "MSS_condition") {
-    // Handle the checkboxes for MSS_condition
-    let updatedMSSCondition = form1Data.MSS_condition || [];
-
-    if (checked) {
-      // Add the value to the array
-      updatedMSSCondition = [...updatedMSSCondition, value];
-    } else {
-      // Remove the value from the array
-      updatedMSSCondition = updatedMSSCondition.filter(
-        (item) => item !== value
-      );
-    }
-    }
-
     if (name === "type_of_research") {
       // Handle the checkboxes for type_of_research
       let updatedTypeOfResearch = form1Data.type_of_research || [];
@@ -222,6 +207,16 @@ function One() {
         custom_research: value,
       });
     } else if (name === "MSS_condition"){
+      let updatedMSSCondition = form1Data.MSS_condition || [];
+      if (checked) {
+        // Add value to the array
+        updatedMSSCondition = [...updatedMSSCondition, value];
+      } else {
+        // Remove value from the array
+        updatedMSSCondition = updatedMSSCondition.filter(
+          (item) => item !== value
+        );
+      }
       setForm1Data({
       ...form1Data,
       MSS_condition: updatedMSSCondition,
