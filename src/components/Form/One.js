@@ -33,7 +33,7 @@ function One() {
   const [selectedlanguage, setSelectedlanguage] = useState("");
   const [customlanguage, setCustomlanguage] = useState("");
 
-  const [form1Data, setForm1Data] = useState({});
+  const [form1Data, setForm1Data] = useState({ type_of_research: [] });
   const [form1Submitted, setForm1Submitted] = useState(
     localStorage.getItem("form1Submitted") === "true"
   );
@@ -66,6 +66,13 @@ function One() {
 
   async function handleForm1Submit(e) {
     e.preventDefault();
+
+    // Ensure at least one type of research is selected
+    if (!form1Data.type_of_research || form1Data.type_of_research.length === 0) {
+      alert("Please select at least one Type of Research.");
+      return;
+    }
+
     setForm1Submitted(true);
 
     try {
@@ -81,7 +88,11 @@ function One() {
       pdf.text(`Research Id: ${alphanumericCode}`, 10, 30);
       pdf.text(`Public Title: ${form1Data.public_title}`, 10, 40);
       pdf.text(`Scientific Title: ${form1Data.sci_title}`, 10, 50);
-      pdf.text(`Type of Research: ${form1Data.type_of_research}`, 10, 60);
+      pdf.text(
+        `Type of Research: ${form1Data.type_of_research.join(", ")}`,
+        10,
+        60
+      );
       pdf.text(`Name: ${form1Data.name}`, 10, 70);
       pdf.text(`Affiliation: ${form1Data.Affiliation}`, 10, 80);
       pdf.text(`Phone No.: ${form1Data.Phno}`, 10, 90);
@@ -160,7 +171,7 @@ function One() {
       window.location.href = "/user";
       alert("Your Research is Posted");
       console.log("Form 1 submitted successfully!");
-      setForm1Data({}); // Reset form data
+      setForm1Data({ type_of_research: [] }); // Reset form data
       localStorage.setItem("researchid", alphanumericCode);
       return alphanumericCode;
     } catch (error) {
@@ -169,11 +180,38 @@ function One() {
   }
 
   function handleForm1InputChange(e) {
-    setForm1Data({
-      ...form1Data,
-      [e.target.name]: e.target.value,
-    });
-    const { name, value } = e.target;
+    const { name, value, checked } = e.target;
+
+    if (name === "type_of_research") {
+      // Handle the checkboxes for type_of_research
+      let updatedTypeOfResearch = form1Data.type_of_research || [];
+      if (checked) {
+        // Add value to the array
+        updatedTypeOfResearch = [...updatedTypeOfResearch, value];
+      } else {
+        // Remove value from the array
+        updatedTypeOfResearch = updatedTypeOfResearch.filter(
+          (item) => item !== value
+        );
+      }
+      setForm1Data({
+        ...form1Data,
+        type_of_research: updatedTypeOfResearch,
+      });
+    } else if (name === "custom_research") {
+      // Handle the custom research input
+      setForm1Data({
+        ...form1Data,
+        custom_research: value,
+      });
+    } else {
+      // For other inputs
+      setForm1Data({
+        ...form1Data,
+        [name]: value,
+      });
+    }
+
     if (name === "Script") {
       setSelectedScript(value);
     } else if (name === "custom_script") {
@@ -271,34 +309,40 @@ function One() {
                   <div className="flex flex-col md:m-4">
                     <label className="flex items-center p-2">
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="type_of_research"
                         value="collation"
-                        checked={form1Data.type_of_research === "collation"}
+                        checked={
+                          form1Data.type_of_research &&
+                          form1Data.type_of_research.includes("collation")
+                        }
                         onChange={handleForm1InputChange}
-                        required
                       />
                       <span className="ml-2">Collation</span>
                     </label>
                     <label className="flex items-center p-2">
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="type_of_research"
                         value="Catalog"
-                        checked={form1Data.type_of_research === "Catalog"}
+                        checked={
+                          form1Data.type_of_research &&
+                          form1Data.type_of_research.includes("Catalog")
+                        }
                         onChange={handleForm1InputChange}
-                        required
                       />
                       <span className="ml-2">Cataloguing </span>
                     </label>
                     <label className="flex items-center p-2">
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="type_of_research"
                         value="translation"
-                        checked={form1Data.type_of_research === "translation"}
+                        checked={
+                          form1Data.type_of_research &&
+                          form1Data.type_of_research.includes("translation")
+                        }
                         onChange={handleForm1InputChange}
-                        required
                       />
                       <span className="ml-2">Translation</span>
                     </label>
@@ -306,37 +350,40 @@ function One() {
                   <div className="flex flex-col md:m-4">
                     <label className="flex items-center p-2">
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="type_of_research"
                         value="Transcription"
-                        checked={form1Data.type_of_research === "Transcription"}
+                        checked={
+                          form1Data.type_of_research &&
+                          form1Data.type_of_research.includes("Transcription")
+                        }
                         onChange={handleForm1InputChange}
-                        required
                       />
                       <span className="ml-2">Transcription</span>
                     </label>
                     <label className="flex items-center p-2">
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="type_of_research"
-                        value="Deciphering
-                        "
-                        checked={form1Data.type_of_research === "Deciphering"}
+                        value="Deciphering"
+                        checked={
+                          form1Data.type_of_research &&
+                          form1Data.type_of_research.includes("Deciphering")
+                        }
                         onChange={handleForm1InputChange}
-                        required
                       />
                       <span className="ml-2">Deciphering</span>
                     </label>
                     <label className="flex items-center p-2">
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="type_of_research"
                         value="Transliteration"
                         checked={
-                          form1Data.type_of_research === "Transliteration"
+                          form1Data.type_of_research &&
+                          form1Data.type_of_research.includes("Transliteration")
                         }
                         onChange={handleForm1InputChange}
-                        required
                       />
                       <span className="ml-2">Transliteration</span>
                     </label>
@@ -345,27 +392,30 @@ function One() {
                   <div className="flex flex-col md:m-4">
                     <label className="flex items-center p-2">
                       <input
-                        type="radio"
+                        type="checkbox"
                         name="type_of_research"
                         value="custom"
-                        checked={form1Data.type_of_research === "custom"}
+                        checked={
+                          form1Data.type_of_research &&
+                          form1Data.type_of_research.includes("custom")
+                        }
                         onChange={handleForm1InputChange}
-                        required
                       />
                       <span className="ml-2">Others</span>
                     </label>
-                    {form1Data.type_of_research === "custom" && (
-                      <label className="flex items-center p-2">
-                        <span className="ml-2">Please specify:</span>
-                        <input
-                          type="text"
-                          name="custom_research"
-                          value={form1Data.custom_research || ""}
-                          onChange={handleForm1InputChange}
-                          required
-                        />
-                      </label>
-                    )}
+                    {form1Data.type_of_research &&
+                      form1Data.type_of_research.includes("custom") && (
+                        <label className="flex items-center p-2">
+                          <span className="ml-2">Please specify:</span>
+                          <input
+                            type="text"
+                            name="custom_research"
+                            value={form1Data.custom_research || ""}
+                            onChange={handleForm1InputChange}
+                            required
+                          />
+                        </label>
+                      )}
                   </div>
                 </div>
                 <div className="w-[100%]">
