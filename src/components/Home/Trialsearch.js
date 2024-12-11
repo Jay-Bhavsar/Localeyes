@@ -141,7 +141,7 @@ const data = [
     "Nature of Work": "Sanskrit text",
     "Source Text Details": "Bhela Samhitā (Maharṣipunarvasorātreyasyāntevāsinā Bhelācāryeṇa praṇītā)",
     "Nature of Work": "Edited",
-    "Team": "V. S. V
+    "Team": "V. S. V"
   }
 
 ];
