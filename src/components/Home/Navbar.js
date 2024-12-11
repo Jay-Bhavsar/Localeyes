@@ -1,38 +1,59 @@
 import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure, Transition } from "@headlessui/react";
 import "../Style/Home.css";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 const logo = require("../img/logo.png");
 
 const isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
+const userRole = sessionStorage.getItem("userRole");  // e.g., 'admin', 'user'
 
+// Conditions to hide specific pages
+const hideAdvancedSearch = true;  // Set to true to hide "Advanced Search"
+const hideDisclaimer = true;      // Set to true to hide "Disclaimer"
+const hideFeedback = true;        // Set to true to hide "Feedback"
+const hideSitemap = true;         // Set to true to hide "Sitemap"
+
+// Build the navigation array based on conditions
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "About Us", href: "/vision", current: false },
- 
   { name: "Trial Search", href: "/trialsearch", current: false },
-  { name: "Advanced Search", href: "/advancesearch", current: false },
+  
+  // Conditionally add "Advanced Search" page
+  ...(hideAdvancedSearch ? [] : [{ name: "Advanced Search", href: "/advancesearch", current: false }]),
+
   { name: "FAQ", href: "/faq", current: false },
-  { name: "Disclaimer", href: "/disclaimer", current: false },
-  { name: "Feedback", href: "/feedback", current: false },
-  { name: "Sitemap", href: "/sitemap", current: false },
+
+  // Conditionally add "Disclaimer" page
+  ...(hideDisclaimer ? [] : [{ name: "Disclaimer", href: "/disclaimer", current: false }]),
+
+  // Conditionally add "Feedback" page
+  ...(hideFeedback ? [] : [{ name: "Feedback", href: "/feedback", current: false }]),
+
+  // Conditionally add "Sitemap" page
+  ...(hideSitemap ? [] : [{ name: "Sitemap", href: "/sitemap", current: false }]),
+
+  // Login/Logout
   {
     name: isUserLoggedIn ? "Logout" : "Login",
     href: isUserLoggedIn ? "/logout" : "/login",
     current: false,
   },
+
+  // Back to portal
   {
     name: isUserLoggedIn ? "Back to Portal" : "",
     href: isUserLoggedIn ? "/user" : "",
     current: false,
   },
+
+  // SignUp
   {
     name: isUserLoggedIn ? "" : "SignUp",
     href: isUserLoggedIn ? "" : "/signup",
     current: false,
   },
-
 ];
 
 function classNames(...classes) {
@@ -48,7 +69,7 @@ export default function Example() {
             <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
               <div className="relative flex items-center justify-between h-24">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  {/* Mobile menu button*/}
+                  {/* Mobile menu button */}
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-rose-950 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
@@ -91,86 +112,9 @@ export default function Example() {
                           {item.name}
                         </Link>
                       ))}
-                    
                     </div>
                   </div>
                 </div>
-                {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="p-1 bg-gray-800 rounded-full text-black-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="w-6 h-6" aria-hidden="true" />
-                </button>
-
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="w-8 h-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-black-100"
-                            )}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div> */}
               </div>
             </div>
 
