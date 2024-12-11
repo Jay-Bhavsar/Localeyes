@@ -142,6 +142,7 @@ const data = [
     "Source Text Details": "Bhela Samhitā (Maharṣipunarvasorātreyasyāntevāsinā Bhelācāryeṇa praṇītā)",
     "Nature of Work": "Edited",
     "Team": "V. S. V
+  }
 
 ];
 
