@@ -18,7 +18,7 @@ const hideSitemap = true;         // Set to true to hide "Sitemap"
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "About Us", href: "/vision", current: false },
-  { name: "Trial Search", href: "/trialsearch", current: false },
+  { name: "List of Completed & Ongoing Works", href: "/trialsearch", current: false },
   
   // Conditionally add "Advanced Search" page
   ...(hideAdvancedSearch ? [] : [{ name: "Advanced Search", href: "/advancesearch", current: false }]),
