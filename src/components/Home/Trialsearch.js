@@ -2,147 +2,215 @@ import React from 'react';
 
 const data = [
   {
-    "Name of the Work": "Abhinavacintāmaṇiḥ",
-    "Nature of Work": "Sanskrit text",
-    "Source Text Details": "Mahāmati Bhagavāna Cakrapāṇidāsaṇkr̥ta Abhinavacintāmaṇiḥ transcribed from Oriya to Devanāgarī",
-    "Nature of Work": "Edited",
-    "Team": "Prem Kishore, Sudarshana Sharma and Madhava Candra",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 1999
-  },
-  {
-    "Name of the Work": "Abhinavacintāmaṇiḥ",
-    "Nature of Work": "Sanskrit text with Hindi translation",
-    "Source Text Details": "Mahāmati Bhagavāna Cakrapāṇidāsa kr̥ta Abhinavacintāmaṇiḥ, Part I and II",
-    "Nature of Work": "Edited and Hindi translation",
-    "Team": "Tārācanda Śarmā",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 2009
-  },
-  {
-    "Name of the Work": "Aṣṭāṅgasaṅgrahaḥ",
-    "Nature of Work": "Sanskrit text with Sanskrit commentary – A Critical edition",
-    "Source Text Details": "Aṣṭāṅgasaṅgrahaḥ - Induvyākhyāsahitaḥ, Sūtraśārīranidānasthānam, Bhāga – Prathama (Ka)",
-    "Nature of Work": "Edited",
-    "Team": "Vivekananda Pandey, Mahendrapal Simha Arya, Ayodhya Pandey, Sacchidananda Tiwari",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 1991
-  },
-  {
-    "Name of the Work": "Aṣṭāṅgasaṅgrahaḥ",
-    "Nature of Work": "Sanskrit text with Sanskrit commentary – A Critical edition",
-    "Source Text Details": "Aṣṭāṅgasaṅgrahaḥ - Induvyākhyāsahitaḥ, Uttarasthānam, Bhāga – 2",
-    "Nature of Work": "Edited",
-    "Team": "Vivekananda Pandey, Mahendrapal Simha Arya, K.D. Sharma, Ayodhya Pandey, Ganesh Kumar Shukla",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 1988
-  },
-  {
-    "Name of the Work": "Aṣṭāṅgasaṅgrahaḥ",
-    "Nature of Work": "Sanskrit text with Sanskrit commentary – A Critical edition",
-    "Source Text Details": "ṣṭāṅgasaṅgrahaḥ - Induvyākhyāsahitaḥ – Cikitsākalpasthānam, Bhāga – Prathama (kha)",
-    "Nature of Work": "Edited",
-    "Team": "Hemaraj Goyal, K.D. Sharma and Ayodhya Pandey",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 1998
-  },
-  {
-    "Name of the Work": "Cakradatta- Ratnaprabhā",
-    "Nature of Work": "Sanskrit text",
-    "Source Text Details": "Cakradatta – Ratnaprabhā, Residual Portion of the Manuscript, edited by Priyavrat Sharma, Bulletin of Indian Institute of History of Medicine, Special volume, Indian Institute of History of Medicine",
-    "Nature of Work": "Edited",
-    "Team": "Priyavrat Sharma",
-    "Agency": "Indian Institute of History of Medicine, Central Council for Research in Indian Medicine & Homoeopathy, New Delhi",
-    "Year of Publication": 2003
-  },
-  {
-    "Name of the Work": "Cārucaryā",
-    "Nature of Work": "Sanskrit text",
-    "Source Text Details": "Cārucaryā by Bhoja Rāja (A Medieval work on Personal Hygiene)",
-    "Nature of Work": "Edited",
-    "Team": "B. Rama Rao",
-    "Agency": "Indian Institute of History of Medicine, Central Council for Research in Indian Medicine & Homoeopathy, New Delhi",
-    "Year of Publication": 1974
-  },
-  {
-    "Name of the Work": "Cārucaryā",
-    "Nature of Work": "Sanskrit text with Hindi translation",
-    "Source Text Details": "Bhojarājakr̥ta Cārucaryā (Vaiyaktika svāstha vijñāna para madhyakālīna kr̥ti)",
-    "Nature of Work": "Hindi translation",
-    "Team": "Ganesh Shukla",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 2000
-  },
-  {
-    "Name of the Work": "Cikitsārṇava",
-    "Nature of Work": "Sanskrit text with Hindi translation",
-    "Source Text Details": "Mahāmahopādhyāyaviśvanāthaseṇakr̥taḥ - Cikitsārṇavaḥ, Pūrvārddhaḥ",
-    "Nature of Work": "Hindi translation",
-    "Team": "Madan Mohan Padhi and Sudarshan Das",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 2009
-  },
-  {
-    "Name of the Work": "Cikitsārṇava (Viśvanāthacikitsā)",
-    "Nature of Work": "Sanskrit text with Hindi translation",
-    "Source Text Details": "Mahāmahopādhyāyaviśvanāthaseṇakr̥taḥ - Cikitsārṇavaḥ (Viśvanāthacikitsā) Uttarārdhaḥ",
-    "Nature of Work": "Hindi translation",
-    "Team": "Madan Mohan Padhi and Sudarshan Das",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 2010
-  },
-  {
-    "Name of the Work": "Dhanvantarisāranidhiḥ",
-    "Nature of Work": "Sanskrit text",
-    "Source Text Details": "Dhanvantarisāranidhiḥ transcribed from Tamil to Devanāgarī",
-    "Nature of Work": "Edited",
-    "Team": "P. M. Padmanabha Sharma and T.V. Varadarajan",
-    "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
-    "Year of Publication": 1999
-  },
-  {
-    "Name of the Work": "Nānāvidhavaidyam",
-    "Nature of Work": "Sanskrit text",
-    "Source Text Details": "Nānāvidhavaidyam",
-    "Nature of Work": "Edited",
-    "Team": "null",
-    "Agency": "null",
-    "Year of Publication": 1999
-  },
-  {
-    "Name of the Work": "Netraprakāśikā",
-    "Nature of Work": "Sanskrit text",
-    "Source Text Details": "Netraprakāśikā transcribed from Tamil to Devanāgarī",
-    "Nature of Work": "Edited",
-    "Team": "P.M.P. Sharma and T.V. Varadarajan",
-    "Agency": "null",
-    "Year of Publication": 1999
-  },
-  {
-    "Name of the Work": "Netraroganidānam",
-    "Nature of Work": "Sanskrit text",
-    "Source Text Details": "Netraroganidānam transcribed from Tamil to Devanāgarī",
-    "Nature of Work": "Edited",
-    "Team": "P.M.P. Sharma and T.V. Varadarajan",
-    "Agency": "null",
-    "Year of Publication": 1999
-  },
-  {
-    "Name of the Work": "Pathyāpathya viniścayaḥ",
-    "Nature of Work": "Sanskrit text with Hindi translation",
-    "Source Text Details": "Mahāmahopādhyāya Viśvanātha Seṇa kr̥ta - Pathyāpathya viniścayaḥ",
-    "Nature of Work": "Hindi translation",
-    "Team": "Prem Kishore and M. M. Padhi",
-    "Agency": "Central Council for Research in Ayurveda and Siddha",
-    "Year of Publication": 1999
-  },
-  {
-    "Name of the Work": "Bhelasaṁhitā",
-    "Nature of Work": "Sanskrit text",
-    "Source Text Details": "Bhela Samhitā (Maharṣipunarvasorātreyasyāntevāsinā Bhelācāryeṇa praṇītā)",
-    "Nature of Work": "Edited",
-    "Team": "V. S. V"
-  }
+        "Name of the Work": "Abhinavacintāmaṇiḥ",
+        "Nature of Work": "transcribed from Oriya to Devanāgarī",
+        "source Text Details": "Mahāmati Bhagavāna Cakrapāṇidāsaṇkr̥ta Abhinavacintāmaṇiḥ",
+        "Team": "Prem Kishore, Sudarshana Sharma and Madhava Candra",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "1999",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Abhinavacintāmaṇiḥ",
+        "Nature of Work": "Edited and Hindi translation",
+        "source Text Details": "Mahāmati Bhagavāna Cakrapāṇidāsa kr̥ta Abhinavacintāmaṇiḥ, Part I and II",
+        "Team": "Tārācanda Śarmā",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "2009",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Aṣṭāṅgasaṅgrahaḥ",
+        "Nature of Work": "Edited",
+        "source Text Details": "Aṣṭāṅgasaṅgrahaḥ - Induvyākhyāsahitaḥ, Sūtraśārīranidānasthānam, Bhāga – Prathama (Ka)",
+        "Team": "Vivekananda Pandey, Mahendrapal Simha Arya, Ayodhya Pandey, Sacchidananda Tiwari",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "1991",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Aṣṭāṅgasaṅgrahaḥ",
+        "Nature of Work": "Edited",
+        "source Text Details": "Aṣṭāṅgasaṅgrahaḥ - Induvyākhyāsahitaḥ, Uttarasthānam, Bhāga – 2",
+        "Team": "Vivekananda Pandey, Mahendrapal Simha Arya, K.D. Sharma, Ayodhya Pandey, Ganesh Kumar Shukla",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "1988",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Aṣṭāṅgasaṅgrahaḥ",
+        "Nature of Work": "Edited",
+        "source Text Details": "ṣṭāṅgasaṅgrahaḥ - Induvyākhyāsahitaḥ – Cikitsākalpasthānam, Bhāga – Prathama (kha)",
+        "Team": "Hemaraj Goyal, K.D. Sharma and Ayodhya Pandey",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "1998",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Cakradatta- Ratnaprabhā",
+        "Nature of Work": "Edited",
+        "source Text Details": "Cakradatta – Ratnaprabhā, Residual Portion of the Manuscript, edited by Priyavrat Sharma, Bulletin of Indian Institute of History of Medicine, Special volume, Indian Institute of History of Medicine",
+        "Team": "Priyavrat Sharma",
+        "Agency": "Indian Institute of History of Medicine, Central Council for Research in Indian Medicine & Homoeopathy, New Delhi",
+        "Year of Publication": "2003",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Cārucaryā",
+        "Nature of Work": "Edited",
+        "source Text Details": "Cārucaryā by Bhoja Rāja (A Medieval work on Personal Hygiene)",
+        "Team": "B. Rama Rao",
+        "Agency": "Indian Institute of History of Medicine, Central Council for Research in Indian Medicine & Homoeopathy, New Delhi",
+        "Year of Publication": "1974",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Cārucaryā",
+        "Nature of Work": "Hindi translation",
+        "source Text Details": "Bhojarājakr̥ta Cārucaryā (Vaiyaktika svāstha vijñāna para madhyakālīna kr̥ti)",
+        "Team": "Ganesh Shukla",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "2000",
+        "Addl Notes": "First edition",
+        "": ""
+    },
+    {
+        "Name of the Work": "Cikitsārṇava",
+        "Nature of Work": "Hindi translation",
+        "source Text Details": "Mahāmahopādhyāyaviśvanāthaseṇakr̥taḥ - Cikitsārṇavaḥ, Pūrvārddhaḥ",
+        "Team": "Madan Mohan Padhi and Sudarshan Das",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "2009",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Cikitsārṇava (Viśvanāthacikitsā)",
+        "Nature of Work": "Hindi translation",
+        "source Text Details": "Mahāmahopādhyāyaviśvanāthaseṇakr̥taḥ - Cikitsārṇavaḥ (Viśvanāthacikitsā) Uttarārdhaḥ",
+        "Team": "Madan Mohan Padhi and Sudarshan Das",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "2010",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Dhanvantarisāranidhiḥ",
+        "Nature of Work": "transcribed from Tamil to Devanāgarī",
+        "source Text Details": "Dhanvantarisāranidhiḥ",
+        "Team": "P. M. Padmanabha Sharma and T.V. Varadarajan",
+        "Agency": "Central Council for Research in Ayurveda and Siddha, New Delhi",
+        "Year of Publication": "1999",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Nānāvidhavaidyam",
+        "Nature of Work": "edited",
+        "source Text Details": "Nānāvidhavaidyam",
+        "Team": "",
+        "Agency": "",
+        "Year of Publication": "1999",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Netraprakāśikā",
+        "Nature of Work": "transcribed from Tamil to Devanāgarī",
+        "source Text Details": "Netraprakāśikā",
+        "Team": "P.M.P. Sharma and T.V. Varadarajan",
+        "Agency": "",
+        "Year of Publication": "1999",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Netraroganidānam",
+        "Nature of Work": "transcribed from Tamil to Devanāgarī",
+        "source Text Details": "Netraroganidānam",
+        "Team": "P.M.P. Sharma and T.V. Varadarajan",
+        "Agency": "",
+        "Year of Publication": "1999",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Pathyāpathya viniścayaḥ",
+        "Nature of Work": "Hindi translation",
+        "source Text Details": "Mahāmahopādhyāya Viśvanātha Seṇa kr̥ta - Pathyāpathya viniścayaḥ",
+        "Team": "Prem Kishore and M. M. Padhi",
+        "Agency": "Central Council for Research in Ayurveda and Siddha",
+        "Year of Publication": "1999",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Bhelasaṁhitā",
+        "Nature of Work": "Edited",
+        "source Text Details": "Bhela Samhitā (Maharṣipunarvasorātreyasyāntevāsinā Bhelācāryeṇa praṇītā)",
+        "Team": "V. S. Venkatasubramania Sastri and C. Raja Rajeswara Sarma",
+        "Agency": "Central Council for Research in Indian Medicine & Homoeopathy, New Delhi",
+        "Year of Publication": "1977",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Bheṣajakalpaḥ",
+        "Nature of Work": "",
+        "source Text Details": "Bhesaja Kalpaḥ (Bhāradvājapraṇītaḥ)",
+        "Team": "V. S. Venkatasubramania Sastri and C. Raja Rajeshwara Sharma",
+        "Agency": "Central Council for Research in Indian Medicine & Homoeopathy, New Delhi",
+        "Year of Publication": "1977",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Rasamañjūṣā",
+        "Nature of Work": "transcribed and translated into Hindi",
+        "source Text Details": "Dvārakātripāṭhī viracita (loka bhāṣā) - Rasamañjūṣā",
+        "Team": "Tārācanda Śarmā",
+        "Agency": "Central Council for Research in Indian Medicine & Homoeopathy, New Delhi",
+        "Year of Publication": "2005",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Rasapradīpikā",
+        "Nature of Work": "",
+        "source Text Details": "Vēdāntācāryapatra Muḍuṁba Vēṁkaṭācāryā viracita - Rasapradīpikā",
+        "Team": "",
+        "Agency": "Central Council For Research in Ayurveda & Siddha, New Delhi",
+        "Year of Publication": "2001",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Śataślokī",
+        "Nature of Work": "transcribed from Tamil to Dēvanāgarī",
+        "source Text Details": "Avadhānasarasvatī viracitā - Śataślōkī",
+        "Team": "M. P. Sharma and T.V. Varadarajan",
+        "Agency": "Central Council for Research in Ayurveda & Siddha, New Delhi",
+        "Year of Publication": "2001",
+        "Addl Notes": "",
+        "": ""
+    },
+    {
+        "Name of the Work": "Śabdacandrikā",
+        "Nature of Work": "Edited",
+        "source Text Details": "Cakrapāṇidatta viracitā - Śabdacandrikā",
+        "Team": "Priyavrat Sharma",
+        "Agency": "Indian Institute of History of Medicine, Central Council for Research in Ayurveda & Siddha, New Delhi",
+        "Year of Publication": "1989",
+        "Addl Notes": "",
+        "": ""
+    }
 
 ];
 
